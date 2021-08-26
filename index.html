@@ -10,7 +10,10 @@
   <div id="program" contenteditable="true">
     goto x: 5 y: 2
   </div><br />
-  <button onclick="parseRoScript(document.getElementById('program').innerText)">
+  <button onclick="document.getElementById('output').innerHTML = parseRoScript(document.getElementById('program').innerText).toString()">
     Parse
   </button>
+  Output:<br />
+  <div id="output">
+  </div>
 </html>
