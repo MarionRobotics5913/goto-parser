@@ -3,10 +3,20 @@ RoScript
 
 Parse to
 {
-  type: "goto"
+  command: "goto"
   args: {
     x: value
     y: value
   }
+  type: "await"
 }
 */
+
+
+function parseRoScript(programString){
+  
+}
+
+function runRoScriptAction(actionObject){
+  
+}
