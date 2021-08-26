@@ -15,6 +15,11 @@ Parse to
 
 function parseRoScript(programString){
   alert(programString);
+  // Lexor
+  var tokens = [];
+  for(var x in programString){
+    
+  }
 }
 
 function runRoScriptAction(actionObject){
