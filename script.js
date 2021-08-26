@@ -26,10 +26,17 @@ function parseRoScript(programString) {
       currToken = "";    
   };
   
-  var x = 0;
+//   var x = 0;
   
-  for (var x in programString) {
+//   while (x < programString.length) {
+  for(var x in programString){
     var char = programString[x];
+    if(currToken === "//"){
+      if(char !== "\n"){
+        continue;
+      }
+      currToken = "";
+    }
     switch(char){
       case " ":
         appendCurrToken();
@@ -38,7 +45,6 @@ function parseRoScript(programString) {
         appendCurrToken();
         tokens.push("newline");        
         break;
-      
       default:
         currToken += char;
     }
@@ -50,6 +56,7 @@ function parseRoScript(programString) {
     // }else {
     //   currToken += char;
     // }
+    // x++;
   }
   // Add on the last token
   tokens.push(currToken);
