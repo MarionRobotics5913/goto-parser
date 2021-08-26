@@ -14,7 +14,7 @@ Parse to
 
 
 function parseRoScript(programString){
-  
+  alert(programString);
 }
 
 function runRoScriptAction(actionObject){

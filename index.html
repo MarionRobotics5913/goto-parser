@@ -7,7 +7,10 @@
     <!-- Import the webpage's javascript file -->
     <script src="/script.js" defer></script>    
   </head>
-  <div class="program" contenteditable="true">
+  <div id="program" contenteditable="true">
     goto x: 5 y: 2
-  </div>
+  </div><br />
+  <button onclick="parseRoScript(document.getElementById('program').innerText)">
+    Parse
+  </button>
 </html>
