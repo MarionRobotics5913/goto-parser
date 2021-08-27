@@ -13,7 +13,7 @@ Parse to
 */
 
 function parseRoScript(programString) {
-  // Lexor
+  // Lexer
   var tokens = [];
   var currToken = "";
 

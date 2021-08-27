@@ -1,7 +1,15 @@
 #program{
   font-family: monospace;
-  background-color: lightgrey;
+  background-color: black;  
+  color: white;
   padding: 10px;
   border-radius: 10px;
   line-height: 1.5em;
+}
+code{
+  font-family: monospace;
+  background-color: black;  
+  color: white;
+  padding: 3px;
+  border-radius: 3px;
 }
