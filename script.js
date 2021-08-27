@@ -68,13 +68,31 @@ function parseRoScript(programString) {
   // Parser
   var actions = [];
   var currIndex = 0; // Index instead of object because of possible shallow cloning issues
+  var line = 1;
+  function createError(type, data){
+    switch(type){
+      case "token":
+        return [{
+          command: "error",
+          message: ""
+        }];              
+        break;
+    }
+  }
   for (var x in tokens) {
     switch (tokens[x]) {
+      case "newline":
+        line++;
+        break;
+      case "goto":
+        if(actions[currIndex].command){
+          errorMessage = `Parsing error: Unexpected token goto on line ${line}`          
+        }
+        break;
       default:
-        return {
-          command: "error",
-          message: `Unexpected token ${x}`
-        };
+        errorMessage = `Parsing error: Unexpected token ${tokens[x]} on line ${line}`
+    }
+    if(errorMessage!==""){
     }
   }
   return actions;
@@ -89,7 +107,7 @@ function runRoScriptActions(actionObject, callback) {
         return actionObject[x].message;
         break;
       case "goto":
-        callback(`Unrecognized command ${actionObject[x].command} run`);
+        callback(`goto: ${JSON.stringify(actionObject[x].arguments)}`);
         break;
       default:
         callback(`Unrecognized command ${actionObject[x].command} run`);
@@ -98,7 +116,9 @@ function runRoScriptActions(actionObject, callback) {
 }
 
 function runProgram(programString) {
-  document.getElementById("output").innerHTML = "Running...";
+  document.getElementById("output").innerHTML = document.getElementById(
+    "output"
+  ).innerHTML = "Running...<br /><br />";
   runRoScriptActions(parseRoScript(programString), output => {
     document.getElementById("output").innerHTML += output + "<br />";
   });
