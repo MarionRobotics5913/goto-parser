@@ -63,7 +63,7 @@ function parseRoScript(programString) {
   }
   // Add on the last token
   appendCurrToken();
-  tokens.push("fileend");
+  tokens.push("end of file");
   console.log(tokens);
 
   // Parser
@@ -104,7 +104,7 @@ function parseRoScript(programString) {
         line++;
         currIndex++;
         break;
-      case "fileend":
+      case "end of file":
         break;
       case "goto":
         if (actions[currIndex]) {
