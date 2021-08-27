@@ -62,7 +62,7 @@ function parseRoScript(programString) {
     // x++;
   }
   // Add on the last token
-  tokens.push(currToken);
+  appendCurrToken();
   console.log(tokens);
 
   // Parser
@@ -83,9 +83,7 @@ function parseRoScript(programString) {
         return [
           {
             command: "error",
-            message: `Parsing error: Expected a number after ${data[0]}, got ${
-              data[1]
-            } instead (line ${line})`
+            message: `Parsing error: Expected a number after ${data[0]}, got ${data[1]} instead (line ${line})`
           }
         ];
         break;
@@ -93,7 +91,7 @@ function parseRoScript(programString) {
   }
   var skipLoops = 0;
   for (var x in tokens) {
-    if (skipLoops) {
+    if(skipLoops){
       skipLoops--;
       continue;
     }
@@ -102,7 +100,7 @@ function parseRoScript(programString) {
       case "newline":
         line++;
         currIndex++;
-        continue;
+        break;
       case "goto":
         if (actions[currIndex]) {
           return createError("token", "goto");
@@ -111,25 +109,21 @@ function parseRoScript(programString) {
           command: "goto",
           args: {},
           type: "stop",
-          flow: "await"
+          flow: "await",
         };
         break;
       default:
         if (!actions[currIndex]) {
           return createError("token", token);
         }
-        console.log(JSON.stringify(actions[currIndex]));
-        switch (actions[currIndex].command) {
+        switch(actions[currIndex].command){
           case "goto":
-            if (token.endsWith(":")) {
-              // Argument for goto
-              if (typeof parseFloat(tokens[x * 1 + 1]) === "number") {
-                actions[currIndex][token.slice(0, -1)] = parseFloat(
-                  tokens[x * 1 + 1]
-                );
+            if(token.endsWith(":")){ // Argument for goto
+              if(typeof parseFloat(tokens[x*1+1]) === "number"){
+                actions[currIndex].args[token.slice(0, -1)] = parseFloat(tokens[x*1+1]);
                 skipLoops = 1;
               } else {
-                return createError("number", [token, tokens[x * 1 + 1]]);
+                return createError("number", [token, tokens[x*1+1]]);
               }
             }
             break;
@@ -148,7 +142,7 @@ function runRoScriptActions(actionObject, callback) {
         return actionObject[x].message;
         break;
       case "goto":
-        callback(`goto: ${JSON.stringify(actionObject[x].arguments)}`);
+        callback(`goto: ${JSON.stringify(actionObject[x].args)}`);
         break;
       default:
         callback(`Unrecognized command ${actionObject[x].command} run`);

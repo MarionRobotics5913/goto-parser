@@ -10,15 +10,15 @@
   <a href="/about.html">What is this?</a>
   <div>
     <div style="padding: 10px 10px 10px 0px;">
-      <textarea id="program" class="code-block" cols="48" rows="16">
+      <textarea id="program" class="code-block" cols="48" rows="16" oninput="if(document.getElementById('autoparse').checked) runProgram(document.getElementById('program').value)">
 goto x: 0.5 y: 0.2 // Comments work
 goto x: 0.3 y: 0.4//They even work without spaces
 goto x: 0.8 y: 0.1
     </textarea>
-    
     </div>
-  </div>
-  <br />
+  </div> Could you look at About?
+  <input type="checkbox" id="autoparse" checked> Auto-parse on changes <br />
+
   <button
     onclick="runProgram(document.getElementById('program').value)"
   >

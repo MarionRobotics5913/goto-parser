@@ -16,6 +16,10 @@
     <h3>
       goto
     </h3>
-    This command is used to tell the robot where to move and how to position on the field. Example: <code>goto x: 0.3 y: 0.6 heading: 90 claw: 0.7 arm: 1</code>
+    Tells the robot where to move and how to position itself on the field. Example: <code>goto x: 0.3 y: 0.6 heading: 90 claw: 0.7 arm: 1</code>
+    <h3> <!-- @Matthew I think this would be cleaner, especially to implement -->
+      attachment
+    </h3>
+    Tells an attachment to do something, specified by the rest of the command. Example: <code>attachment claw goto pos: 0.6</code>
   </body>
 </html>
