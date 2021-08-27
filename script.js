@@ -16,34 +16,35 @@ function parseRoScript(programString) {
   // Lexor
   var tokens = [];
   var currToken = "";
-  
-  function appendCurrToken(){
-      if (typeof currToken * 1 === "number") {
-        tokens.push(currToken * 1);
-      } else if (currToken !== "") {
-        tokens.push(currToken);
-      }
-      currToken = "";    
-  };
-  
-//   var x = 0;
-  
-//   while (x < programString.length) {
-  for(var x in programString){
+
+  function appendCurrToken() {
+    if (typeof currToken * 1 === "number") {
+      tokens.push(currToken * 1);
+    } else if (currToken.endsWith("//")) {
+      tokens.push(currToken.slice(0, -2));
+    } else if (currToken !== "") {
+      tokens.push(currToken);
+    }
+    currToken = "";
+  }
+
+  //   var x = 0;
+
+  //   while (x < programString.length) {
+  for (var x in programString) {
     var char = programString[x];
-    if(currToken === "//"){
-      if(char !== "\n"){
+    if (currToken.endsWith("//")) { // If a comment started
+      if (char !== "\n") {
         continue;
       }
-      currToken = "";
     }
-    switch(char){
+    switch (char) {
       case " ":
         appendCurrToken();
-      break;
+        break;
       case "\n":
         appendCurrToken();
-        tokens.push("newline");        
+        tokens.push("newline");
         break;
       default:
         currToken += char;
@@ -61,10 +62,6 @@ function parseRoScript(programString) {
   // Add on the last token
   tokens.push(currToken);
   return tokens;
-  
-  
 }
 
-function runRoScriptAction(actionObject) {
-  
-}
+function runRoScriptAction(actionObject) {}
