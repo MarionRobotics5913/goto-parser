@@ -62,7 +62,14 @@ function parseRoScript(programString) {
   }
   // Add on the last token
   tokens.push(currToken);
-  return tokens;
+  // return tokens;
+  
+  // Parser
+  var actions = [];
+  var currIndex = 0; // Index instead of object because of possible shallow cloning issues
+  for(var x in tokens){
+    switch()
+  }
 }
 
 function runRoScriptAction(actionObject) {}
