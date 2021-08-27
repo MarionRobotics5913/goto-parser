@@ -63,7 +63,7 @@ function parseRoScript(programString) {
   }
   // Add on the last token
   tokens.push(currToken);
-  // return tokens;
+  console.log(tokens);
 
   // Parser
   var actions = [];
@@ -75,7 +75,7 @@ function parseRoScript(programString) {
         return [
           {
             command: "error",
-            message: `Parsing error: Unexpected token "${data}" on line ${line}`
+            message: `Parsing error: Unexpected token "${data}" (line ${line})`
           }
         ];
         break;
@@ -83,7 +83,9 @@ function parseRoScript(programString) {
         return [
           {
             command: "error",
-            message: `Parsing error: Expected a number after ${data[0]}, got ${data[1]} instead`
+            message: `Parsing error: Expected a number after ${data[0]}, got ${
+              data[1]
+            } instead (line ${line})`
           }
         ];
         break;
@@ -91,7 +93,7 @@ function parseRoScript(programString) {
   }
   var skipLoops = 0;
   for (var x in tokens) {
-    if(skipLoops){
+    if (skipLoops) {
       skipLoops--;
       continue;
     }
@@ -99,7 +101,8 @@ function parseRoScript(programString) {
     switch (token) {
       case "newline":
         line++;
-        break;
+        currIndex++;
+        continue;
       case "goto":
         if (actions[currIndex]) {
           return createError("token", "goto");
@@ -108,21 +111,25 @@ function parseRoScript(programString) {
           command: "goto",
           args: {},
           type: "stop",
-          flow: "await",
+          flow: "await"
         };
         break;
       default:
         if (!actions[currIndex]) {
           return createError("token", token);
         }
-        switch(actions[currIndex].command){
+        console.log(JSON.stringify(actions[currIndex]));
+        switch (actions[currIndex].command) {
           case "goto":
-            if(token.endsWith(":")){ // Argument for goto
-              if(typeof tokens[x+1]*1 === "number"){
-                actions[currIndex][token.slice(0, -1)] = tokens[x+1]*1;
+            if (token.endsWith(":")) {
+              // Argument for goto
+              if (typeof parseFloat(tokens[x * 1 + 1]) === "number") {
+                actions[currIndex][token.slice(0, -1)] = parseFloat(
+                  tokens[x * 1 + 1]
+                );
                 skipLoops = 1;
               } else {
-                return createError("number", [token, tokens[x]});
+                return createError("number", [token, tokens[x * 1 + 1]]);
               }
             }
             break;
