@@ -5,21 +5,25 @@
     <link rel="stylesheet" href="/style.css" />
 
     <!-- Import the webpage's javascript file -->
-    <script src="/script.js" defer></script>    
+    <script src="/script.js" defer></script>
   </head>
   <a href="/about.html">What is this?</a>
   <div>
-    <textarea id="program" cols=48 rows=16>
+    <div style="padding: 10px;">
+      <textarea id="program" class="code-block" cols="48" rows="16">
 goto x: 0.5 y: 0.2 // Comments work
 goto x: 0.3 y: 0.4//They even work without spaces
 goto x: 0.8 y: 0.1
-    </textarea>
+    </textarea
+      >
+    </div>
   </div>
   <br />
-  <button onclick="document.getElementById('output').innerHTML = parseRoScript(document.getElementById('program').innerText).toString().split(',').join('<br />')">
+  <button
+    onclick="document.getElementById('output').innerHTML = parseRoScript(document.getElementById('program').innerText).toString().split(',').join('<br />')"
+  >
     Parse
   </button>
   Output:<br />
-  <div id="output">
-  </div>
+  <div id="output"></div>
 </html>
