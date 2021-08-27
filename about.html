@@ -16,10 +16,37 @@
     <h3>
       goto
     </h3>
-    Tells the robot where to move and how to position itself on the field. Example: <code>goto x: 0.3 y: 0.6 heading: 90 claw: 0.7 arm: 1</code>
+    Tells the robot where to move and how to position itself on the field. Example: <code>goto x: 0.3 y: 0.6 heading: 90</code>
     <h3> <!-- @Matthew I think this would be cleaner, especially to implement -->
-      attachment
+      attachment <!-- Robot movement is fun, and it's very separate from attachment movement; trying to coordinate the two is nigh impossible -->
+<!--       True, maybe they should just be separate. Especially because attachment gives direct control and goto is indirect.
+ Actually, why not call it "set" instead? Well, that's not quite what it does But maybe it could do that But there's a reason it doesn't, and it's the same as why driving isn't that. Because rapidly going to a certain position is a bad idea. This could possibly work for servos, but not for motors.
+We could have a set command separate as well, for setting power, but goto is an indirect method that goes to a position True, though I think of goto as a command to set robot position relative to the field and abstracts the wheels. this is more of a "set to this position" where set would then be "set to this speed"
+However.
+You can't set a motor to a position. And many attachments are motors
+True, but the servo ones are set to a position
+Then it makes more sense to make it "set", because for a motor, it would set the speed, and for a servo, it would set the position. It's the most raw control possible for those two units.
+However.
+The point is disconnecting the control of the drive motors from the individual attachments, since the drive motors are the only ones that should be coordinated.
+The attachment command isolates to attachments, but the `set` and `goto` commands could both be used for both normal mode and attachment mode.
+I know. This would only be used for attachment motors or attachment servos. The drive motors are abstracted away with goto.
+...? How does goto handle an attachment? It's for positionally moving the robot.
+Exactly.
+So goto cannot do both
+No
+Because
+Goto goes to a position. But a position can be in the range of a motor as well. As an example...
+We had a motor one year to raise/lower the robot. It's reasonable to have that move toward the place.
+I think I actually get it. So for a motor attachment o rcontinuous servo, goto would be "set to a specific position" and set/attachment would be "set to this speed". For servos I'm not sure if there's a difference.
+Set/attachment would be for setting speeds of things, such as attachment motors or the speed of the robot
+Again, attachment can be used for multiple things
+Let's give 4 examples:
+attachment claw goto pos: 0 stop
+attachment railgun set power: 1 stop
+goto x: 0 y: 0
+set fl: 1 fr: 1 bl: 1 br: 1 // RAM WHATEVE
+-->
     </h3>
-    Tells an attachment to do something, specified by the rest of the command. Example: <code>attachment claw goto pos: 0.6</code>
+    Tells an attachment to do something, specified by the rest of the command. Example: <code>attachment claw pos: 0.6</code>
   </body>
 </html>
