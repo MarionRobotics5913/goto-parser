@@ -84,7 +84,9 @@ function parseRoScript(programString) {
         return [
           {
             command: "error",
-            message: `Parsing error: Expected a number after ${data[0]}, got ${data[1]} instead (line ${line})`
+            message: `Parsing error: Expected a number after ${data[0]}, got ${
+              data[1]
+            } instead (line ${line})`
           }
         ];
         break;
@@ -92,7 +94,7 @@ function parseRoScript(programString) {
   }
   var skipLoops = 0;
   for (var x in tokens) {
-    if(skipLoops){
+    if (skipLoops) {
       skipLoops--;
       continue;
     }
@@ -103,7 +105,6 @@ function parseRoScript(programString) {
         currIndex++;
         break;
       case "fileend":
-        
         break;
       case "goto":
         if (actions[currIndex]) {
@@ -113,23 +114,32 @@ function parseRoScript(programString) {
           command: "goto",
           args: {},
           type: "stop",
-          flow: "await",
+          flow: "await"
         };
         break;
       default:
         if (!actions[currIndex]) {
           return createError("token", token);
         }
-        switch(actions[currIndex].command){
+        switch (actions[currIndex].command) {
           case "goto":
-            if(token.endsWith(":")){ // Argument for goto
-              if(typeof parseFloat(tokens[x*1+1]) === "number" && parseFloat(tokens[x*1+1]) !== NaN){
-                console.log("Number " + parseFloat(tokens[x*1+1]) + ", " + tokens[x*1+1]);
-                actions[currIndex].args[token.slice(0, -1)] = parseFloat(tokens[x*1+1]);
+            if (token.endsWith(":")) {
+              // Argument for goto
+              if (!isNaN(parseFloat(tokens[x * 1 + 1]))) {
+                // Make sure it's not NaN
+                console.log(
+                  "Number " +
+                    parseFloat(tokens[x * 1 + 1]) +
+                    ", " +
+                    tokens[x * 1 + 1]
+                );
+                actions[currIndex].args[token.slice(0, -1)] = parseFloat(
+                  tokens[x * 1 + 1]
+                );
                 skipLoops = 1;
               } else {
                 console.log("Not number " + token);
-                return createError("number", [token, tokens[x*1+1]]);
+                return createError("number", [token, tokens[x * 1 + 1]]);
               }
             } else {
               return createError("token", token);
