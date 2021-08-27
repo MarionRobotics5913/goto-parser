@@ -72,11 +72,18 @@ function parseRoScript(programString) {
   function createError(type, data) {
     switch (type) {
       case "token":
-        console.log("Error created");
         return [
           {
             command: "error",
             message: `Parsing error: Unexpected token "${data}" on line ${line}`
+          }
+        ];
+        break;
+      case "number":
+        return [
+          {
+            command: "error",
+            message: `Parsing error: Expected a number after ${data[0]}, got ${data[1]} instead`
           }
         ];
         break;
@@ -110,8 +117,13 @@ function parseRoScript(programString) {
         }
         switch(actions[currIndex].command){
           case "goto":
-            if(token.endsWith(":")){ // Argument
-              
+            if(token.endsWith(":")){ // Argument for goto
+              if(typeof tokens[x+1]*1 === "number"){
+                actions[currIndex][token.slice(0, -1)] = tokens[x+1]*1;
+                skipLoops = 1;
+              } else {
+                return createError("number", [token, tokens[x]});
+              }
             }
             break;
         }
