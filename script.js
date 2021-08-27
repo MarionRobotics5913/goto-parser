@@ -18,10 +18,11 @@ function parseRoScript(programString) {
   var currToken = "";
 
   function appendCurrToken() {
+    if (currToken.endsWith("//")) {
+      currToken = currToken.slice(0, -2);
+    }
     if (typeof currToken * 1 === "number") {
       tokens.push(currToken * 1);
-    } else if (currToken.endsWith("//")) {
-      tokens.push(currToken.slice(0, -2));
     } else if (currToken !== "") {
       tokens.push(currToken);
     }
