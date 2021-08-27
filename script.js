@@ -69,30 +69,52 @@ function parseRoScript(programString) {
   var actions = [];
   var currIndex = 0; // Index instead of object because of possible shallow cloning issues
   var line = 1;
-  function createError(type, data){
-    switch(type){
+  function createError(type, data) {
+    switch (type) {
       case "token":
-        return [{
-          command: "error",
-          message: ""
-        }];              
+        console.log("Error created");
+        return [
+          {
+            command: "error",
+            message: `Parsing error: Unexpected token "${data}" on line ${line}`
+          }
+        ];
         break;
     }
   }
+  var skipLoops = 0;
   for (var x in tokens) {
-    switch (tokens[x]) {
+    if(skipLoops){
+      skipLoops--;
+      continue;
+    }
+    var token = tokens[x]; // Just to make readability a bit better
+    switch (token) {
       case "newline":
         line++;
         break;
       case "goto":
-        if(actions[currIndex].command){
-          errorMessage = `Parsing error: Unexpected token goto on line ${line}`          
+        if (actions[currIndex]) {
+          return createError("token", "goto");
         }
+        actions[currIndex] = {
+          command: "goto",
+          args: {},
+          type: "stop",
+          flow: "await",
+        };
         break;
       default:
-        errorMessage = `Parsing error: Unexpected token ${tokens[x]} on line ${line}`
-    }
-    if(errorMessage!==""){
+        if (!actions[currIndex]) {
+          return createError("token", token);
+        }
+        switch(actions[currIndex].command){
+          case "goto":
+            if(token.endsWith(":")){ // Argument
+              
+            }
+            break;
+        }
     }
   }
   return actions;
