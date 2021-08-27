@@ -103,6 +103,7 @@ function parseRoScript(programString) {
         currIndex++;
         break;
       case "fileend":
+        
         break;
       case "goto":
         if (actions[currIndex]) {
@@ -122,12 +123,16 @@ function parseRoScript(programString) {
         switch(actions[currIndex].command){
           case "goto":
             if(token.endsWith(":")){ // Argument for goto
-              if(typeof parseFloat(tokens[x*1+1]) === "number"){
+              if(typeof parseFloat(tokens[x*1+1]) === "number" && parseFloat(tokens[x*1+1]) !== NaN){
+                console.log("Number " + parseFloat(tokens[x*1+1]) + ", " + tokens[x*1+1]);
                 actions[currIndex].args[token.slice(0, -1)] = parseFloat(tokens[x*1+1]);
                 skipLoops = 1;
               } else {
+                console.log("Not number " + token);
                 return createError("number", [token, tokens[x*1+1]]);
               }
+            } else {
+              return createError("token", token);
             }
             break;
         }
