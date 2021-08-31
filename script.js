@@ -211,6 +211,7 @@ editor.addEventListener('input', updateEditor);
 function updateEditor() {
     const sel = window.getSelection();
     const textSegments = getTextSegments(editor);
+  // alert(JSON.stringify(textSegments));
     const textContent = textSegments.map(({text}) => text).join('');
     let anchorIndex = null;
     let focusIndex = null;
@@ -224,8 +225,8 @@ function updateEditor() {
         }
         currentIndex += text.length;
     });
-    
-    editor.innerHTML = renderText(textContent);
+    // alert(textContent);
+    editor.innerHTML = renderText(textContent).replace("\n", "<br />");
     
     restoreSelection(anchorIndex, focusIndex);
 }
@@ -256,19 +257,20 @@ function restoreSelection(absoluteAnchorIndex, absoluteFocusIndex) {
 }
 
 function renderText(text) {
-    const words = text.split(/(\s+)/);
-    const output = words.map((word) => {
-        if (word === 'bold') {
-            return `<strong>${word}</strong>`;
-        }
-        else if (word === 'red') {
-            return `<span style='color:red'>${word}</span>`;
-        }
-        else {
-            return word;
-        }
-    })
-    return output.join('');
+    // const words = text.split(/(\s+)/);
+    // const output = words.map((word) => {
+    //     if (word === 'bold') {
+    //         return `<strong>${word}</strong>`;
+    //     }
+    //     else if (word === 'red') {
+    //         return `<span style='color:red'>${word}</span>`;
+    //     }
+    //     else {
+    //         return word;
+    //     }
+    // })
+    // return output.join('');
+  return text.replace("red", `<span style='color:red'>red</span>`).replace("bold", "<strong>bold</strong>")
 }
 
 updateEditor();
