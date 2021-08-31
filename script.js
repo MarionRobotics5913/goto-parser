@@ -184,7 +184,7 @@ function runProgram(programString) {
 
 // Add syntax highlighting to the editor element
 // Code from Brian Mearns: https://codepen.io/brianmearns/pen/YVjZWw
-const editor = document.getElementById('program');
+const editor = document.getElementById('editor');
 const selectionOutput = document.getElementById('selection');
 
 function getTextSegments(element) {
