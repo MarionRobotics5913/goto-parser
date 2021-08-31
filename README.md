@@ -5,4 +5,4 @@ Woooooo
 ---
 ### Stuff to add:
 
-Lexor rewrite-ish
+Lexer rewrite-ish
