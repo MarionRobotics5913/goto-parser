@@ -152,7 +152,8 @@ Parse to
 // }
 
 function parseGotoScript(programString){
-  
+  var lexer;
+  var parser;
 }
 
 // This is just for handling stuff on this page and testing
