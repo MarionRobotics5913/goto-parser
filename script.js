@@ -187,7 +187,16 @@ function codeUpdate(){ // Run every time the textarea updates
   var highlighter = document.getElementById("highlighter");
   var text = textarea.value.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace("\u0010", "<br />");
   text = text.replace("red", "<span style='color: red'>red</span>")
-  // if(text.endsWith("<br />")) text += " ";
+  if(text.endsWith("<br />")) text += " ";
   highlighter.height = textarea.clientHeight;
   highlighter.innerText = text;
 };
+
+function sync_scroll(element) {
+  /* Scroll result to scroll coords of event - sync with textarea */
+  // let result_element = document.querySelector("#highlighting");
+  let result_element = document.getElementById("highlighter");
+  // Get and set x and y
+  result_element.scrollTop = element.scrollTop;
+  result_element.scrollLeft = element.scrollLeft;
+}
