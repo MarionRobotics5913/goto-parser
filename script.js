@@ -151,7 +151,7 @@ Parse to
 //   return actions;
 // }
 
-function parseGotoScript(programString) {
+function GotoParser() {
   this.lexer;
   this.parser;
 
@@ -194,8 +194,8 @@ function parseProgram(programString) {
   document.getElementById("output").innerHTML = document.getElementById(
     "output"
   ).innerHTML = "Running...<br /><br />";
-  var parser = 
-  runRoScriptActions(parseGotoScript(programString), output => {
+  var parser = new GotoParser();
+  runRoScriptActions(parser.parser(programString), output => {
     document.getElementById("output").innerHTML += output + "<br />";
   });
 }
