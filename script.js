@@ -162,7 +162,9 @@ function GotoParser() {
     var currentToken = {}; // Line, column, type, token
     for(var x in programString){
       var char = programString[x];
-      alert(char);
+      if((/[a-zA-Z]/).test(char)){
+        alert(char);
+      }
     }
   };
   this.parser = function(tokens) {
