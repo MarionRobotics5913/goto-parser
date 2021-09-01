@@ -20,12 +20,14 @@
   color: transparent;
   background: transparent;
   caret-color: white;
+  white-space: nowrap;
 }
 #highlighter {
   position: absolute;
   top: 0;
   left: 0;
   z-index: 0;
+  white-space: nowrap;
 }
 code {
   font-family: monospace;
