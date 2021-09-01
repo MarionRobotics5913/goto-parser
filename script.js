@@ -152,6 +152,12 @@ Parse to
 // }
 
 function parseGotoScript(programString){
+  this.lexer;
+  this.parser;
+  
+  this.lexer = function(programString){
+    
+  }
   
 }
 
