@@ -156,10 +156,13 @@ function parseGotoScript(programString) {
   this.parser;
 
   this.lexer = function(programString) {
-    var position = 0;
+    var position = 1;
     var line = 1;
+    var tokens = [];
+    var currentToken = {}; // Line, column, type, token
     for(var x in programString){
-      
+      var char = programString[x];
+      alert(char);
     }
   };
   this.parser = function(tokens) {
@@ -187,10 +190,11 @@ function runRoScriptActions(actionObject, callback) {
   }
 }
 
-function runProgram(programString) {
+function parseProgram(programString) {
   document.getElementById("output").innerHTML = document.getElementById(
     "output"
   ).innerHTML = "Running...<br /><br />";
+  var parser = 
   runRoScriptActions(parseGotoScript(programString), output => {
     document.getElementById("output").innerHTML += output + "<br />";
   });
@@ -211,6 +215,7 @@ function codeUpdate() {
   highlighter.height = textarea.clientHeight;
   highlighter.innerHTML = text;
   // alert(text);
+  parseProgram(textarea.value);
 }
 
 codeUpdate();
