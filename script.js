@@ -185,8 +185,9 @@ function runProgram(programString) {
 function codeUpdate(){ // Run every time the textarea updates
   var textarea = document.getElementById("editor");
   var highlighter = document.getElementById("highlighter");
-  var text = textarea.value;
+  var text = textarea.value.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace("\u0010", "<br />");
   text = text.replace("red", "<span style='color: red'>red</span>")
-  if(text.endsWith("<br />")) text += " ";
-  highlighter.innerHTML = text;
+  // if(text.endsWith("<br />")) text += " ";
+  highlighter.height = textarea.clientHeight;
+  highlighter.innerText = text;
 };
