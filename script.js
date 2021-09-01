@@ -156,17 +156,29 @@ function GotoParser() {
   this.parser;
 
   this.lexer = function(programString) {
-    var position = 1;
+    var column = 1;
     var line = 1;
     var tokens = [];
-    var currentToken = {}; // Line, column, type, token
+    var currentToken = {
+        line,
+        column,
+        type: undefined, // Not necessary but I like being able to see it if I look
+        token: ""
+      }; // Line, column, type, token
     function newToken(){
-      
-    };
+      tokens.push(currentToken);
+      currentToken = {
+        line,
+        column,
+        type: undefined,
+        token: ""
+      };
+    }; // Handling for unexpected weird tokens will be here
+    
     for(var x in programString){
       var char = programString[x];
       if((/[a-zA-Z0-9]/).test(char)){
-        tokens.push(char);
+        
       }
     }
   };
