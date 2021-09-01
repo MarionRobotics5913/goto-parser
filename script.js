@@ -192,13 +192,19 @@ function codeUpdate(){ // Run every time the textarea updates
   var highlighter = document.getElementById("highlighter");
   
   var text = textarea.value.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/\ /g, "&nbsp;").replace(/\n/g, "<br />")
-  text = text.replace("red", "<span style='color: red'>red</span>")
+  text = text.replace(/red/g, "<span style='color: red'>red</span>")
+  text = text.replace(/blue/g, "<span style='color: blue'>blue</span>")
+  text = text.replace(/green/g, "<span style='color: green'>green</span>")
+  text = text.replace(/goto/g, "<span style='color: cyan; font-weight: bold;'>goto</span>")
+  text = text.replace(/(\/\/(.*)\n)/g, "<span style='color: grey'>$1</span>")
   if(text.endsWith("<br />")) text += " ";
   
   highlighter.height = textarea.clientHeight;
   highlighter.innerHTML = text;
   // alert(text);
 };
+
+codeUpdate();
 
 function sync_scroll(element) {
   /* Scroll result to scroll coords of event - sync with textarea */
