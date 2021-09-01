@@ -151,14 +151,23 @@ Parse to
 //   return actions;
 // }
 
-function parseGotoScript(programString){
+function parseGotoScript(programString) {
   this.lexer;
   this.parser;
-  
-  this.lexer = function(programString){
+
+  this.lexer = function(programString) {
+    var position = 0;
+    var line = 1;
+    for(var x in programString){
+      
+    }
+  };
+  this.parser = function(tokens) {
     
-  }
-  
+  };
+  this.parseProgram = function(programString) {
+    return this.parser(this.lexer(programString));
+  };
 }
 
 // This is just for handling stuff on this page and testing
@@ -187,22 +196,22 @@ function runProgram(programString) {
   });
 }
 
-function codeUpdate(){ // Run every time the textarea updates
+function codeUpdate() {
+  // Run every time the textarea updates
   var textarea = document.getElementById("editor");
   var highlighter = document.getElementById("highlighter");
-  
-  var text = textarea.value.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/\ /g, "&nbsp;").replace(/\n/g, "<br />")
-  text = text.replace(/red/g, "<span style='color: red'>red</span>")
-  text = text.replace(/blue/g, "<span style='color: blue'>blue</span>")
-  text = text.replace(/green/g, "<span style='color: green'>green</span>")
-  text = text.replace(/goto/g, "<span style='color: cyan; font-weight: bold;'>goto</span>")
-  text = text.replace(/(\/\/(.*)\n)/g, "<span style='color: grey'>$1</span>")
-  if(text.endsWith("<br />")) text += " ";
-  
+
+  var text = textarea.value
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/\ /g, "&nbsp;")
+    .replace(/\n/g, "<br />");
+  if (text.endsWith("<br />")) text += " ";
+
   highlighter.height = textarea.clientHeight;
   highlighter.innerHTML = text;
   // alert(text);
-};
+}
 
 codeUpdate();
 
