@@ -182,3 +182,7 @@ function runProgram(programString) {
   });
 }
 
+function codeUpdate(){ // Run every time the textarea updates
+  var textarea = document.getElementById("editor");
+  var highlighter = document.getElementById("")
+};

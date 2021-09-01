@@ -10,7 +10,7 @@
   <a href="/about.html">What is this?</a>
 <!--   <div> -->
     <div style="padding: 0px; position: relative;">
-      <textarea id="editor" class="code-block" cols="48" rows="16" oninput="if(document.getElementById('autoparse').checked) runProgram(document.getElementById('program').value)">
+      <textarea id="editor" class="code-block" cols="48" rows="16" oninput="codeUpdate();">
 goto x: 0.5 y: 0.2 // Comments work
 goto x: 0.3 y: 0.4//They even work without spaces
 goto x: 0.8 y: 0.1
