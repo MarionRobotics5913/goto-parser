@@ -4,11 +4,11 @@
   color: white;
   border-radius: 10px;
   line-height: 16px;
-  width: calc(100% - 35px);
-  height: calc(100% - 35px);
+  width: calc(100% - 45px);
+  height: calc(100% - 45px);
   resize: none;
   margin: 10px;
-  padding: 5px;
+  padding: 10px;
   border: 0;
   overflow: auto;
 }

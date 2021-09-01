@@ -152,8 +152,7 @@ Parse to
 // }
 
 function parseGotoScript(programString){
-  var lexer;
-  var parser;
+  
 }
 
 // This is just for handling stuff on this page and testing
@@ -185,9 +184,11 @@ function runProgram(programString) {
 function codeUpdate(){ // Run every time the textarea updates
   var textarea = document.getElementById("editor");
   var highlighter = document.getElementById("highlighter");
+  
   var text = textarea.value.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/\ /g, "&nbsp;").replace(/\n/g, "<br />")
   text = text.replace("red", "<span style='color: red'>red</span>")
   if(text.endsWith("<br />")) text += " ";
+  
   highlighter.height = textarea.clientHeight;
   highlighter.innerHTML = text;
   // alert(text);
