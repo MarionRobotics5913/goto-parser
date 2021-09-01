@@ -178,7 +178,7 @@ function GotoParser() {
     for(var x in programString){
       var char = programString[x];
       if((/[a-zA-Z0-9]/).test(char)){
-        
+        // Identifier
       }
     }
   };
