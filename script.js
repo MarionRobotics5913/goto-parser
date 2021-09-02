@@ -154,6 +154,7 @@ Parse to
 function GotoParser() {
   this.lex;
   this.parse;
+  this.
 
   this.lex = function(programString) {
     var column = 1;
