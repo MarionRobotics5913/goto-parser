@@ -167,7 +167,7 @@ function GotoParser() {
     }; // Line, column, type, token
     function newToken() {
       tokens.push(currentToken);
-      currentToken = {
+      currToken = {
         line,
         column,
         type: undefined,
@@ -179,6 +179,7 @@ function GotoParser() {
       var char = programString[x];
       if (/[a-zA-Z]/.test(char)) {
         // Identifier
+        if(currToken)
       } else if (/[0-9\.]/.test(char)) {
         // Number (or identifier continuation)
       } else {
