@@ -152,21 +152,21 @@ Parse to
 // }
 
 function GotoParser() {
-  this.lexer;
-  this.parser;
+  this.lex;
+  this.parse;
 
-  this.lexer = function(programString) {
+  this.lex = function(programString) {
     var column = 1;
     var line = 1;
     var tokens = [];
-    var currentToken = {
+    var currToken = {
       line,
       column,
       type: undefined, // Not necessary but I like being able to see it if I look
       token: ""
     }; // Line, column, type, token
     function newToken() {
-      tokens.push(currentToken);
+      tokens.push(currToken);
       currToken = {
         line,
         column,
@@ -179,7 +179,9 @@ function GotoParser() {
       var char = programString[x];
       if (/[a-zA-Z]/.test(char)) {
         // Identifier
-        if(currToken)
+        if(currToken.type === "identifier"){
+          
+        }
       } else if (/[0-9\.]/.test(char)) {
         // Number (or identifier continuation)
       } else {
@@ -187,9 +189,9 @@ function GotoParser() {
       }
     }
   };
-  this.parser = function(tokens) {};
+  this.parse = function(tokens) {};
   this.parseProgram = function(programString) {
-    return this.parser(this.lexer(programString));
+    return this.parse(this.lex(programString));
   };
 }
 
