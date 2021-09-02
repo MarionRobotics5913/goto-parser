@@ -152,9 +152,9 @@ Parse to
 // }
 
 function GotoParser() {
-  this.lex;
-  this.parse;
-  this.
+  this.lex; // Lexer
+  this.parse; // Parser
+  this.analyze; // Semantic analyzer
 
   this.lex = function(programString) {
     var column = 1;
@@ -203,7 +203,7 @@ function GotoParser() {
   };
   this.parse = function(tokens) {};
   this.parseProgram = function(programString) {
-    return this.parse(this.lex(programString));
+    return this.analyze(this.parse(this.lex(programString)));
   };
 }
 
@@ -246,6 +246,7 @@ function codeUpdate() {
     .replace(/\n/g, "<br />");
   if (text.endsWith("<br />")) text += " ";
 
+  text = text.replace(/red/g, "<span style='color: red'>red</span>")
   highlighter.height = textarea.clientHeight;
   highlighter.innerHTML = text;
   // alert(text);
