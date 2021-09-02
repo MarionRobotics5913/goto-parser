@@ -179,8 +179,13 @@ function GotoParser() {
       var char = programString[x];
       if (/[a-zA-Z]/.test(char)) {
         // Identifier
-        if(currToken.type === "identifier"){
-          
+        switch(currToken.type){
+          case "identifier":
+            
+            break;
+          case "number":
+            
+            break;
         }
       } else if (/[0-9\.]/.test(char)) {
         // Number (or identifier continuation)
