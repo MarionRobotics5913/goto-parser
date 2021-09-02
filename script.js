@@ -160,12 +160,12 @@ function GotoParser() {
     var line = 1;
     var tokens = [];
     var currentToken = {
-        line,
-        column,
-        type: undefined, // Not necessary but I like being able to see it if I look
-        token: ""
-      }; // Line, column, type, token
-    function newToken(){
+      line,
+      column,
+      type: undefined, // Not necessary but I like being able to see it if I look
+      token: ""
+    }; // Line, column, type, token
+    function newToken() {
       tokens.push(currentToken);
       currentToken = {
         line,
@@ -173,18 +173,20 @@ function GotoParser() {
         type: undefined,
         token: ""
       };
-    }; // Handling for unexpected weird tokens will be here
-    
-    for(var x in programString){
+    } // Handling for unexpected weird tokens will be here
+
+    for (var x in programString) {
       var char = programString[x];
-      if((/[a-zA-Z0-9]/).test(char)){
+      if (/[a-zA-Z]/.test(char)) {
         // Identifier
+      } else if (/[0-9\.]/.test(char)) {
+        // Number (or identifier continuation)
+      } else {
+        // Symbol
       }
     }
   };
-  this.parser = function(tokens) {
-    
-  };
+  this.parser = function(tokens) {};
   this.parseProgram = function(programString) {
     return this.parser(this.lexer(programString));
   };
