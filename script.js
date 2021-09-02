@@ -181,10 +181,16 @@ function GotoParser() {
         // Identifier
         switch(currToken.type){
           case "identifier":
-            
+            // Append
             break;
           case "number":
-            
+            // For now, bad
+            break;
+          case "symbol":
+            // For now, bad
+            break;
+          case undefined:
+            // Start a new token
             break;
         }
       } else if (/[0-9\.]/.test(char)) {
