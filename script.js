@@ -157,6 +157,7 @@ function GotoParser() {
   this.analyze; // Semantic analyzer
 
   this.lex = function(programString) {
+    var x = 0;
     var column = 1;
     var line = 1;
     var tokens = [];
@@ -176,55 +177,69 @@ function GotoParser() {
       };
     } // Handling for unexpected weird tokens will be here
 
-    for (var x in programString) {
+    while (x < programString.length) {
+      /*
+      loop over characters
+      check starting character and decide token type
+      eat valid characters until you hit an invalid
+      break
+      */
+      
       var char = programString[x];
-      if (/[a-zA-Z]/.test(char)) {
-        // Identifier
-        switch(currToken.type){
-          case "identifier":
-            // Append
-            currToken.token += char;
-            break;
-          case "number":
-            // For now, bad
-            break;
-          case "symbol":
-            // For now, bad
-            break;
-          case undefined:
-            // Set type and such
-            currToken.type = "identifier";
-            currToken.token += char;
-            break;
-        }
-      } else if (/[0-9\.]/.test(char)) {
-        // Number (or identifier continuation)
-        switch(currToken.type){
-          case "identifier":
-            // Okay unless it's a dot
-            
-            break;
-          case "number":
-            // Good
-            currToken.token += char;
-            break;
-          case "symbol":
-            // For now, bad
-            break;
-          case undefined:
-            // Start a new number token (pay attention to the dot)
-            currToken.type = "number";
-            currToken.token += char;
-            break;
-        }
-      } else {
-        // Symbol
-        switch(char){
-          default:
-            // Unidentified stranger. ACK!
-            break;
-        };
+      if(/[a-zA-Z]/.test(char)){ // Identifier
+        
+      } else if (/[0-9\.]/.test(char)) { // Number
+        
+      } else { // Symbol
+        
       }
+//       if (/[a-zA-Z]/.test(char)) {
+//         // Identifier
+//         switch(currToken.type){
+//           case "identifier":
+//             // Append
+//             currToken.token += char;
+//             break;
+//           case "number":
+//             // For now, bad
+//             break;
+//           case "symbol":
+//             // For now, bad
+//             break;
+//           case undefined:
+//             // Set type and such
+//             currToken.type = "identifier";
+//             currToken.token += char;
+//             break;
+//         }
+//       } else if (/[0-9\.]/.test(char)) {
+//         // Number (or identifier continuation)
+//         switch(currToken.type){
+//           case "identifier":
+//             // Okay unless it's a dot
+            
+//             break;
+//           case "number":
+//             // Good
+//             currToken.token += char;
+//             break;
+//           case "symbol":
+//             // For now, bad
+//             break;
+//           case undefined:
+//             // Start a new number token (pay attention to the dot)
+//             currToken.type = "number";
+//             currToken.token += char;
+//             break;
+//         }
+//       } else {
+//         // Symbol
+//         switch(char){
+//           default:
+//             // Unidentified stranger. ACK!
+//             break;
+//         };
+//       }
     }
   };
   this.parse = function(tokens) {};
