@@ -198,7 +198,8 @@ function GotoParser() {
         // Number (or identifier continuation)
         switch(currToken.type){
           case "identifier":
-            // Okay
+            // Okay unless it's a dot
+            
             break;
           case "number":
             // Good
@@ -207,7 +208,7 @@ function GotoParser() {
             // For now, bad
             break;
           case undefined:
-            // Start a new number token
+            // Start a new number token (pay attention to the dot)
             break;
         }
       } else {
@@ -215,7 +216,6 @@ function GotoParser() {
         switch(char){
           default:
             // Unidentified stranger. ACK!
-            
             break;
         };
       }
