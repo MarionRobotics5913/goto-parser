@@ -157,7 +157,7 @@ function GotoParser() {
   this.analyze; // Semantic analyzer
 
   this.lex = function(programString) {
-    var x = 0;
+    var x = -1; // Gets incremented to 0 immediately and updates the character
     var column = 1;
     var line = 1;
     var tokens = [];
@@ -175,9 +175,10 @@ function GotoParser() {
         type: undefined,
         token: ""
       };
-    } // Handling for unexpected weird tokens will be here
+    } // Handling for unexpected weird tokens will be here, like "" or " " if they somehow end up being produced
     var char;
     function increment(){
+      x++;
       char = programString[x];
       if(char === "\n"){
         line++;
@@ -185,7 +186,6 @@ function GotoParser() {
       }else{
         column++;
       }
-      x++;
     };
       /*
       loop over characters
@@ -200,8 +200,8 @@ function GotoParser() {
       if(/[a-zA-Z]/.test(char)){ // Identifier
         currToken.type = "identifier";
         currToken.token += char;
-        while(/[a-zA-Z0-9]/.test(char)){
-          increment();
+        while(/[a-zA-Z0-9]/.test(programString[x+1])){ // While the next character is also an identifier character
+          increment(); // Actually increment the counter
           currToken.token += char;
         }
         newToken();
