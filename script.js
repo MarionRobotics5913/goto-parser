@@ -183,6 +183,7 @@ function GotoParser() {
         switch(currToken.type){
           case "identifier":
             // Append
+            currToken.token += char;
             break;
           case "number":
             // For now, bad
@@ -192,7 +193,8 @@ function GotoParser() {
             break;
           case undefined:
             // Set type and such
-            
+            currToken.type = "identifier";
+            currToken.token += char;
             break;
         }
       } else if (/[0-9\.]/.test(char)) {
@@ -204,12 +206,15 @@ function GotoParser() {
             break;
           case "number":
             // Good
+            currToken.token += char;
             break;
           case "symbol":
             // For now, bad
             break;
           case undefined:
             // Start a new number token (pay attention to the dot)
+            currToken.type = "number";
+            currToken.token += char;
             break;
         }
       } else {
