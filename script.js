@@ -181,23 +181,28 @@ function GotoParser() {
       char = programString[x];
       x++;
     };
-    while (x < programString.length) {
-      increment();
-      tokens.push(char);
       /*
       loop over characters
       check starting character and decide token type
       eat valid characters until you hit an invalid
       break
       */
+    while (x < programString.length) {
+      increment();
       
       // var char = programString[x];
       if(/[a-zA-Z]/.test(char)){ // Identifier
         currToken.type = "identifier";
-        // while()
+        currToken.token += char;
+        increment(); // Increment characters and X value
+        while(/[a-zA-Z0-9]/.test(char)){
+          
+        }
       } else if (/[0-9\.]/.test(char)) { // Number
+        currToken.type = "number";
         
       } else { // Symbol
+        currToken.type = "symbol";
         
       }
 //       if (/[a-zA-Z]/.test(char)) {
@@ -247,11 +252,11 @@ function GotoParser() {
 //             break;
 //         };
 //       }
-      return tokens;
     }
+      return tokens;
   };
   this.parse = function(tokens) {return tokens;};
-  this.analyze
+  this.analyze = function(actions) {return actions;};
   this.parseProgram = function(programString) {
     return this.analyze(this.parse(this.lex(programString)));
   };
@@ -259,19 +264,20 @@ function GotoParser() {
 
 // This is just for handling stuff on this page and testing
 function runRoScriptActions(actionObject, callback) {
-  for (var x in actionObject) {
-    switch (actionObject[x].command) {
-      case "error":
-        callback(`Error: ${actionObject[x].message}`);
-        return actionObject[x].message;
-        break;
-      case "goto":
-        callback(`goto: ${JSON.stringify(actionObject[x].args)}`);
-        break;
-      default:
-        callback(`Unrecognized command ${actionObject[x].command} run`);
-    }
-  }
+  // for (var x in actionObject) {
+  //   switch (actionObject[x].command) {
+  //     case "error":
+  //       callback(`Error: ${actionObject[x].message}`);
+  //       return actionObject[x].message;
+  //       break;
+  //     case "goto":
+  //       callback(`goto: ${JSON.stringify(actionObject[x].args)}`);
+  //       break;
+  //     default:
+  //       callback(`Unrecognized command ${actionObject[x].command} run`);
+  //   }
+  // }
+  callback(`Output:<br />${JSON.stringify(actionObject)}`);
 }
 
 function parseProgram(programString) {
