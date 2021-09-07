@@ -177,6 +177,7 @@ function GotoParser() {
       };
     } // Handling for unexpected weird tokens will be here, like "" or " " if they somehow end up being produced
     var char;
+    
     function increment(){
       x++;
       char = programString[x];
@@ -194,31 +195,41 @@ function GotoParser() {
       break
       */
     var infiniteLoopStopper = 0;
-    while (x < programString.length && infiniteLoopStopper<50) {
+    // while (x < programString.length && infiniteLoopStopper<50) {
+    while(infiniteLoopStopper<15){
       infiniteLoopStopper++;
       increment(); //"goto x: 0"
-      
       // var char = programString[x];
       if(/[a-zA-Z]/.test(char)){ // Identifier
         currToken.type = "identifier";
         currToken.token += char;
+      console.log(char);
         while(/[a-zA-Z0-9]/.test(programString[x+1])){ // While the next character is also an identifier character
           increment(); // Actually increment the counter
-          console.log(char); currToken.token += char;
+          currToken.token += char;
+      console.log(char);
         }
         newToken();
       } else if (/[0-9\.]/.test(char)) { // Number
         currToken.type = "number";
-        
+        while(/[0-9\.]/.test(programString[x+1])){ // While the next character is also an identifier character
+          increment(); // Actually increment the counter
+          currToken.token += char;
+      console.log(char);
+        }
       } else { // Symbol
         switch(char){
           case " ":
           case "\n":
             // Do nothing, increment takes care of it (Should I put a statement here?)
             break;
+          case undefined:
+            alert("Undefined");
+            break;
           default:
             currToken.type = "symbol";
             currToken.token = char;
+      console.log(char);
             newToken();
         }
       }
