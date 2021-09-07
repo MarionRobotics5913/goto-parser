@@ -191,7 +191,8 @@ function GotoParser() {
             // For now, bad
             break;
           case undefined:
-            // Start a new token
+            // Set type and such
+            
             break;
         }
       } else if (/[0-9\.]/.test(char)) {
