@@ -188,15 +188,15 @@ function GotoParser() {
       break
       */
     while (x < programString.length) {
-      increment();
+      increment(); //"goto x: 0"
       
       // var char = programString[x];
       if(/[a-zA-Z]/.test(char)){ // Identifier
         currToken.type = "identifier";
         currToken.token += char;
-        increment(); // Increment characters and X value
         while(/[a-zA-Z0-9]/.test(char)){
-          
+          currToken.token += char;
+          increment();
         }
       } else if (/[0-9\.]/.test(char)) { // Number
         currToken.type = "number";
