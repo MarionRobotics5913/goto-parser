@@ -176,8 +176,13 @@ function GotoParser() {
         token: ""
       };
     } // Handling for unexpected weird tokens will be here
-
+    var char;
+    function increment(){
+      char = programString[x];
+      x++;
+    };
     while (x < programString.length) {
+      increment();
       /*
       loop over characters
       check starting character and decide token type
@@ -185,8 +190,10 @@ function GotoParser() {
       break
       */
       
-      var char = programString[x];
+      // var char = programString[x];
+      alert(char);
       if(/[a-zA-Z]/.test(char)){ // Identifier
+        currToken.type = "identifier";
         
       } else if (/[0-9\.]/.test(char)) { // Number
         
