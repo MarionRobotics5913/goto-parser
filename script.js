@@ -177,8 +177,12 @@ function GotoParser() {
       };
     } // Handling for unexpected weird tokens will be here, like "" or " " if they somehow end up being produced
     var char;
-    
+    var infiniteLoopStopper = 0;
     function increment(){
+      infiniteLoopStopper++;
+      if(infiniteLoopStopper>1000){
+        throw "Lexer has looped over 1000 times"
+      }
       x++;
       char = programString[x];
       if(char === "\n"){
@@ -195,8 +199,8 @@ function GotoParser() {
       break
       */
     var infiniteLoopStopper = 0;
-    // while (x < programString.length && infiniteLoopStopper<50) {
-    while(infiniteLoopStopper<15){
+    while (x < programString.length && infiniteLoopStopper<50) {
+    // while(infiniteLoopStopper<15){
       infiniteLoopStopper++;
       increment(); //"goto x: 0"
       // var char = programString[x];
