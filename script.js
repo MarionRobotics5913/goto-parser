@@ -158,7 +158,7 @@ function GotoParser() {
 
   this.lex = function(programString) {
     var x = -1; // Gets incremented to 0 immediately and updates the character
-    var column = 1;
+    var column = 0;
     var line = 1;
     var tokens = [];
     var currToken = {
@@ -182,7 +182,7 @@ function GotoParser() {
       char = programString[x];
       if(char === "\n"){
         line++;
-        column = 1;
+        column = 0;
       }else{
         column++;
       }
@@ -193,7 +193,9 @@ function GotoParser() {
       eat valid characters until you hit an invalid
       break
       */
-    while (x < programString.length) {
+    var infiniteLoopStopper = 0;
+    while (x < programString.length && infiniteLoopStopper<50) {
+      infiniteLoopStopper++;
       increment(); //"goto x: 0"
       
       // var char = programString[x];
@@ -202,7 +204,7 @@ function GotoParser() {
         currToken.token += char;
         while(/[a-zA-Z0-9]/.test(programString[x+1])){ // While the next character is also an identifier character
           increment(); // Actually increment the counter
-          currToken.token += char;
+          console.log(char); currToken.token += char;
         }
         newToken();
       } else if (/[0-9\.]/.test(char)) { // Number
@@ -211,11 +213,13 @@ function GotoParser() {
       } else { // Symbol
         switch(char){
           case " ":
-            // Do nothing
-            continue;
+          case "\n":
+            // Do nothing, increment takes care of it (Should I put a statement here?)
             break;
           default:
-          currToken.type = "symbol";
+            currToken.type = "symbol";
+            currToken.token = char;
+            newToken();
         }
       }
 //       if (/[a-zA-Z]/.test(char)) {
