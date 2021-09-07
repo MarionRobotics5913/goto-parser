@@ -196,8 +196,28 @@ function GotoParser() {
         }
       } else if (/[0-9\.]/.test(char)) {
         // Number (or identifier continuation)
+        switch(currToken.type){
+          case "identifier":
+            // Okay
+            break;
+          case "number":
+            // Good
+            break;
+          case "symbol":
+            // For now, bad
+            break;
+          case undefined:
+            // Start a new number token
+            break;
+        }
       } else {
         // Symbol
+        switch(char){
+          default:
+            // Unidentified stranger. ACK!
+            
+            break;
+        };
       }
     }
   };
