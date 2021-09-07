@@ -183,6 +183,7 @@ function GotoParser() {
     };
     while (x < programString.length) {
       increment();
+      tokens.push(char);
       /*
       loop over characters
       check starting character and decide token type
@@ -191,10 +192,9 @@ function GotoParser() {
       */
       
       // var char = programString[x];
-      alert(char);
       if(/[a-zA-Z]/.test(char)){ // Identifier
         currToken.type = "identifier";
-        
+        // while()
       } else if (/[0-9\.]/.test(char)) { // Number
         
       } else { // Symbol
@@ -247,9 +247,11 @@ function GotoParser() {
 //             break;
 //         };
 //       }
+      return tokens;
     }
   };
-  this.parse = function(tokens) {};
+  this.parse = function(tokens) {return tokens;};
+  this.analyze
   this.parseProgram = function(programString) {
     return this.analyze(this.parse(this.lex(programString)));
   };
