@@ -209,8 +209,14 @@ function GotoParser() {
         currToken.type = "number";
         
       } else { // Symbol
-        currToken.type = "symbol";
-        
+        switch(char){
+          case " ":
+            // Do nothing
+            continue;
+            break;
+          default:
+          currToken.type = "symbol";
+        }
       }
 //       if (/[a-zA-Z]/.test(char)) {
 //         // Identifier
