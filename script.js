@@ -179,6 +179,12 @@ function GotoParser() {
     var char;
     function increment(){
       char = programString[x];
+      if(char === "\n"){
+        line++;
+        column = 1;
+      }else{
+        column++;
+      }
       x++;
     };
       /*
@@ -195,9 +201,10 @@ function GotoParser() {
         currToken.type = "identifier";
         currToken.token += char;
         while(/[a-zA-Z0-9]/.test(char)){
-          currToken.token += char;
           increment();
+          currToken.token += char;
         }
+        newToken();
       } else if (/[0-9\.]/.test(char)) { // Number
         currToken.type = "number";
         
@@ -289,6 +296,10 @@ function parseProgram(programString) {
     document.getElementById("output").innerHTML += output + "<br />";
   });
 }
+
+// Actual page functions
+
+document.getElementById("editor").value = document.getElementById("editor").value.trim();
 
 function codeUpdate() {
   // Run every time the textarea updates
