@@ -385,9 +385,9 @@ function parseProgram(programString) {
 
 // Actual page functions
 
-document.getElementById("editor").value = document
+document.getElementById("editor") ? document.getElementById("editor").value = document
   .getElementById("editor")
-  .value.trim();
+  .value.trim() : null;
 
 function codeUpdate(parse) {
   // Run every time the textarea updates
@@ -420,10 +420,9 @@ function sync_scroll(element) {
   result_element.scrollLeft = element.scrollLeft;
 }
 
-codeUpdate(true);
-
-// var codeBlocks = document.getElementsByTagName("code");
+var codeBlocks = document.getElementsByTagName("code");
 for(var x of document.getElementsByTagName("code")){
-  alert(x);
   x.innerHTML = new GotoParser().highlight(x.innerText);
 }
+
+codeUpdate(true);
