@@ -28,7 +28,7 @@ set arm: 0.9 stop // Reach down to box
     goto x: 0.8 y: 0.1
   </div> -->
   <input type="checkbox" id="autoparse" checked> Auto-parse on changes <br />
-  <input type="checkbox" id="toggleHighlight" onchange="codeUpdate(false);"> Highlight code syntax :) <br />
+  <input type="checkbox" id="toggleHighlight" onchange="codeUpdate(false);" checked> Highlight code syntax :) <br />
 
   <button
     onclick="parseProgram(document.getElementById('editor').value)"

@@ -229,7 +229,7 @@ function GotoParser() {
         switch (char) {
           case "\n":
           case ";":
-            currToken.type = "symbol";
+            currToken.type = "newline";
             currToken.value = char;
             newToken();
             break;
@@ -289,7 +289,9 @@ function GotoParser() {
     var reservedWords = this.reservedWords;
 
     function prepText(token) {
-      var coloredWords = {};
+      var coloredWords = {
+        ";": "grey"
+      };
       for (var x of reservedWords) {
         coloredWords[x] = "cyan";
       }
