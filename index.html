@@ -14,6 +14,7 @@
 goto x: 0.3 y: 0.4//They even work without spaces
 goto x: 0.8 y: 0.1 -->
       <textarea id="editor" class="code-block" cols="48" rows="16" oninput="codeUpdate(true); sync_scroll(this);" onscroll="sync_scroll(this);" spellcheck="false">
+start x: 0.8 y: 0.5 // Starting position
 radius x: 0.05 y: 0.05 // Set precision
 goto x: 0.5 y: 0.2 cont // Go to the box
 set arm: 0.9 stop // Reach down to box
@@ -28,7 +29,8 @@ set arm: 0.9 stop // Reach down to box
     goto x: 0.8 y: 0.1
   </div> -->
   <input type="checkbox" id="autoparse" checked> Auto-parse on changes <br />
-  <input type="checkbox" id="toggleHighlight" onchange="codeUpdate(false);" checked> Highlight code syntax :) <br />
+  <input type="checkbox" id="toggleHighlight" onchange="codeUpdate(false);" checked> Highlight code syntax <br />
+  <input type="checkbox" id="highContrast" onchange="codeUpdate(false);"> High contrast highlighting <br />
 
   <button
     onclick="parseProgram(document.getElementById('editor').value)"

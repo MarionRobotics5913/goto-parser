@@ -287,6 +287,7 @@ function GotoParser() {
     var tokens = this.lex(programString);
     var text = "";
     var reservedWords = this.reservedWords;
+    var highContrast = document.getElementById("highContrast").checked;
 
     function prepText(token) {
       var coloredWords = {

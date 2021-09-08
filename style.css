@@ -20,7 +20,7 @@
   color: transparent;
   background: transparent;
   caret-color: white;
-  white-space: nowrap;
+  white-space: pre;
 }
 #highlighter {
   position: absolute;
