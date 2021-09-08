@@ -156,7 +156,7 @@ function GotoParser() {
   this.parse; // Parser
   this.analyze; // Semantic analyzer
   this.highlight; // Syntax highlighter that returns HTML content
-  this.reservedWords = ["goto", "set", "radius", "cont", "stop"];
+  this.reservedWords = ["goto", "set", "radius", "cont", "stop", "start"];
 
   this.lex = function(programString) {
     var x = -1; // Gets incremented to 0 immediately and updates the character
@@ -287,19 +287,19 @@ function GotoParser() {
     var tokens = this.lex(programString);
     var text = "";
     var reservedWords = this.reservedWords;
-    var highContrast = document.getElementById("highContrast").checked;
+    var colorSet = document.getElementById("highContrast").checked?1:0;
 
     function prepText(token) {
       var coloredWords = {
-        ";": "grey"
+        ";": ["grey","white"]
       };
       for (var x of reservedWords) {
-        coloredWords[x] = "cyan";
+        coloredWords[x] = ["cyan","cyan"];
       }
       var coloredTypes = {
-        number: "orange",
-        symbol: "grey",
-        comment: "rgb(100, 200, 100)"
+        number: ["orange","orange"],
+        symbol: ["grey","violet"],
+        comment: ["rgb(100, 200, 100)","lime"]
       };
       var value = token.value
         .replace(/&/g, "&amp;")
@@ -308,11 +308,11 @@ function GotoParser() {
         .replace(/\n/g, "<br />");
       if (coloredWords.hasOwnProperty(token.value)) {
         return `<span style="color: ${
-          coloredWords[token.value]
+          coloredWords[token.value][colorSet]
         }; font-weight: bold;">${value}</span>`;
       } else if (coloredTypes.hasOwnProperty(token.type)) {
         return `<span style="color: ${
-          coloredTypes[token.type]
+          coloredTypes[token.type][colorSet]
         }">${value}</span>`;
       } else {
         return value;
