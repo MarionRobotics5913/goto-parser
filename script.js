@@ -156,7 +156,7 @@ function GotoParser() {
   this.parse; // Parser
   this.analyze; // Semantic analyzer
   this.highlight; // Syntax highlighter that returns HTML content
-  this.reservedWords = ["goto", "test"];
+  this.reservedWords = ["goto", "set", "radius"];
 
   this.lex = function(programString) {
     var x = -1; // Gets incremented to 0 immediately and updates the character
@@ -260,27 +260,6 @@ function GotoParser() {
                 currToken.type = "eof";
                 newToken();
               }
-            } else if (nextChar !== undefined && nextChar === "*") {
-              currToken.type = "comment";
-              while (char && char !== "*" && nextChar !== "/") {
-                currToken.value += char;
-      // x++;
-      // char = programString[x];
-      // nextChar = programString[x+1];
-      //           column++;
-                increment();
-              }
-              newToken();
-              if (char) {
-                currToken.type = "symbol";
-                currToken.value = char;
-                // x--;
-                increment();
-                newToken();
-              } else {
-                currToken.type = "eof";
-                newToken();
-              }
             } else {
               currToken.type = "symbol";
               currToken.value = char;
@@ -307,10 +286,11 @@ function GotoParser() {
   this.highlight = function(programString) {
     var tokens = this.lex(programString);
     var text = "";
+    var reservedWords = this.reservedWords;
 
     function prepText(token) {
       var coloredWords = {};
-      for (var x in this.reservedWords) {
+      for (var x of reservedWords) {
         coloredWords[x] = "cyan";
       }
       var coloredTypes = {
@@ -362,17 +342,13 @@ function GotoParser() {
         // Otherwise
         // Add a space
         text += " ";
-        console.log("Space");
         column++;
       }
     }
 
     if (text.endsWith("<br />")) text += " ";
 
-    return text.replace(
-      /goto/g,
-      "<span style='color: cyan; font-weight: bold;'>goto</span>"
-    );
+    return text;
   };
 
   this.parseProgram = function(programString) {
