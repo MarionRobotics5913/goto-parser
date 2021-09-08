@@ -16,7 +16,7 @@ goto x: 0.8 y: 0.1 -->
       <textarea id="editor" class="code-block" cols="48" rows="16" oninput="codeUpdate(true); sync_scroll(this);" onscroll="sync_scroll(this);">
 radius x: 0.05 y: 0.05 // Set precision
 goto x: 0.5 y: 0.2 cont // Go to the box
-set arm: 0.9 stop // 
+set arm: 0.9 stop // Reach down to box
       </textarea>
     <div id="highlighter" class="code-block">
       </div>
@@ -28,7 +28,7 @@ set arm: 0.9 stop //
     goto x: 0.8 y: 0.1
   </div> -->
   <input type="checkbox" id="autoparse" checked> Auto-parse on changes <br />
-  <input type="checkbox" id="toggleHighlight" onchange="codeUpdate(false);"> Highlight code syntax <br />
+  <input type="checkbox" id="toggleHighlight" onchange="codeUpdate(false);"> Highlight code syntax :) <br />
 
   <button
     onclick="parseProgram(document.getElementById('editor').value)"

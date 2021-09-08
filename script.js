@@ -306,7 +306,7 @@ function GotoParser() {
       if (coloredWords.hasOwnProperty(token.value)) {
         return `<span style="color: ${
           coloredWords[token.value]
-        }">${value}</span>`;
+        }; font-weight: bold;">${value}</span>`;
       } else if (coloredTypes.hasOwnProperty(token.type)) {
         return `<span style="color: ${
           coloredTypes[token.type]
