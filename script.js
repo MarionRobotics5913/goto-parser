@@ -287,7 +287,7 @@ function GotoParser() {
     var tokens = this.lex(programString);
     var text = "";
     var reservedWords = this.reservedWords;
-    var colorSet = document.getElementById("highContrast").checked?1:0;
+    var colorSet = document.getElementById("highContrast")?.checked?1:0;
 
     function prepText(token) {
       var coloredWords = {
@@ -424,7 +424,6 @@ function sync_scroll(element) {
 }
 
 var codeBlocks = document.getElementsByTagName("code");
-alert(typeof codeBlocks);
 for(var x of document.getElementsByTagName("code")){
   x.innerHTML = new GotoParser().highlight(x.innerText);
 }

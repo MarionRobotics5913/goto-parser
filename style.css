@@ -1,3 +1,10 @@
+html{
+  background-color: rgb(60, 65, 70);
+  color: white;
+}
+a{
+  color: cyan;
+}
 .code-block {
   font-family: monospace;
   background-color: black;
