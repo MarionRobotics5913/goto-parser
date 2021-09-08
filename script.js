@@ -296,9 +296,9 @@ function GotoParser() {
         coloredWords[x] = "cyan";
       }
       var coloredTypes = {
-        number: "pink",
+        number: "orange",
         symbol: "grey",
-        comment: "green"
+        comment: "rgb(100, 200, 100)"
       };
       var value = token.value
         .replace(/&/g, "&amp;")
