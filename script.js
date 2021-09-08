@@ -204,23 +204,26 @@ function GotoParser() {
       infiniteLoopStopper++;
       increment(); //"goto x: 0"
       // var char = programString[x];
-      if(/[a-zA-Z]/.test(char)){ // Identifier
+      if(char === undefined){
+        //End of file
+        currToken.type = "eof";
+        newToken();
+      }else if(/[a-zA-Z]/.test(char)){ // Identifier
         currToken.type = "identifier";
         currToken.token += char;
-      console.log(char);
         while(/[a-zA-Z0-9]/.test(programString[x+1])){ // While the next character is also an identifier character
           increment(); // Actually increment the counter
           currToken.token += char;
-      console.log(char);
         }
         newToken();
       } else if (/[0-9\.]/.test(char)) { // Number
         currToken.type = "number";
+        currToken.token += char;
         while(/[0-9\.]/.test(programString[x+1])){ // While the next character is also an identifier character
           increment(); // Actually increment the counter
           currToken.token += char;
-      console.log(char);
         }
+        newToken();
       } else { // Symbol
         switch(char){
           case " ":
@@ -233,7 +236,6 @@ function GotoParser() {
           default:
             currToken.type = "symbol";
             currToken.token = char;
-      console.log(char);
             newToken();
         }
       }
