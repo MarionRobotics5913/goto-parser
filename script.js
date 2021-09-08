@@ -184,7 +184,7 @@ function GotoParser() {
     function increment() {
       infiniteLoopStopper++;
       if (infiniteLoopStopper > 1000) {
-        throw "Lexer has looped over 1000 times";
+        throw "Lexer has incremented over 1000 times";
       }
       x++;
       char = programString[x];
@@ -196,18 +196,10 @@ function GotoParser() {
         column++;
       }
     }
-    /*
-      loop over characters
-      check starting character and decide token type
-      eat valid characters until you hit an invalid
-      break
-      */
+
     var infiniteLoopStopper = 0;
-    while (x < programString.length && infiniteLoopStopper < 50) {
-      // while(infiniteLoopStopper<15){
-      infiniteLoopStopper++;
-      increment(); //"goto x: 0"
-      // var char = programString[x];
+    while (x < programString.length) {
+      increment();
       if (char === undefined) {
         //End of file
         currToken.type = "eof";
@@ -245,17 +237,22 @@ function GotoParser() {
             currToken.column++;
             break;
           case undefined:
-            throw "Lexer recieved undefined token"
+            throw "Lexer recieved undefined token";
             break;
           case "/":
-            if(nextChar === "/"){
+            
+            if (nextChar && nextChar === "/") {
               currToken.type = "comment";
-              currToken.value = "/";
-              while(char !== "\n"){
-                
+              while (char && char !== "\n") {
+                currToken.value += char;
+                increment();
               }
+              newToken();
+            } else {
+              currToken.type = "symbol";
+              currToken.value = char;
+              newToken();
             }
-            break;
           default:
             currToken.type = "symbol";
             currToken.value = char;
@@ -387,10 +384,21 @@ function codeUpdate(parse) {
   var textarea = document.getElementById("editor");
   var highlighter = document.getElementById("highlighter");
 
+  var text = document.getElementById("toggleHighlight").checked
+    ? new GotoParser().highlight(textarea.value)
+    : textarea.value
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/\ /g, "&nbsp;")
+        .replace(/\n/g, "<br />");
+  if (text.endsWith("<br />")) text += " ";
   highlighter.height = textarea.clientHeight;
-  highlighter.innerHTML = document.getElementById("toggleHighlight").checked ? new GotoParser().highlight(textarea.value) : textarea.value;
+  highlighter.innerHTML = text;
+
   // alert(text);
-  if(parse && document.getElementById("autoparse").checked){parseProgram(textarea.value);}
+  if (parse && document.getElementById("autoparse").checked) {
+    parseProgram(textarea.value);
+  }
 }
 
 codeUpdate(true);
