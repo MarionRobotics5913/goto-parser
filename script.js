@@ -374,7 +374,7 @@ function runRoScriptActions(actionObject, callback) {
   //       callback(`Unrecognized command ${actionObject[x].command} run`);
   //   }
   // }
-  callback(`Output:<br />${actionObject.map(JSON.stringify).join("<br />")}`);
+  callback(`<br />${actionObject.map(JSON.stringify).join("<br />")}`);
 }
 
 function parseProgram(programString) {
@@ -382,7 +382,7 @@ function parseProgram(programString) {
     "output"
   ).innerHTML = "Running...<br /><br />";
   runRoScriptActions(new GotoParser().parseProgram(programString), output => {
-    document.getElementById("output").innerHTML += output + "<br />";
+    document.getElementById("output").innerHTML = output;
   });
 }
 
@@ -424,6 +424,7 @@ function sync_scroll(element) {
 }
 
 var codeBlocks = document.getElementsByTagName("code");
+alert(typeof codeBlocks);
 for(var x of document.getElementsByTagName("code")){
   x.innerHTML = new GotoParser().highlight(x.innerText);
 }
