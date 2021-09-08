@@ -167,7 +167,7 @@ function GotoParser() {
       line,
       column,
       type: undefined, // Not necessary but I like being able to see it if I look
-      token: ""
+      value: ""
     }; // Line, column, type, token
     function newToken() {
       tokens.push(currToken);
@@ -175,65 +175,70 @@ function GotoParser() {
         line,
         column,
         type: undefined,
-        token: ""
+        value: ""
       };
     } // Handling for unexpected weird tokens will be here, like "" or " " if they somehow end up being produced
     var char;
     var nextChar;
     var infiniteLoopStopper = 0;
-    function increment(){
+    function increment() {
       infiniteLoopStopper++;
-      if(infiniteLoopStopper>1000){
-        throw "Lexer has looped over 1000 times"
+      if (infiniteLoopStopper > 1000) {
+        throw "Lexer has looped over 1000 times";
       }
       x++;
       char = programString[x];
-      nextChar = programString[x+1];
-      if(char === "\n"){
+      nextChar = programString[x + 1];
+      if (char === "\n") {
         line++;
         column = 0;
-      }else{
+      } else {
         column++;
       }
-    };
-      /*
+    }
+    /*
       loop over characters
       check starting character and decide token type
       eat valid characters until you hit an invalid
       break
       */
     var infiniteLoopStopper = 0;
-    while (x < programString.length && infiniteLoopStopper<50) {
-    // while(infiniteLoopStopper<15){
+    while (x < programString.length && infiniteLoopStopper < 50) {
+      // while(infiniteLoopStopper<15){
       infiniteLoopStopper++;
       increment(); //"goto x: 0"
       // var char = programString[x];
-      if(char === undefined){
+      if (char === undefined) {
         //End of file
         currToken.type = "eof";
         newToken();
-      }else if(/[a-zA-Z]/.test(char)){ // Identifier
+      } else if (/[a-zA-Z]/.test(char)) {
+        // Identifier
         currToken.type = "identifier";
-        currToken.token += char;
-        while(nextChar !== undefined && /[a-zA-Z0-9]/.test(nextChar)){ // While the next character is also an identifier character
+        currToken.value += char;
+        while (nextChar !== undefined && /[a-zA-Z0-9]/.test(nextChar)) {
+          // While the next character is also an identifier character
           increment(); // Actually increment the counter
-          currToken.token += char;
+          currToken.value += char;
         }
         newToken();
-      } else if (/[0-9\.]/.test(char)) { // Number
+      } else if (/[0-9\.]/.test(char)) {
+        // Number
         currToken.type = "number";
-        currToken.token += char;
-        while(nextChar !== undefined && /[0-9\.]/.test(nextChar)){ // While the next character is also an identifier character
+        currToken.value += char;
+        while (nextChar !== undefined && /[0-9\.]/.test(nextChar)) {
+          // While the next character is also an identifier character
           increment(); // Actually increment the counter
-          currToken.token += char;
+          currToken.value += char;
         }
         newToken();
-      } else { // Symbol
-        switch(char){
+      } else {
+        // Symbol
+        switch (char) {
           case "\n":
           case ";":
             currToken.type = "symbol";
-            currToken.token = char;
+            currToken.value = char;
             newToken();
           case " ":
             currToken.column++;
@@ -243,32 +248,61 @@ function GotoParser() {
             break;
           default:
             currToken.type = "symbol";
-            currToken.token = char;
+            currToken.value = char;
             newToken();
         }
       }
     }
-      return tokens;
+    return tokens;
   };
-  this.parse = function(tokens) {return tokens;};
-  
-  this.analyze = function(actions) {return actions;};
-  
-  this.highlight = function(text){
-    var text = text
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/\ /g, "&nbsp;")
-    .replace(/\n/g, "<br />");
-  if (text.endsWith("<br />")) text += " ";
+  this.parse = function(tokens) {
+    return tokens;
+  };
 
-    return text.replace(/goto/g, "<span style='color: cyan; font-weight: bold;'>goto</span>")
+  this.analyze = function(actions) {
+    return actions;
+  };
+
+  this.highlight = function(programString) {
+    var tokens = this.lex(programString);
+    var text = "";
+
+    function prepText(token) {
+      switch (token.type) {
+        default:
+          return token.value
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/\ /g, "&nbsp;")
+            .replace(/\n/g, "<br />");
+      }
+    }
+
     // Start at 1, 1
+    var column = 1;
+    var line = 1;
+    var index = 100;
     // Repeatedly:
-    // Check the position of the next token
-    // If
-  }
-  
+    while (tokens[index]) {
+      // Check the position of the next token
+      // If it's at the right position:
+      if (tokens[index].column === column && tokens[index].line === line) {
+        // Add it
+        text += prepText(tokens[index]);
+        // Jump forwards by the correct number of characters or jump down a line for newlines
+      }
+      // Otherwise
+      // Add a space
+    }
+
+    if (text.endsWith("<br />")) text += " ";
+
+    return text.replace(
+      /goto/g,
+      "<span style='color: cyan; font-weight: bold;'>goto</span>"
+    );
+  };
+
   this.parseProgram = function(programString) {
     return this.analyze(this.parse(this.lex(programString)));
   };
@@ -303,7 +337,9 @@ function parseProgram(programString) {
 
 // Actual page functions
 
-document.getElementById("editor").value = document.getElementById("editor").value.trim();
+document.getElementById("editor").value = document
+  .getElementById("editor")
+  .value.trim();
 
 function codeUpdate() {
   // Run every time the textarea updates
