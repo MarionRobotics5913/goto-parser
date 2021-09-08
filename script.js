@@ -245,7 +245,16 @@ function GotoParser() {
             currToken.column++;
             break;
           case undefined:
-            alert("Undefined");
+            throw "Lexer recieved undefined token"
+            break;
+          case "/":
+            if(nextChar === "/"){
+              currToken.type = "comment";
+              currToken.value = "/";
+              while(char !== "\n"){
+                
+              }
+            }
             break;
           default:
             currToken.type = "symbol";
@@ -373,18 +382,18 @@ document.getElementById("editor").value = document
   .getElementById("editor")
   .value.trim();
 
-function codeUpdate() {
+function codeUpdate(parse) {
   // Run every time the textarea updates
   var textarea = document.getElementById("editor");
   var highlighter = document.getElementById("highlighter");
 
   highlighter.height = textarea.clientHeight;
-  highlighter.innerHTML = new GotoParser().highlight(textarea.value);
+  highlighter.innerHTML = document.getElementById("toggleHighlight").checked ? new GotoParser().highlight(textarea.value) : textarea.value;
   // alert(text);
-  parseProgram(textarea.value);
+  if(parse && document.getElementById("autoparse").checked){parseProgram(textarea.value);}
 }
 
-codeUpdate();
+codeUpdate(true);
 
 function sync_scroll(element) {
   /* Scroll result to scroll coords of event - sync with textarea */
