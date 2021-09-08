@@ -160,7 +160,7 @@ function GotoParser() {
 
   this.lex = function(programString) {
     var x = -1; // Gets incremented to 0 immediately and updates the character
-    var column = 0;
+    var column = 1;
     var line = 1;
     var tokens = [];
     var currToken = {
@@ -191,7 +191,7 @@ function GotoParser() {
       nextChar = programString[x + 1];
       if (char === "\n") {
         line++;
-        column = 0;
+        column = 1;
       } else {
         column++;
       }
@@ -236,6 +236,7 @@ function GotoParser() {
         // Symbol
         switch (char) {
           case "\n":
+            
           case ";":
             currToken.type = "symbol";
             currToken.value = char;
@@ -270,6 +271,7 @@ function GotoParser() {
     function prepText(token) {
       switch (token.type) {
         default:
+        console.log("Prepped: " + token.value);
           return token.value
             .replace(/&/g, "&amp;")
             .replace(/</g, "&lt;")
@@ -281,18 +283,32 @@ function GotoParser() {
     // Start at 1, 1
     var column = 1;
     var line = 1;
-    var index = 100;
+    var index = 0;
     // Repeatedly:
-    while (tokens[index]) {
+    var infiniteLoopStopper = 0;
+    while (tokens[index] && infiniteLoopStopper<500) {
+      infiniteLoopStopper++;
       // Check the position of the next token
       // If it's at the right position:
-      if (tokens[index].column === column && tokens[index].line === line) {
+      if (tokens[index].column <= column && tokens[index].line <= line) {
         // Add it
         text += prepText(tokens[index]);
         // Jump forwards by the correct number of characters or jump down a line for newlines
-      }
+        if(tokens[index].value === "\n"){
+          line++;
+          column = 1;
+        }else{
+          column += tokens[index].value.length;
+        }
+        // Advance to the next token
+        index++;
+      } else {
       // Otherwise
       // Add a space
+        text += " ";
+      console.log("Space");
+        column++;
+      }
     }
 
     if (text.endsWith("<br />")) text += " ";
