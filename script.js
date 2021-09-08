@@ -177,6 +177,7 @@ function GotoParser() {
       };
     } // Handling for unexpected weird tokens will be here, like "" or " " if they somehow end up being produced
     var char;
+    var nextChar;
     var infiniteLoopStopper = 0;
     function increment(){
       infiniteLoopStopper++;
@@ -185,6 +186,7 @@ function GotoParser() {
       }
       x++;
       char = programString[x];
+      nextChar = programString[x+1];
       if(char === "\n"){
         line++;
         column = 0;
@@ -211,7 +213,7 @@ function GotoParser() {
       }else if(/[a-zA-Z]/.test(char)){ // Identifier
         currToken.type = "identifier";
         currToken.token += char;
-        while(/[a-zA-Z0-9]/.test(programString[x+1])){ // While the next character is also an identifier character
+        while(nextChar !== undefined && /[a-zA-Z0-9]/.test(nextChar)){ // While the next character is also an identifier character
           increment(); // Actually increment the counter
           currToken.token += char;
         }
@@ -219,7 +221,7 @@ function GotoParser() {
       } else if (/[0-9\.]/.test(char)) { // Number
         currToken.type = "number";
         currToken.token += char;
-        while(/[0-9\.]/.test(programString[x+1])){ // While the next character is also an identifier character
+        while(nextChar !== undefined && /[0-9\.]/.test(nextChar)){ // While the next character is also an identifier character
           increment(); // Actually increment the counter
           currToken.token += char;
         }
@@ -239,53 +241,6 @@ function GotoParser() {
             newToken();
         }
       }
-//       if (/[a-zA-Z]/.test(char)) {
-//         // Identifier
-//         switch(currToken.type){
-//           case "identifier":
-//             // Append
-//             currToken.token += char;
-//             break;
-//           case "number":
-//             // For now, bad
-//             break;
-//           case "symbol":
-//             // For now, bad
-//             break;
-//           case undefined:
-//             // Set type and such
-//             currToken.type = "identifier";
-//             currToken.token += char;
-//             break;
-//         }
-//       } else if (/[0-9\.]/.test(char)) {
-//         // Number (or identifier continuation)
-//         switch(currToken.type){
-//           case "identifier":
-//             // Okay unless it's a dot
-            
-//             break;
-//           case "number":
-//             // Good
-//             currToken.token += char;
-//             break;
-//           case "symbol":
-//             // For now, bad
-//             break;
-//           case undefined:
-//             // Start a new number token (pay attention to the dot)
-//             currToken.type = "number";
-//             currToken.token += char;
-//             break;
-//         }
-//       } else {
-//         // Symbol
-//         switch(char){
-//           default:
-//             // Unidentified stranger. ACK!
-//             break;
-//         };
-//       }
     }
       return tokens;
   };
@@ -311,7 +266,7 @@ function runRoScriptActions(actionObject, callback) {
   //       callback(`Unrecognized command ${actionObject[x].command} run`);
   //   }
   // }
-  callback(`Output:<br />${JSON.stringify(actionObject)}`);
+  callback(`Output:<br />${actionObject.map(JSON.stringify).join("<br />")}`);
 }
 
 function parseProgram(programString) {
