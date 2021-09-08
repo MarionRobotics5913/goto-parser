@@ -155,6 +155,7 @@ function GotoParser() {
   this.lex; // Lexer
   this.parse; // Parser
   this.analyze; // Semantic analyzer
+  this.highlight; // Syntax highlighter that returns HTML content
   this.reservedWords = ["goto"];
 
   this.lex = function(programString) {
@@ -250,7 +251,24 @@ function GotoParser() {
       return tokens;
   };
   this.parse = function(tokens) {return tokens;};
+  
   this.analyze = function(actions) {return actions;};
+  
+  this.highlight = function(text){
+    var text = text
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/\ /g, "&nbsp;")
+    .replace(/\n/g, "<br />");
+  if (text.endsWith("<br />")) text += " ";
+
+    return text.replace(/goto/g, "<span style='color: cyan; font-weight: bold;'>goto</span>")
+    // Start at 1, 1
+    // Repeatedly:
+    // Check the position of the next token
+    // If
+  }
+  
   this.parseProgram = function(programString) {
     return this.analyze(this.parse(this.lex(programString)));
   };
@@ -278,8 +296,7 @@ function parseProgram(programString) {
   document.getElementById("output").innerHTML = document.getElementById(
     "output"
   ).innerHTML = "Running...<br /><br />";
-  var parser = new GotoParser();
-  runRoScriptActions(parser.parseProgram(programString), output => {
+  runRoScriptActions(new GotoParser().parseProgram(programString), output => {
     document.getElementById("output").innerHTML += output + "<br />";
   });
 }
@@ -288,21 +305,13 @@ function parseProgram(programString) {
 
 document.getElementById("editor").value = document.getElementById("editor").value.trim();
 
-
 function codeUpdate() {
   // Run every time the textarea updates
   var textarea = document.getElementById("editor");
   var highlighter = document.getElementById("highlighter");
 
-  var text = textarea.value
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/\ /g, "&nbsp;")
-    .replace(/\n/g, "<br />");
-  if (text.endsWith("<br />")) text += " ";
-
   highlighter.height = textarea.clientHeight;
-  highlighter.innerHTML = highlight(text);
+  highlighter.innerHTML = new GotoParser().highlight(textarea.value);
   // alert(text);
   parseProgram(textarea.value);
 }
