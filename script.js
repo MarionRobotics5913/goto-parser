@@ -156,7 +156,7 @@ function GotoParser() {
   this.parse; // Parser
   this.analyze; // Semantic analyzer
   this.highlight; // Syntax highlighter that returns HTML content
-  this.reservedWords = ["goto"];
+  this.reservedWords = ["goto", "test"];
 
   this.lex = function(programString) {
     var x = -1; // Gets incremented to 0 immediately and updates the character
@@ -269,27 +269,30 @@ function GotoParser() {
     var text = "";
 
     function prepText(token) {
-      var colorWords = [
-        ...this.reservedWords.map((word) => {return [word, "cyan"]}) // Make all the reserved words cyan
-      ];
-      var coloredTypes = [
-        // ["identifier", "white"],
-        ["number", "pink"],
-        ["symbol", "grey"],
-        ["comment", "green"]
-      ]
-      if(this.reservedWords.includes(token.value)){
-        
-      }else{
-      switch (token.type) {
-        default:
-        console.log("Prepped: " + token.value);
-          return token.value
-            .replace(/&/g, "&amp;")
-            .replace(/</g, "&lt;")
-            .replace(/\ /g, "&nbsp;")
-            .replace(/\n/g, "<br />");
+      var coloredWords = {};
+      for (var x in this.reservedWords) {
+        coloredWords[x] = "cyan";
       }
+      var coloredTypes = {
+        number: "pink",
+        symbol: "grey",
+        comment: "green"
+      };
+      var value = token.value
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/\ /g, "&nbsp;")
+        .replace(/\n/g, "<br />");
+      if (coloredWords.hasOwnProperty(token.value)) {
+        return `<span style="color: ${
+          coloredWords[token.value]
+        }">${value}</span>`;
+      } else if (coloredTypes.hasOwnProperty(token.type)) {
+        return `<span style="color: ${
+          coloredTypes[token.type]
+        }">${value}</span>`;
+      } else {
+        return value;
       }
     }
 
@@ -299,7 +302,7 @@ function GotoParser() {
     var index = 0;
     // Repeatedly:
     var infiniteLoopStopper = 0;
-    while (tokens[index] && infiniteLoopStopper<500) {
+    while (tokens[index] && infiniteLoopStopper < 500) {
       infiniteLoopStopper++;
       // Check the position of the next token
       // If it's at the right position:
@@ -307,19 +310,19 @@ function GotoParser() {
         // Add it
         text += prepText(tokens[index]);
         // Jump forwards by the correct number of characters or jump down a line for newlines
-        if(tokens[index].value === "\n"){
+        if (tokens[index].value === "\n") {
           line++;
           column = 1;
-        }else{
+        } else {
           column += tokens[index].value.length;
         }
         // Advance to the next token
         index++;
       } else {
-      // Otherwise
-      // Add a space
+        // Otherwise
+        // Add a space
         text += " ";
-      console.log("Space");
+        console.log("Space");
         column++;
       }
     }
