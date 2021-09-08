@@ -156,7 +156,7 @@ function GotoParser() {
   this.parse; // Parser
   this.analyze; // Semantic analyzer
   this.highlight; // Syntax highlighter that returns HTML content
-  this.reservedWords = ["goto", "set", "radius"];
+  this.reservedWords = ["goto", "set", "radius", "cont", "stop"];
 
   this.lex = function(programString) {
     var x = -1; // Gets incremented to 0 immediately and updates the character
@@ -411,8 +411,6 @@ function codeUpdate(parse) {
   }
 }
 
-codeUpdate(true);
-
 function sync_scroll(element) {
   /* Scroll result to scroll coords of event - sync with textarea */
   // let result_element = document.querySelector("#highlighting");
@@ -420,4 +418,12 @@ function sync_scroll(element) {
   // Get and set x and y
   result_element.scrollTop = element.scrollTop;
   result_element.scrollLeft = element.scrollLeft;
+}
+
+codeUpdate(true);
+
+// var codeBlocks = document.getElementsByTagName("code");
+for(var x of document.getElementsByTagName("code")){
+  alert(x);
+  x.innerHTML = new GotoParser().highlight(x.innerText);
 }
