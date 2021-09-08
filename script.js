@@ -245,13 +245,41 @@ function GotoParser() {
               currToken.type = "comment";
               while (char && char !== "\n") {
                 currToken.value += char;
+      x++;
+      char = programString[x];
+                column++;
+              }
+              newToken();
+              if (char) {
+                currToken.type = "symbol";
+                currToken.value = char;
+                x--;
+                increment();
+                newToken();
+              } else {
+                currToken.type = "eof";
+                newToken();
+              }
+            } else if (nextChar !== undefined && nextChar === "*") {
+              currToken.type = "comment";
+              while (char && char !== "*" && nextChar !== "/") {
+                currToken.value += char;
+      // x++;
+      // char = programString[x];
+      // nextChar = programString[x+1];
+      //           column++;
                 increment();
               }
               newToken();
-              if(char){
-              currToken.type = "symbol";
-              currToken.value = char;
-              newToken();
+              if (char) {
+                currToken.type = "symbol";
+                currToken.value = char;
+                // x--;
+                increment();
+                newToken();
+              } else {
+                currToken.type = "eof";
+                newToken();
               }
             } else {
               currToken.type = "symbol";
