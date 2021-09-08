@@ -155,6 +155,7 @@ function GotoParser() {
   this.lex; // Lexer
   this.parse; // Parser
   this.analyze; // Semantic analyzer
+  this.reservedWords = ["goto"];
 
   this.lex = function(programString) {
     var x = -1; // Gets incremented to 0 immediately and updates the character
@@ -228,9 +229,13 @@ function GotoParser() {
         newToken();
       } else { // Symbol
         switch(char){
-          case " ":
           case "\n":
-            // Do nothing, increment takes care of it (Should I put a statement here?)
+          case ";":
+            currToken.type = "symbol";
+            currToken.token = char;
+            newToken();
+          case " ":
+            currToken.column++;
             break;
           case undefined:
             alert("Undefined");
@@ -283,6 +288,7 @@ function parseProgram(programString) {
 
 document.getElementById("editor").value = document.getElementById("editor").value.trim();
 
+
 function codeUpdate() {
   // Run every time the textarea updates
   var textarea = document.getElementById("editor");
@@ -295,9 +301,8 @@ function codeUpdate() {
     .replace(/\n/g, "<br />");
   if (text.endsWith("<br />")) text += " ";
 
-  text = text.replace(/red/g, "<span style='color: red'>red</span>")
   highlighter.height = textarea.clientHeight;
-  highlighter.innerHTML = text;
+  highlighter.innerHTML = highlight(text);
   // alert(text);
   parseProgram(textarea.value);
 }
