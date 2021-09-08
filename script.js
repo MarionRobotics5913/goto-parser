@@ -240,19 +240,25 @@ function GotoParser() {
             throw "Lexer recieved undefined token";
             break;
           case "/":
-            
-            if (nextChar && nextChar === "/") {
+            console.log(`Current: ${char} Next: ${nextChar}`);
+            if (nextChar !== undefined && nextChar === "/") {
               currToken.type = "comment";
               while (char && char !== "\n") {
                 currToken.value += char;
                 increment();
               }
               newToken();
+              if(char){
+              currToken.type = "symbol";
+              currToken.value = char;
+              newToken();
+              }
             } else {
               currToken.type = "symbol";
               currToken.value = char;
               newToken();
             }
+            break;
           default:
             currToken.type = "symbol";
             currToken.value = char;
