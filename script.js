@@ -236,11 +236,11 @@ function GotoParser() {
         // Symbol
         switch (char) {
           case "\n":
-            
           case ";":
             currToken.type = "symbol";
             currToken.value = char;
             newToken();
+            break;
           case " ":
             currToken.column++;
             break;
@@ -269,6 +269,18 @@ function GotoParser() {
     var text = "";
 
     function prepText(token) {
+      var colorWords = [
+        ...this.reservedWords.map((word) => {return [word, "cyan"]}) // Make all the reserved words cyan
+      ];
+      var coloredTypes = [
+        // ["identifier", "white"],
+        ["number", "pink"],
+        ["symbol", "grey"],
+        ["comment", "green"]
+      ]
+      if(this.reservedWords.includes(token.value)){
+        
+      }else{
       switch (token.type) {
         default:
         console.log("Prepped: " + token.value);
@@ -277,6 +289,7 @@ function GotoParser() {
             .replace(/</g, "&lt;")
             .replace(/\ /g, "&nbsp;")
             .replace(/\n/g, "<br />");
+      }
       }
     }
 
