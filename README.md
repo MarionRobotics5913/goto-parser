@@ -1,8 +1,2 @@
-# RoScript
+Writing down my thoughts here
 
-Woooooo
-
----
-### Stuff to add:
-
-Lexer rewrite-ish
