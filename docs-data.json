@@ -1,8 +1,12 @@
 {
   "goto": {
-    "content": ""
+    "content": "",
+    "examples": "",
+    "seealso": ["set"]
   },
   "Comments": {
-    "content": ""
+    "content": "",
+    "examples": "",
+    "seealso": []
   }
 }
