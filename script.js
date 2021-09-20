@@ -432,7 +432,9 @@ codeUpdate(true);
 
 // Code for the docs loader
 
+var data = JSON.parse(document.getElementById('data').textContent);
 function loadEntry(name){
-  var entry = 
-  document.getElementById("title").innerHTML = 
+  var entry = data[name];
+  document.getElementById("title").innerHTML = name;
+  document.getElementById("content").innerHTML = entry.content
 }
