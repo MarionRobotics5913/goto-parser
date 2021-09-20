@@ -431,11 +431,12 @@ for(var x of document.getElementsByTagName("code")){
 // Code for the docs loader
 
 function loadEntry(name){
-  alert(document.getElementById("data"));
-  var data = JSON.parse(document.getElementById('data').textContent);
+  var data;
+  alert(data);
+  // var data = JSON.parse(document.getElementById('data').textContent);
   var entry = data[name];
   // var entry;
-  document.getElementById("heading").innerHTML = name;
+  document.getElementById("heading").innerHTML = data.textContent;
   document.getElementById("content").innerHTML = entry.content || "Content goes here";
   document.getElementById("seealso").innerHTML = "See also: " + entry._seealso.join(", ") || "";
 }
