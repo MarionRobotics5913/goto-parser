@@ -1,9 +1,7 @@
 {
-  "main": {
-    "content": "This is the main docs for Goto",
-    "examples": "",
-    "seealso": [""]
-  },
+  "main": [{
+    "content": "This is the main docs for Goto"
+  }],
   "goto": {
     "content": "",
     "examples": "",
