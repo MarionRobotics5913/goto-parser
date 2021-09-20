@@ -1,6 +1,7 @@
 html{
-  background-color: rgb(60, 65, 70);
+  background-color: rgb(10, 20, 40);
   color: white;
+  font-family: sans-serif;
 }
 a{
   color: cyan;
@@ -10,6 +11,7 @@ h1, h2, h3, h4, h5, h6{
 }
 .code-block {
   font-family: monospace;
+  font-size: 13px;
   background-color: black;
   color: white;
   border-radius: 10px;
