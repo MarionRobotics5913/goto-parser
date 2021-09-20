@@ -1,15 +1,15 @@
 {
-  "main": [{
-    "content": "This is the main docs for Goto"
-  }],
-  "goto": {
-    "content": "",
-    "examples": "",
-    "seealso": ["set"]
+  "main": {
+    "_main": "This is the main docs for Goto"
   },
+  "goto": [{
+    "_main": "",
+    "Examples": "",
+    "_seealso": ["set"]
+  }],
   "Comments": {
-    "content": "",
-    "examples": "",
-    "seealso": []
+    "_main": "",
+    "Examples": "",
+    "_seealso": []
   }
 }
