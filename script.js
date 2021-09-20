@@ -397,7 +397,7 @@ function codeUpdate(parse) {
   var textarea = document.getElementById("editor");
   var highlighter = document.getElementById("highlighter");
 
-  var text = document.getElementById("toggleHighlight").checked 
+  var text = document.getElementById("toggleHighlight")?.checked ?? true
     ? new GotoParser().highlight(textarea.value)
     : textarea.value
         .replace(/&/g, "&amp;")
