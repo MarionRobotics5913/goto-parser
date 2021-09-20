@@ -3,6 +3,9 @@ html{
   color: white;
   font-family: sans-serif;
 }
+body{
+  margin: 20px;
+}
 a{
   color: cyan;
 }
@@ -19,7 +22,7 @@ h1, h2, h3, h4, h5, h6{
   width: calc(100% - 45px);
   height: calc(100% - 45px);
   resize: none;
-  margin: 10px;
+  margin: 10px 0px 10px 0px;
   padding: 10px;
   border: 0;
   overflow: auto;
@@ -51,9 +54,9 @@ code {
 .divider {
   background-color: rgba(255, 255, 255, 0.4);
   height: 3px;
-  width: calc(100vw - 60px);
-  position: absolute;
+  width: calc(100vw - 40px);
+/*   position: absolute; */
   left: 0px;
-  margin: 30px;
-  box-shadow: 0px 0px 5px white;
+  margin: 20px 0px 20px 0px;
+/*   box-shadow: 0px 0px 5px white; */
 }
