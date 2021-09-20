@@ -4,14 +4,17 @@
     <!-- Import the webpage's stylesheet -->
     <link rel="stylesheet" href="/style.css" />
 
-    <!-- Import the webpage's javascript file -->
-    <script src="/script.js" defer></script>  
+    <script id="data" type="application/json" src="/docs-data.json"></script>
     
-    <script id="data" type="application/json" src="/docs-data.json">
-    </script>
+    <!-- Import the webpage's javascript file -->
+    <script src="/script.js" defer></script>
+    <script defer>alert("Hi")</script>
   </head>
   <body>
     <a href="/">Back to editor</a>
+    <button onclick="loadEntry('goto')">
+      Test
+    </button>
     <h1 id="heading">
       Loading...
     </h1>
@@ -19,9 +22,8 @@
     <div id="content">
       Test content
     </div>
-    <div id="seealso">
-    </div>
-<!--     <h3>
+    <div id="seealso"></div>
+    <!--     <h3>
       attachment
     </h3>
     Tells an attachment to do something, specified by the rest of the command. Example: <code>attachment claw pos: 0.6</code> -->

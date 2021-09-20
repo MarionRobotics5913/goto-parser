@@ -397,7 +397,7 @@ function codeUpdate(parse) {
   var textarea = document.getElementById("editor");
   var highlighter = document.getElementById("highlighter");
 
-  var text = document.getElementById("toggleHighlight").checked
+  var text = document.getElementById("toggleHighlight").checked 
     ? new GotoParser().highlight(textarea.value)
     : textarea.value
         .replace(/&/g, "&amp;")
@@ -432,9 +432,11 @@ codeUpdate(true);
 
 // Code for the docs loader
 
-var data = JSON.parse(document.getElementById('data').textContent);
 function loadEntry(name){
+  alert("Loading " + name)
+  var data = JSON.parse(document.getElementById('data').textContent);
   var entry = data[name];
   document.getElementById("title").innerHTML = name;
-  document.getElementById("content").innerHTML = entry.content
+  document.getElementById("content").innerHTML = entry.content || "Content goes here";
+  document.getElementById("seealso").innerHTML = "See also: " + entry._seealso.join(", ") || "";
 }
