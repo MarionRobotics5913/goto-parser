@@ -430,3 +430,9 @@ for(var x of document.getElementsByTagName("code")){
 
 codeUpdate(true);
 
+// Code for the docs loader
+
+function loadEntry(name){
+  var entry = 
+  document.getElementById("title").innerHTML = 
+}
