@@ -428,15 +428,14 @@ for(var x of document.getElementsByTagName("code")){
   x.innerHTML = new GotoParser().highlight(x.innerText);
 }
 
-codeUpdate(true);
-
 // Code for the docs loader
 
 function loadEntry(name){
-  alert("Loading " + name)
+  alert(document.getElementById("data"));
   var data = JSON.parse(document.getElementById('data').textContent);
   var entry = data[name];
-  document.getElementById("title").innerHTML = name;
+  // var entry;
+  document.getElementById("heading").innerHTML = name;
   document.getElementById("content").innerHTML = entry.content || "Content goes here";
   document.getElementById("seealso").innerHTML = "See also: " + entry._seealso.join(", ") || "";
 }
