@@ -8,7 +8,7 @@ var data = {
     _main: "Oops! Looks like you found an entry that hasn't been created yet.",
     _seealso: ["Welcome!"]
   },
-  goto: {
+  ["Example entry"]: {
     _main: "Main body content",
     Syntax: "Syntax content",
     Examples: `Example content<br>

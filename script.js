@@ -435,6 +435,7 @@ function highlightBlocks() {
 }
 
 function loadEntry(name) {
+  // Note: trigger animation with Element.style.animation = "CSS animation shorthand"
   if (!data) return;
   var { _main, _seealso, ...fields } = data[name] || data["Not found"];
   var mainElem = document.getElementById("content");
