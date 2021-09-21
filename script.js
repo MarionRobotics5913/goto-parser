@@ -278,6 +278,7 @@ function GotoParser() {
     return tokens;
   };
   this.parse = function(tokens) {
+    let actions = [];
     tokens = tokens.filter((token) => token.type !== "comment");
     /*
     
@@ -288,8 +289,10 @@ function GotoParser() {
         case "goto":
         case "set":
         case "start":
+          // Eat arguments until a newline or a semicolon, then make a new Action
           break;
-        
+        default:
+          break;
       }
       x++;
     }
