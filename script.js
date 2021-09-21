@@ -278,6 +278,10 @@ function GotoParser() {
     return tokens;
   };
   this.parse = function(tokens) {
+    /*
+    Parser works like:
+    
+    */
     return tokens;
   };
 
