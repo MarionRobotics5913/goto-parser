@@ -458,7 +458,10 @@ function loadEntry(name) {
       )
       .join(", ")}`;
   }
-  
+  var cover = document.getElementsByClassName("cover")[0];
+  cover.classList.remove("cover");
+  void cover.offsetWidth;
+  cover.classList.add("cover")
   highlightBlocks();
 }
 
