@@ -151,6 +151,8 @@ Parse to
 //   return actions;
 // }
 
+var data;
+
 function GotoParser() {
   this.lex; // Lexer
   this.parse; // Parser
@@ -431,12 +433,12 @@ for(var x of document.getElementsByTagName("code")){
 // Code for the docs loader
 
 function loadEntry(name){
-  var data;
   alert(data);
   // var data = JSON.parse(document.getElementById('data').textContent);
-  var entry = data[name];
+  var {_main, _seealso, ...entry} = data[name];
   // var entry;
-  document.getElementById("heading").innerHTML = data.textContent;
+  alert(Object.keys(entry));
+  document.getElementById("heading").innerHTML = name;
   document.getElementById("content").innerHTML = entry.content || "Content goes here";
   document.getElementById("seealso").innerHTML = "See also: " + entry._seealso.join(", ") || "";
 }
