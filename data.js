@@ -11,7 +11,14 @@ var data = {
   goto: {
     _main: "Main body content",
     Syntax: "Syntax content",
-    Examples: "Example content",
+    Examples: `Example content<br>
+    Inline code block: <code>goto x: 0.4 y: 0.7 stop</code><br>
+    External block:
+    <div class="code-block">
+      goto x: 0 y: 0 cont<br>
+      set x: 0.9 y: 0.1 stop<br>
+      //It even highlights automatically!
+    </div>`,
     Test: "Random extra field for more bulk to test on",
     Yo: "Procgen pages are epic",
     _seealso: ["set", "cont", "stop"]

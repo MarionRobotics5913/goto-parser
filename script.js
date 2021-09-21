@@ -247,8 +247,8 @@ function GotoParser() {
               currToken.type = "comment";
               while (char && char !== "\n") {
                 currToken.value += char;
-      x++;
-      char = programString[x];
+                x++;
+                char = programString[x];
                 column++;
               }
               newToken();
@@ -289,19 +289,19 @@ function GotoParser() {
     var tokens = this.lex(programString);
     var text = "";
     var reservedWords = this.reservedWords;
-    var colorSet = document.getElementById("highContrast")?.checked?1:0;
+    var colorSet = document.getElementById("highContrast")?.checked ? 1 : 0;
 
     function prepText(token) {
       var coloredWords = {
-        ";": ["grey","white"]
+        ";": ["grey", "white"]
       };
       for (var x of reservedWords) {
-        coloredWords[x] = ["cyan","cyan"];
+        coloredWords[x] = ["cyan", "cyan"];
       }
       var coloredTypes = {
-        number: ["orange","orange"],
-        symbol: ["grey","violet"],
-        comment: ["rgb(100, 200, 100)","lime"]
+        number: ["orange", "orange"],
+        symbol: ["grey", "violet"],
+        comment: ["rgb(100, 200, 100)", "lime"]
       };
       var value = token.value
         .replace(/&/g, "&amp;")
@@ -309,13 +309,9 @@ function GotoParser() {
         .replace(/\ /g, "&nbsp;")
         .replace(/\n/g, "<br />");
       if (coloredWords.hasOwnProperty(token.value)) {
-        return `<span style="color: ${
-          coloredWords[token.value][colorSet]
-        }; font-weight: bold;">${value}</span>`;
+        return `<span style="color: ${coloredWords[token.value][colorSet]}; font-weight: bold;">${value}</span>`;
       } else if (coloredTypes.hasOwnProperty(token.type)) {
-        return `<span style="color: ${
-          coloredTypes[token.type][colorSet]
-        }">${value}</span>`;
+        return `<span style="color: ${coloredTypes[token.type][colorSet]}">${value}</span>`;
       } else {
         return value;
       }
@@ -390,16 +386,18 @@ function parseProgram(programString) {
 
 // Actual page functions
 
-document.getElementById("editor") ? document.getElementById("editor").value = document
-  .getElementById("editor")
-  .value.trim() : null;
+document.getElementById("editor")
+  ? (document.getElementById("editor").value = document
+      .getElementById("editor")
+      .value.trim())
+  : null;
 
 function codeUpdate(parse) {
   // Run every time the textarea updates
   var textarea = document.getElementById("editor");
   var highlighter = document.getElementById("highlighter");
-  if(!textarea || !highlighter) return;
-  
+  if (!textarea || !highlighter) return;
+
   var text = document.getElementById("toggleHighlight")?.checked
     ? new GotoParser().highlight(textarea?.value)
     : textarea?.value
@@ -426,31 +424,41 @@ function sync_scroll(element) {
   result_element.scrollLeft = element.scrollLeft;
 }
 
-var codeBlocks = document.getElementsByTagName("code");
-for(var x of document.getElementsByTagName("code")){
-  x.innerHTML = new GotoParser().highlight(x.innerText);
-}
-
 codeUpdate(true);
 
-// Code for the docs loader
+// Code for the about page
+function highlightBlocks() {
+  var codeBlocks = [...document.getElementsByTagName("code"), ...document.getElementsByClassName("code-block")];
+  for (var x of document.getElementsByTagName("code")) {
+    x.innerHTML = new GotoParser().highlight(x.innerText);
+  }
+}
 
-function loadEntry(name){
-  if(!data) return;
-  var {_main, _seealso, ...fields} = data[name] || data["Not found"];
+function loadEntry(name) {
+  if (!data) return;
+  var { _main, _seealso, ...fields } = data[name] || data["Not found"];
   var mainElem = document.getElementById("content");
 
   document.getElementById("heading").innerHTML = name;
   mainElem.innerHTML = _main;
 
-  for(var x in Object.entries(fields)){
+  for (var x in Object.entries(fields)) {
     var [title, content] = Object.entries(fields)[x];
     //     <div class="divider"></div>
     mainElem.innerHTML += `<div class='divider'></div><h2>${title}</h2>${content}`;
   }
-  if(_seealso){
-    document.getElementById("seealso").innerHTML = `<div class='divider'></div><h2>See also:</h2>${_seealso.map(entry => `<span class='doclink' onclick='loadEntry("${entry}")'>${entry}</span>`).join(", ")}`;
+  if (_seealso) {
+    document.getElementById(
+      "seealso"
+    ).innerHTML = `<div class='divider'></div><h2>See also:</h2>${_seealso
+      .map(
+        entry =>
+          `<span class='doclink' onclick='loadEntry("${entry}")'>${entry}</span>`
+      )
+      .join(", ")}`;
   }
+  
+  highlightBlocks();
 }
 
 loadEntry("Welcome!");
