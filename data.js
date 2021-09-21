@@ -3,8 +3,10 @@ var data = {
     _main: "This is the main docs for Goto"
   },
   goto: {
-    _main: "",
-    Examples: "",
+    _main: "Main body content",
+    Syntax: "Syntax content",
+    Examples: "Example content",
+    Test
     _seealso: ["set"]
   },
   Comments: {

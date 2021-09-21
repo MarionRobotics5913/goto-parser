@@ -398,10 +398,11 @@ function codeUpdate(parse) {
   // Run every time the textarea updates
   var textarea = document.getElementById("editor");
   var highlighter = document.getElementById("highlighter");
-
-  var text = document.getElementById("toggleHighlight")?.checked ?? true
-    ? new GotoParser().highlight(textarea.value)
-    : textarea.value
+  if(!textarea || !highlighter) return;
+  
+  var text = document.getElementById("toggleHighlight")?.checked
+    ? new GotoParser().highlight(textarea?.value)
+    : textarea?.value
         .replace(/&/g, "&amp;")
         .replace(/</g, "&lt;")
         .replace(/\ /g, "&nbsp;")
@@ -430,19 +431,23 @@ for(var x of document.getElementsByTagName("code")){
   x.innerHTML = new GotoParser().highlight(x.innerText);
 }
 
+codeUpdate(true);
+
 // Code for the docs loader
 
 function loadEntry(name){
-  alert(data);
-  // var data = JSON.parse(document.getElementById('data').textContent);
   var {_main, _seealso, ...fields} = data[name];
-  // var entry;
-  for(var x in Object.entries(fields)){
-    var [title, content] = fields[x];
-    alert(title);
-    alert(contet);
-  }
+  var contentElement =   document.getElementById("content");
+
   document.getElementById("heading").innerHTML = name;
-  document.getElementById("content").innerHTML = fields.content || "Content goes here";
-  document.getElementById("seealso").innerHTML = "See also: " + _seealso.join(", ") || "";
+  contentElement.innerHTML = _main;
+
+  for(var x in Object.entries(fields)){
+    var [title, content] = Object.entries(fields)[x];
+    //     <div class="divider"></div>
+
+  }
+  if(_seealso){
+    document.getElementById("seealso").innerHTML = "See also: " + _seealso.join(", ") || "";
+  }
 }
