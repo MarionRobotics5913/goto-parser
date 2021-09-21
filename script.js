@@ -435,10 +435,14 @@ for(var x of document.getElementsByTagName("code")){
 function loadEntry(name){
   alert(data);
   // var data = JSON.parse(document.getElementById('data').textContent);
-  var {_main, _seealso, ...entry} = data[name];
+  var {_main, _seealso, ...fields} = data[name];
   // var entry;
-  alert(Object.keys(entry));
+  for(var x in Object.entries(fields)){
+    var [title, content] = fields[x];
+    alert(title);
+    alert(contet);
+  }
   document.getElementById("heading").innerHTML = name;
-  document.getElementById("content").innerHTML = entry.content || "Content goes here";
-  document.getElementById("seealso").innerHTML = "See also: " + entry._seealso.join(", ") || "";
+  document.getElementById("content").innerHTML = fields.content || "Content goes here";
+  document.getElementById("seealso").innerHTML = "See also: " + _seealso.join(", ") || "";
 }
