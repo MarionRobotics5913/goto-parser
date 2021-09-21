@@ -17,8 +17,7 @@ var data = {
     <div class="code-block">
       goto x: 0 y: 0 cont<br>
       set x: 0.9 y: 0.1 stop<br>
-      // It even highlights automatically!<br>
-      // Apparently not code blocks yet though. I'm still working on that one. 
+      // It even highlights automatically! 
     </div>`,
     Test: "Random extra field for more bulk to test on",
     Yo: "Procgen pages are epic",

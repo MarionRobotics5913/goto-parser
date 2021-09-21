@@ -429,7 +429,7 @@ codeUpdate(true);
 // Code for the about page
 function highlightBlocks() {
   var codeBlocks = [...document.getElementsByTagName("code"), ...document.getElementsByClassName("code-block")];
-  for (var x of document.getElementsByTagName("code")) {
+  for (var x of codeBlocks) {
     x.innerHTML = new GotoParser().highlight(x.innerText);
   }
 }
