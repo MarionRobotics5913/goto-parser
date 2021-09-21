@@ -1,9 +1,12 @@
 @keyframes fadein {
-  from {
-    background-color: rgba(10, 20, 40, 1);
+  0% {
+    background-color: rgba(10, 20, 40, 0);
     z-index: 1;
   }
-  to {
+  50% {
+    background-color: rgba(10, 20, 40, 1);    
+  }
+  100% {
     background-color: rgba(10, 20, 40, 0);
     z-index: 1;
   }
@@ -88,5 +91,5 @@ code {
   top: 0px;
   width: 100vw;
   height: 100vh;
-  animation: fadein 0.6s ease-out;
+  animation: fadein 0.6s ease-in-out;
 }
