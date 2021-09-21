@@ -278,10 +278,21 @@ function GotoParser() {
     return tokens;
   };
   this.parse = function(tokens) {
+    tokens = tokens.filter((token) => token.type !== "comment");
     /*
-    Parser works like:
     
     */
+    var x = 0;
+    while (x < tokens.length) {
+      switch (tokens[x]) {
+        case "goto":
+        case "set":
+        case "start":
+          break;
+        
+      }
+      x++;
+    }
     return tokens;
   };
 
@@ -432,7 +443,10 @@ codeUpdate(true);
 
 // Code for the about page
 function highlightBlocks() {
-  var codeBlocks = [...document.getElementsByTagName("code"), ...document.getElementsByClassName("code-block")];
+  var codeBlocks = [
+    ...document.getElementsByTagName("code"),
+    ...document.getElementsByClassName("code-block")
+  ];
   for (var x of codeBlocks) {
     x.innerHTML = new GotoParser().highlight(x.innerText);
   }
@@ -441,35 +455,36 @@ function highlightBlocks() {
 function loadEntry(name) {
   // Note: trigger animation with Element.style.animation = "CSS animation shorthand"
   if (!data) return;
-  
+
   var cover = document.getElementsByClassName("cover")[0];
   cover.classList.remove("cover");
   void cover.offsetWidth;
   cover.classList.add("cover");
-  
+
   setTimeout(() => {
-  var { _main, _seealso, _availability, ...fields } = data[name] || data["Not found"];
-  var mainElem = document.getElementById("content");
-  // var footerElem
+    var { _main, _seealso, _availability, ...fields } =
+      data[name] || data["Not found"];
+    var mainElem = document.getElementById("content");
+    // var footerElem
 
-  document.getElementById("heading").innerHTML = name;
-  mainElem.innerHTML = _main;
+    document.getElementById("heading").innerHTML = name;
+    mainElem.innerHTML = _main;
 
-  for (var x in Object.entries(fields)) {
-    var [title, content] = Object.entries(fields)[x];
-    //     <div class="divider"></div>
-    mainElem.innerHTML += `<div class='divider'></div><h2>${title}</h2>${content}`;
-  }
-  if (_seealso) {
-    mainElem.innerHTML += `<div class='divider'></div><h2>See also:</h2>${_seealso
-      .map(
-        entry =>
-          `<span class='doclink' onclick='loadEntry("${entry}")'>${entry}</span>`
-      )
-      .join(", ")}`;
-  }
-  highlightBlocks();
-    }, 300);
+    for (var x in Object.entries(fields)) {
+      var [title, content] = Object.entries(fields)[x];
+      //     <div class="divider"></div>
+      mainElem.innerHTML += `<div class='divider'></div><h2>${title}</h2>${content}`;
+    }
+    if (_seealso) {
+      mainElem.innerHTML += `<div class='divider'></div><h2>See also:</h2>${_seealso
+        .map(
+          entry =>
+            `<span class='doclink' onclick='loadEntry("${entry}")'>${entry}</span>`
+        )
+        .join(", ")}`;
+    }
+    highlightBlocks();
+  }, 300);
 }
 
 document.getElementById("cover")?.classList.add("cover");
