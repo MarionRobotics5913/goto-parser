@@ -14,11 +14,11 @@ var data = {
     Examples: "Example content",
     Test: "Random extra field for more bulk to test on",
     Yo: "Procgen pages are epic",
-    _seealso: ["set"]
+    _seealso: ["set", "cont", "stop"]
   },
   Comments: {
     _main: "Haven't actually written this one yet blah blah blah",
     Examples: "",
-    _seealso: []
+    _seealso: ["goto", "set"]
   }
 };

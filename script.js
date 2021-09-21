@@ -449,7 +449,7 @@ function loadEntry(name){
     mainElem.innerHTML += `<div class='divider'></div><h2>${title}</h2>${content}`;
   }
   if(_seealso){
-    document.getElementById("seealso").innerHTML = `<div class='divider'></div><h2>See also:</h2>${_seealso.map(entry => `<span class='doclink' onclick='loadEntry("${entry}")'>${entry}</span>`)}`;
+    document.getElementById("seealso").innerHTML = `<div class='divider'></div><h2>See also:</h2>${_seealso.map(entry => `<span class='doclink' onclick='loadEntry("${entry}")'>${entry}</span>`).join(", ")}`;
   }
 }
 
