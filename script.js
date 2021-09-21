@@ -437,17 +437,17 @@ codeUpdate(true);
 
 function loadEntry(name){
   var {_main, _seealso, ...fields} = data[name];
-  var contentElement =   document.getElementById("content");
+  var mainElem =   document.getElementById("content");
 
   document.getElementById("heading").innerHTML = name;
-  contentElement.innerHTML = _main;
+  mainElem.innerHTML = _main;
 
   for(var x in Object.entries(fields)){
     var [title, content] = Object.entries(fields)[x];
     //     <div class="divider"></div>
-
+    mainElem.innerHTML += `<div class='divider'></div><h2>${title}</h2>${content}`;
   }
   if(_seealso){
-    document.getElementById("seealso").innerHTML = "See also: " + _seealso.join(", ") || "";
+    document.getElementById("seealso").innerHTML = `<div class='divider'></div><h2>See also:</h2>${_seealso.map(entry => `<span class='doclink' onclick='loadEntry(${entry})'>${entry}</span>`)}`;
   }
 }

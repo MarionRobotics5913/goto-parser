@@ -6,7 +6,8 @@ var data = {
     _main: "Main body content",
     Syntax: "Syntax content",
     Examples: "Example content",
-    Test
+    Test: "Random extra field for more bulk to test on",
+    Yo: "Procgen pages are epic",
     _seealso: ["set"]
   },
   Comments: {
