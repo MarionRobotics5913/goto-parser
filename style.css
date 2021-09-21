@@ -62,5 +62,10 @@ code {
 }
 .doclink {
   color: rgb(0, 255, 255);
+  background-color: rgba(0, 255, 255, 0.1);
+  border-radius: 6px;
+  padding: 3px;
+}
+.doclink:hover {
   background-color: rgba(0, 255, 255, 0.2);
 }
