@@ -84,12 +84,14 @@ code {
 .doclink:hover {
   background-color: rgba(0, 255, 255, 0.2);
 }
-.cover {
+#cover {
   z-index: -1;
   position: fixed;
   left: 0px;
   top: 0px;
   width: 100vw;
   height: 100vh;
+}
+.cover {
   animation: fadein 0.6s ease-in-out;
 }

@@ -468,4 +468,5 @@ function loadEntry(name) {
     }, 300);
 }
 
+document.getElementById("cover")?.classList.add("cover");
 loadEntry("Welcome!");
