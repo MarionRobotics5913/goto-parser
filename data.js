@@ -1,6 +1,7 @@
 var data = {
-  _main: {
-    _main: "This is the main docs for Goto"
+  ["Welcome!"]: {
+    _main: "This is a guide on how to use Goto, a language developed by FTC team 5913 for a fast, low-effort, and more beginner-friendly way to program autonomous modes that operate smoothly. To get started, check out some of the pages listed below.",
+    _seealso: ["goto", "Comments", "set"]
   },
   goto: {
     _main: "Main body content",

@@ -436,8 +436,9 @@ codeUpdate(true);
 // Code for the docs loader
 
 function loadEntry(name){
+  if(!data) return;
   var {_main, _seealso, ...fields} = data[name];
-  var mainElem =   document.getElementById("content");
+  var mainElem = document.getElementById("content");
 
   document.getElementById("heading").innerHTML = name;
   mainElem.innerHTML = _main;
@@ -451,3 +452,5 @@ function loadEntry(name){
     document.getElementById("seealso").innerHTML = `<div class='divider'></div><h2>See also:</h2>${_seealso.map(entry => `<span class='doclink' onclick='loadEntry(${entry})'>${entry}</span>`)}`;
   }
 }
+
+loadEntry("Welcome!");
