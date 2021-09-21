@@ -1,3 +1,8 @@
+@keyframes fadein {
+  from {background-color: rgba(10, 20, 40, 1);}
+  to {background-color: rgba(10, 20, 40, 0);}
+}
+
 html {
   background-color: rgb(10, 20, 40);
   color: white;
@@ -69,4 +74,12 @@ code {
 }
 .doclink:hover {
   background-color: rgba(0, 255, 255, 0.2);
+}
+#cover {
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  width: 100vw;
+  height: 100vh;
+  animation: fadein 0.4s ease-out;
 }
