@@ -140,7 +140,7 @@ function GotoParser() {
   };
   this.parse = function(tokens) {
     let actions = [];
-    tokens = tokens.filter((token) => token.type !== "comment");
+    tokens = tokens.filter(token => token.type !== "comment");
     /*
     
     */
@@ -155,7 +155,7 @@ function GotoParser() {
         case "start":
         case "radius":
           // Eat arguments until a newline or a semicolon, then make a new Action
-          
+
           break;
         default:
           break;
@@ -270,11 +270,15 @@ function parseProgram(programString) {
 
 // Actual page functions
 
-document.getElementById("editor")
-  ? (document.getElementById("editor").value = document
-      .getElementById("editor")
-      .value.trim())
-  : null;
+var editor = document.getElementById("editor");
+if (editor) {
+  editor.value = editor.value.trim();
+  editor.addEventListener("keydown", (event) => {
+    // Function here :)
+    if (event.ctrlKey)
+            if(event.keycode == )
+  });
+}
 
 function codeUpdate(parse) {
   // Run every time the textarea updates
@@ -320,6 +324,8 @@ function highlightBlocks() {
     x.innerHTML = new GotoParser().highlight(x.innerText);
   }
 }
+
+
 
 function loadEntry(name) {
   if (!data) return;
