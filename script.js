@@ -273,10 +273,15 @@ function parseProgram(programString) {
 var editor = document.getElementById("editor");
 if (editor) {
   editor.value = editor.value.trim();
-  editor.addEventListener("keydown", (event) => {
+  editor.addEventListener("keydown", event => {
     // Function here :)
-    if (event.ctrlKey)
-            if(event.keycode == )
+    if (event.key === 'l' && event.ctrlKey) {
+      
+      event.preventDefault();
+      event.stopPropogation();
+      //Ctrl+L
+      
+    }
   });
 }
 
@@ -324,8 +329,6 @@ function highlightBlocks() {
     x.innerHTML = new GotoParser().highlight(x.innerText);
   }
 }
-
-
 
 function loadEntry(name) {
   if (!data) return;
