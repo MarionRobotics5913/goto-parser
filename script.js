@@ -284,13 +284,17 @@ function GotoParser() {
     
     */
     var x = 0;
+    var curr
     while (x < tokens.length) {
       switch (tokens[x]) {
         case "goto":
         case "set":
         case "start":
+        case "radius":
           // Eat arguments until a newline or a semicolon, then make a new Action
+          
           break;
+        
         default:
           break;
       }
