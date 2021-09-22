@@ -276,11 +276,15 @@ if (editor) {
   editor.addEventListener("keydown", event => {
     // Function here :)
     if (event.key === 'l' && event.ctrlKey) {
-      
+      var position = editor.selectionStart;
+      var first = editor.value.slice(0, position).split("\n");
+      var second = editor.value.slice(position).split("\n");
+      editor.setSelectionRange(
+        position - first[first.length-1].length,
+        position + second[0].length
+      );
       event.preventDefault();
-      event.stopPropogation();
-      //Ctrl+L
-      
+      event.stopPropagation();
     }
   });
 }
