@@ -6,7 +6,12 @@ var data = {
   },
   "Feature propositions": {
     _main: "This contains a list of feaure ideas and brief descriptions.",
-    "cont/stop": "Used in set and ",
+    "cont/stop": `Used in goto and set. This determines whether the robot stops at the specified checkpoint or continues smoothly through it.<br>
+    Example:
+    <div class="code-block">
+      goto x: 0 y: 0 cont<br>
+      set x: 0.9 y: 0.1 stop
+    </div>`,
     end: "Terminate the program early. <code>end</code>",
     
   },
