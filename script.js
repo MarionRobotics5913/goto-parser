@@ -171,13 +171,14 @@ function GotoParser() {
       // } else {
       //   column++;
       // }
+      alert(token);
     }
 
     var infiniteLoopStopper = 0;
     tokens = tokens.filter(token => token.type !== "comment");
     while (x < tokens.length) {
       increment();
-      switch (token) {
+      switch (token.value) {
         case "goto":
         case "set":
         case "start":
@@ -186,7 +187,7 @@ function GotoParser() {
           actions.push(token);
           break;
         default:
-          actions.push(token);
+          // actions.push(token);
           break;
       }
     }
