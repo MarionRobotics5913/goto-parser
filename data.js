@@ -2,7 +2,13 @@ var data = {
   "Welcome!": {
     _main:
       "This is a guide on how to use Goto, a language developed by FTC team 5913 for a fast, low-effort, and more beginner-friendly way to program autonomous modes that operate smoothly. To get started, check out some of the pages listed below.",
-    _seealso: ["goto", "Comments", "set"]
+    _seealso: ["goto", "Comments", "set", "Feature propositions"]
+  },
+  "Feature propositions": {
+    _main: "This contains a list of feaure ideas and brief descriptions.",
+    "cont/stop": "Used in set and ",
+    end: "Terminate the program early. <code>end</code>",
+    
   },
   "Not found": {
     _main: "Oops! Looks like you found an entry that hasn't been created yet.",

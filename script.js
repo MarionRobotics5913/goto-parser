@@ -223,7 +223,7 @@ function GotoParser() {
       } else {
         // Otherwise
         // Add a space
-        text += " ";
+        text += "&nbsp;";
         column++;
       }
     }
