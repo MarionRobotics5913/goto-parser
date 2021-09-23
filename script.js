@@ -140,26 +140,22 @@ function GotoParser() {
   };
   this.parse = function(tokens) {
     var x = -1; // Gets incremented to 0 immediately and updates the character
-    var column = 1;
-    var line = 1;
-    var tokens = [];
-    var currToken = {
-      line,
-      column,
-      type: undefined, // Not necessary but I like being able to see it if I look
-      value: ""
-    }; // Line, column, type, token
+    var actions = [];
+    var currAction = {
+      name: "",
+      arguments: {
+        
+      }
+    };
     function newToken() {
-      tokens.push(currToken);
-      currToken = {
-        line,
-        column,
+      actions.push(currAction);
+      currAction = {
         type: undefined,
         value: ""
       };
     } // Handling for unexpected weird tokens will be here, like "" or " " if they somehow end up being produced
-    var char;
-    var nextChar;
+    var token;
+    var nextToken;
     var infiniteLoopStopper = 0;
     function increment() {
       infiniteLoopStopper++;
@@ -167,23 +163,18 @@ function GotoParser() {
         throw "Lexer has incremented over 1000 times";
       }
       x++;
-      char = programString[x];
-      nextChar = programString[x + 1];
-      if (char === "\n") {
-        line++;
-        column = 1;
-      } else {
-        column++;
-      }
+      token = tokens[x];
+      nextToken = tokens[x + 1];
+      // if (char === "\n") {
+      //   line++;
+      //   column = 1;
+      // } else {
+      //   column++;
+      // }
     }
 
     var infiniteLoopStopper = 0;
-    let actions = [];
     tokens = tokens.filter(token => token.type !== "comment");
-    var x = 0;
-    var currAction = {
-      type: ""
-    };
     while (x < tokens.length) {
       switch (tokens[x]) {
         case "goto":
