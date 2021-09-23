@@ -160,7 +160,7 @@ function GotoParser() {
     function increment() {
       infiniteLoopStopper++;
       if (infiniteLoopStopper > 1000) {
-        throw "Lexer has incremented over 1000 times";
+        throw "Parser has incremented over 1000 times";
       }
       x++;
       token = tokens[x];
@@ -176,20 +176,21 @@ function GotoParser() {
     var infiniteLoopStopper = 0;
     tokens = tokens.filter(token => token.type !== "comment");
     while (x < tokens.length) {
-      switch (tokens[x]) {
+      increment();
+      switch (token) {
         case "goto":
         case "set":
         case "start":
         case "radius":
           // Eat arguments until a newline or a semicolon, then make a new Action
-          
+          actions.push(token);
           break;
         default:
+          actions.push(token);
           break;
       }
-      x++;
     }
-    return tokens;
+    return actions;
   };
 
   this.analyze = function(actions) {
