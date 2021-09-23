@@ -141,9 +141,6 @@ function GotoParser() {
   this.parse = function(tokens) {
     let actions = [];
     tokens = tokens.filter(token => token.type !== "comment");
-    /*
-    
-    */
     var x = 0;
     var currAction = {
       type: ""
@@ -155,7 +152,7 @@ function GotoParser() {
         case "start":
         case "radius":
           // Eat arguments until a newline or a semicolon, then make a new Action
-
+          
           break;
         default:
           break;
