@@ -171,7 +171,7 @@ function GotoParser() {
       // } else {
       //   column++;
       // }
-      alert(token);
+      // alert(token);
     }
 
     var infiniteLoopStopper = 0;
@@ -315,6 +315,11 @@ if (editor) {
       event.preventDefault();
       event.stopPropagation();
     }
+    if (event.key === '/' && event.ctrlKey){
+      var position = editor.selectionStart;
+      var first = editor.value.slice(0, position).split("\n");
+      
+    }
   });
 }
 
@@ -399,3 +404,7 @@ function loadEntry(name) {
 
 document.getElementById("cover")?.classList.add("cover");
 loadEntry("Welcome!");
+
+if(process.versions.hasOwnProperty('electron')) {
+  var 
+}
