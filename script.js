@@ -12,6 +12,23 @@ Parse to
 }
 */
 
+if(window.process && process.versions.hasOwnProperty("electron")) {}else{
+  function upload() {
+    var name = window.prompt("What should the program be called?");
+    if(!name) return;
+    // Robot is at either http://192.168.43.1:8080 or http://192.168.49.1:8080
+    // Process:
+    // 1. Build Java file
+    // 2. 
+  }
+  
+  var parseButton = document.getElementById("parseButton");
+  var uploadButton = document.createElement("button");
+  uploadButton.innerHTML = "Upload";
+  uploadButton.onclick = upload;
+  parseButton.parentNode.insertBefore(uploadButton, parseButton);
+}
+
 var data;
 
 function GotoParser() {
@@ -317,8 +334,16 @@ if (editor) {
     }
     if (event.key === '/' && event.ctrlKey){
       var position = editor.selectionStart;
-      var first = editor.value.slice(0, position).split("\n");
       
+      var newLinePos;
+      for(var i = position; i >= 0; i--){
+        if(editor.value[i] === '\n'){
+          newLinePos = i;
+          break;
+        }
+      }
+      alert(newLinePos);
+      editor.value.splice(i, 0, "//");
     }
   });
 }
@@ -404,7 +429,3 @@ function loadEntry(name) {
 
 document.getElementById("cover")?.classList.add("cover");
 loadEntry("Welcome!");
-
-if(process.versions.hasOwnProperty('electron')) {
-  var 
-}
