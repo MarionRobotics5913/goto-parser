@@ -359,13 +359,30 @@ if (editor) {
       var newLinePos;
       for(var i = position; i >= 0; i--){
         if(editor.value[i] === '\n'){
-          newLinePos = i;
+          newLinePos = i + 1;
           break;
         }
       }
+      debugger;
+      editor.value = editor.value.splice(newLinePos, 0, "//"); //- editor is a textarea so it should be .value --Matt
+      //- Your problem is that editor.value is a string and String.splice does not exist
+      //we made string.splice
+      //- Interesting. I'm gonna look for that
+      // at the top
+      //- Found it. That should work. So what is the issue currently?
+      // Heh...
+      // So.
+      // THinking
+      // The most comical issue is 
+      //this works fine. my problem was on my end
+      //- I did notice it does not put the cursor back where it should be
+      //- That does work on my computer too
+      // We had some comical issues
+      // One was when we swapped codeUpdate to use editor.innerHTML
+      
+      codeUpdate(false);
       event.preventDefault();
       event.stopPropagation();
-      editor.innerHTML = editor.innerHTML.splice(newLinePos, 0, "//");
     }
   });
 }
