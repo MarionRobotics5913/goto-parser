@@ -49,7 +49,7 @@ if (window.process && process.versions.hasOwnProperty("electron")) {
   var uploadButton = document.createElement("button");
   uploadButton.innerHTML = "Upload";
   uploadButton.onclick = upload;
-  parseButton.parentNode.insertBefore(uploadButton, parseButton);
+  parseButton?.parentNode?.insertBefore(uploadButton, parseButton); // Why this?
 }
 
 var data;
@@ -214,14 +214,16 @@ function GotoParser() {
 
     var infiniteLoopStopper = 0;
     tokens = tokens.filter(token => token.type !== "comment");
-    while (x < tokens.length) {
+    while (x < tokens.length-1) {
       increment();
+      console.log(token);
       switch (token.value) {
         case "goto":
         case "set":
         case "start":
         case "radius":
           // Eat arguments until a newline or a semicolon, then make a new Action
+          
           actions.push(token);
           break;
         default:
@@ -460,4 +462,3 @@ function loadEntry(name) {
 
 document.getElementById("cover")?.classList.add("cover");
 loadEntry("Welcome!");
-// Hi, who is Anonymous? --Matt
