@@ -12,6 +12,25 @@ Parse to
 }
 */
 
+// Credit to StackOverflow: https://stackoverflow.com/questions/4313841/insert-a-string-at-a-specific-index
+if (!String.prototype.splice) {
+    /**
+     * {JSDoc}
+     *
+     * The splice() method changes the content of a string by removing a range of
+     * characters and/or adding new characters.
+     *
+     * @this {String}
+     * @param {number} start Index at which to start changing the string.
+     * @param {number} delCount An integer indicating the number of old chars to remove.
+     * @param {string} newSubStr The String that is spliced in.
+     * @return {string} A new string with the spliced substring.
+     */
+    String.prototype.splice = function(start, delCount, newSubStr) {
+        return this.slice(0, start) + newSubStr + this.slice(start + Math.abs(delCount));
+    };
+}
+
 if(window.process && process.versions.hasOwnProperty("electron")) {}else{
   function upload() {
     var name = window.prompt("What should the program be called?");
@@ -19,7 +38,8 @@ if(window.process && process.versions.hasOwnProperty("electron")) {}else{
     // Robot is at either http://192.168.43.1:8080 or http://192.168.49.1:8080
     // Process:
     // 1. Build Java file
-    // 2. 
+    // 2. Send POST request to <server>/java/file/upload
+    //   a. 
   }
   
   var parseButton = document.getElementById("parseButton");
@@ -333,6 +353,7 @@ if (editor) {
       event.stopPropagation();
     }
     if (event.key === '/' && event.ctrlKey){
+      // alert(editor.type);
       var position = editor.selectionStart;
       
       var newLinePos;
@@ -342,8 +363,9 @@ if (editor) {
           break;
         }
       }
-      alert(newLinePos);
-      editor.value.splice(i, 0, "//");
+      event.preventDefault();
+      event.stopPropagation();
+      editor.innerHTML = editor.innerHTML.splice(newLinePos, 0, "//");
     }
   });
 }
