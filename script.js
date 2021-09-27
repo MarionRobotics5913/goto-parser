@@ -14,34 +14,37 @@ Parse to
 
 // Credit to StackOverflow: https://stackoverflow.com/questions/4313841/insert-a-string-at-a-specific-index
 if (!String.prototype.splice) {
-    /**
-     * {JSDoc}
-     *
-     * The splice() method changes the content of a string by removing a range of
-     * characters and/or adding new characters.
-     *
-     * @this {String}
-     * @param {number} start Index at which to start changing the string.
-     * @param {number} delCount An integer indicating the number of old chars to remove.
-     * @param {string} newSubStr The String that is spliced in.
-     * @return {string} A new string with the spliced substring.
-     */
-    String.prototype.splice = function(start, delCount, newSubStr) {
-        return this.slice(0, start) + newSubStr + this.slice(start + Math.abs(delCount));
-    };
+  /**
+   * {JSDoc}
+   *
+   * The splice() method changes the content of a string by removing a range of
+   * characters and/or adding new characters.
+   *
+   * @this {String}
+   * @param {number} start Index at which to start changing the string.
+   * @param {number} delCount An integer indicating the number of old chars to remove.
+   * @param {string} newSubStr The String that is spliced in.
+   * @return {string} A new string with the spliced substring.
+   */
+  String.prototype.splice = function(start, delCount, newSubStr) {
+    return (
+      this.slice(0, start) + newSubStr + this.slice(start + Math.abs(delCount))
+    );
+  };
 }
 
-if(window.process && process.versions.hasOwnProperty("electron")) {}else{
+if (window.process && process.versions.hasOwnProperty("electron")) {
+} else {
   function upload() {
     var name = window.prompt("What should the program be called?");
-    if(!name) return;
+    if (!name) return;
     // Robot is at either http://192.168.43.1:8080 or http://192.168.49.1:8080
     // Process:
     // 1. Build Java file
     // 2. Send POST request to <server>/java/file/upload
-    //   a. 
+    //   a.
   }
-  
+
   var parseButton = document.getElementById("parseButton");
   var uploadButton = document.createElement("button");
   uploadButton.innerHTML = "Upload";
@@ -180,9 +183,7 @@ function GotoParser() {
     var actions = [];
     var currAction = {
       name: "",
-      arguments: {
-        
-      }
+      arguments: {}
     };
     function newToken() {
       actions.push(currAction);
@@ -341,46 +342,37 @@ if (editor) {
   editor.value = editor.value.trim();
   editor.addEventListener("keydown", event => {
     // Function here :)
-    if (event.key === 'l' && event.ctrlKey) {
+    if (event.key === "l" && event.ctrlKey) {
       var position = editor.selectionStart;
       var first = editor.value.slice(0, position).split("\n");
       var second = editor.value.slice(position).split("\n");
       editor.setSelectionRange(
-        position - first[first.length-1].length,
+        position - first[first.length - 1].length,
         position + second[0].length
       );
       event.preventDefault();
       event.stopPropagation();
     }
-    if (event.key === '/' && event.ctrlKey){
+    if (event.key === "/" && event.ctrlKey) {
       // alert(editor.type);
       var position = editor.selectionStart;
-      
-      var newLinePos;
-      for(var i = position; i >= 0; i--){
-        if(editor.value[i] === '\n'){
+
+      var newLinePos = 0;
+      for (var i = position - 1; i > 0; i--) {
+        if (editor.value[i] === "\n") {
           newLinePos = i + 1;
           break;
         }
       }
-      debugger;
-      editor.value = editor.value.splice(newLinePos, 0, "//"); //- editor is a textarea so it should be .value --Matt
-      //- Your problem is that editor.value is a string and String.splice does not exist
-      //we made string.splice
-      //- Interesting. I'm gonna look for that
-      // at the top
-      //- Found it. That should work. So what is the issue currently?
-      // Heh...
-      // So.
-      // THinking
-      // The most comical issue is 
-      //this works fine. my problem was on my end
-      //- I did notice it does not put the cursor back where it should be
-      //- That does work on my computer too
-      // We had some comical issues
-      // One was when we swapped codeUpdate to use editor.innerHTML
-      
-      codeUpdate(false);
+      if (editor.value[newLinePos] !== "/") {
+        editor.value = editor.value.splice(newLinePos, 0, "//");
+        editor.setSelectionRange(position + 2, position + 2);
+      } else {
+        editor.value = editor.value.splice(newLinePos, 2, "");
+        editor.setSelectionRange(position - 2, position - 2);
+      }
+
+      codeUpdate(false); //calls hightlighter
       event.preventDefault();
       event.stopPropagation();
     }
@@ -468,3 +460,4 @@ function loadEntry(name) {
 
 document.getElementById("cover")?.classList.add("cover");
 loadEntry("Welcome!");
+// Hi, who is Anonymous? --Matt
