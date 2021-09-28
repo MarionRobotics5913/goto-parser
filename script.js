@@ -49,7 +49,7 @@ if (window.process && process.versions.hasOwnProperty("electron")) {
   var uploadButton = document.createElement("button");
   uploadButton.innerHTML = "Upload";
   uploadButton.onclick = upload;
-  parseButton?.parentNode?.insertBefore(uploadButton, parseButton); // Why this?
+  parseButton?.parentNode?.insertBefore(uploadButton, parseButton);
 }
 
 var data;
