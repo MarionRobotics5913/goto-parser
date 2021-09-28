@@ -30,9 +30,15 @@ button {
   background-color: transparent;
   color: cyan;
   border: 3px solid cyan;
-  border-radius: 5px;
+  border-radius: 15px;
   margin: 3px;
-  padding: 5px;
+  padding: 5px 10px 5px 10px;
+  transition: all 0.2s;
+}
+button:hover {
+  background-color: rgba(0, 255, 255, 0.4);
+  color: white;
+  border-color: white;
 }
 .code-block {
   font-family: monospace;

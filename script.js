@@ -143,7 +143,6 @@ function GotoParser() {
             throw "Lexer recieved undefined token";
             break;
           case "/":
-            console.log(`Current: ${char} Next: ${nextChar}`);
             if (nextChar !== undefined && nextChar === "/") {
               currToken.type = "comment";
               while (char && char !== "\n") {
@@ -381,7 +380,7 @@ if (editor) {
       event.stopPropagation();
 
     }
-    if(event.keyCode === 9 && event.ctrlKey){ //ctrl = tab
+    if(event.keyCode === 40 && event.ctrlKey){ //ctrl + down
       var position = editor.selectionStart;
 
       var line = [];
@@ -396,7 +395,13 @@ if (editor) {
       alert(line);
       event.preventDefault();
       event.stopPropagation();
-
+    }
+    if(event.keyCode === 9){
+      var position = editor.selectionStart;
+      editor.value = editor.value.splice(position, 1, "a");
+      editor.setSelectionRange(position + 2, position + 2);
+      event.preventDefault();
+      event.stopPropagation();
     }
   });
 }
@@ -450,6 +455,8 @@ function loadEntry(name) {
   if (!data) return;
 
   var cover = document.getElementsByClassName("cover")[0];
+  if(!cover) return;
+  
   cover.classList.remove("cover");
   void cover.offsetWidth;
   cover.classList.add("cover");
