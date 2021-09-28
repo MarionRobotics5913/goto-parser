@@ -42,7 +42,7 @@ if (window.process && process.versions.hasOwnProperty("electron")) {
     // Process:
     // 1. Build Java file
     // 2. Send POST request to <server>/java/file/upload
-    //   a.
+    //   a. Send file as "file" in a multipart form
   }
 
   var parseButton = document.getElementById("parseButton");
@@ -398,8 +398,18 @@ if (editor) {
     }
     if(event.keyCode === 9){
       var position = editor.selectionStart;
-      editor.value = editor.value.splice(position, 1, "a");
+
+      var newLinePos = 0;
+      for (var i = position - 1; i > 0; i--) {
+        if (editor.value[i] === "\n") {
+          newLinePos = i + 1;
+          break;
+        }
+      }
+      
+      editor.value = editor.value.splice(newLinePos, 0, "  ");
       editor.setSelectionRange(position + 2, position + 2);
+      codeUpdate(false); //calls hightlighter
       event.preventDefault();
       event.stopPropagation();
     }
