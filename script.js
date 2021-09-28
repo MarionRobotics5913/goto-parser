@@ -352,8 +352,6 @@ if (editor) {
         position - first[first.length - 1].length,
         position + second[0].length
       );
-      event.preventDefault();
-      event.stopPropagation();
     }
     if (event.key === "/" && event.ctrlKey) {
       // alert(editor.type);
@@ -377,9 +375,20 @@ if (editor) {
       }
 
       codeUpdate(false); //calls hightlighter
-      event.preventDefault();
-      event.stopPropagation();
     }
+    if(event.keyCode === 9){ //tab
+      var position = editor.selectionStart;
+
+      var newLinePos = [];
+      for (var i = position - 1; i > 0; i--) {
+        if (editor.value[i] !== "\n") {
+          
+        }
+      }
+      
+    }
+    event.preventDefault();
+    event.stopPropagation();
   });
 }
 
