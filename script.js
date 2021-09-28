@@ -12,6 +12,29 @@ Parse to
 }
 */
 
+// Credit to StackOverflow: https://stackoverflow.com/questions/4282151/is-it-possible-to-ping-a-server-from-javascript
+function ping(host, port, pong) {
+  var started = new Date().getTime();
+
+  var http = new XMLHttpRequest();
+
+  http.open("GET", "http://" + host + ":" + port, /*async*/ true);
+  http.onreadystatechange = function() {
+    if (http.readyState == 4) {
+      var ended = new Date().getTime();
+      var milliseconds = ended - started;
+      if (pong != null) {
+        pong(milliseconds);
+      }
+    }
+  };
+  try {
+    http.send(null);
+  } catch (exception) {
+    // this is expected
+  }
+}
+
 // Credit to StackOverflow: https://stackoverflow.com/questions/4313841/insert-a-string-at-a-specific-index
 if (!String.prototype.splice) {
   /**
@@ -43,6 +66,15 @@ if (window.process && process.versions.hasOwnProperty("electron")) {
     // 1. Build Java file
     // 2. Send POST request to <server>/java/file/upload
     //   a. Send file as "file" in a multipart form
+    var responseRecieved = false;
+    function part2(millis) {
+      if(responseRecieved) return;
+      responseRecieved = true;
+      
+      var XHR = new XMLHttpRequest();
+    }
+    ping("192.168.43.1", "8080", part2);
+    ping("192.168.49.1", "8080", part2);
   }
 
   var parseButton = document.getElementById("parseButton");
@@ -177,7 +209,7 @@ function GotoParser() {
     }
     return tokens;
   };
-  
+
   this.parse = function(tokens) {
     var x = -1; // Gets incremented to 0 immediately and updates the character
     var actions = [];
@@ -214,7 +246,7 @@ function GotoParser() {
 
     var infiniteLoopStopper = 0;
     tokens = tokens.filter(token => token.type !== "comment");
-    while (x < tokens.length-1) {
+    while (x < tokens.length - 1) {
       increment();
       // console.log(token);
       switch (token.value) {
@@ -223,7 +255,7 @@ function GotoParser() {
         case "start":
         case "radius":
           // Eat arguments until a newline or a semicolon, then make a new Action
-          
+
           actions.push(token);
           break;
         default:
@@ -366,10 +398,12 @@ if (editor) {
           break;
         }
       }
-      if (editor.value[newLinePos] === "/" && editor.value[newLinePos + 1] === "/") {
+      if (
+        editor.value[newLinePos] === "/" &&
+        editor.value[newLinePos + 1] === "/"
+      ) {
         editor.value = editor.value.splice(newLinePos, 2, "");
         editor.setSelectionRange(position - 2, position - 2);
-
       } else {
         editor.value = editor.value.splice(newLinePos, 0, "//");
         editor.setSelectionRange(position + 2, position + 2);
@@ -378,9 +412,9 @@ if (editor) {
       codeUpdate(false); //calls hightlighter
       event.preventDefault();
       event.stopPropagation();
-
     }
-    if(event.keyCode === 40 && event.ctrlKey){ //ctrl + down
+    if (event.keyCode === 40 && event.ctrlKey) {
+      //ctrl + down
       var position = editor.selectionStart;
 
       var line = [];
@@ -396,7 +430,7 @@ if (editor) {
       event.preventDefault();
       event.stopPropagation();
     }
-    if(event.keyCode === 9){
+    if (event.keyCode === 9) {
       var position = editor.selectionStart;
 
       var newLinePos = 0;
@@ -406,9 +440,31 @@ if (editor) {
           break;
         }
       }
-      
+
       editor.value = editor.value.splice(newLinePos, 0, "  ");
       editor.setSelectionRange(position + 2, position + 2);
+      codeUpdate(false); //calls hightlighter
+      event.preventDefault();
+      event.stopPropagation();
+    }
+    if (event.keyCode === 9 && event.shiftKey) {
+      var position = editor.selectionStart;
+
+      var newLinePos = 0;
+      for (var i = position - 1; i > 0; i--) {
+        if (editor.value[i] === "\n") {
+          newLinePos = i + 1;
+          break;
+        }
+      }
+      if (
+        editor.value[newLinePos] === "/" &&
+        editor.value[newLinePos + 1] === "/"
+      ) {
+        editor.value = editor.value.splice(newLinePos, 2, "");
+        editor.setSelectionRange(position - 2, position - 2);
+      }
+
       codeUpdate(false); //calls hightlighter
       event.preventDefault();
       event.stopPropagation();
@@ -465,8 +521,8 @@ function loadEntry(name) {
   if (!data) return;
 
   var cover = document.getElementsByClassName("cover")[0];
-  if(!cover) return;
-  
+  if (!cover) return;
+
   cover.classList.remove("cover");
   void cover.offsetWidth;
   cover.classList.add("cover");
