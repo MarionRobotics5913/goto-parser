@@ -49,7 +49,7 @@ if (window.process && process.versions.hasOwnProperty("electron")) {
   var uploadButton = document.createElement("button");
   uploadButton.innerHTML = "Upload";
   uploadButton.onclick = upload;
-  parseButton?.parentNode?.insertBefore(uploadButton, parseButton);
+  parseButton?.parentNode?.insertBefore(uploadButton, parseButton.nextSibling);
 }
 
 var data;
@@ -178,6 +178,7 @@ function GotoParser() {
     }
     return tokens;
   };
+  
   this.parse = function(tokens) {
     var x = -1; // Gets incremented to 0 immediately and updates the character
     var actions = [];
@@ -216,7 +217,7 @@ function GotoParser() {
     tokens = tokens.filter(token => token.type !== "comment");
     while (x < tokens.length-1) {
       increment();
-      console.log(token);
+      // console.log(token);
       switch (token.value) {
         case "goto":
         case "set":
@@ -352,6 +353,8 @@ if (editor) {
         position - first[first.length - 1].length,
         position + second[0].length
       );
+      event.preventDefault();
+      event.stopPropagation();
     }
     if (event.key === "/" && event.ctrlKey) {
       // alert(editor.type);
@@ -371,24 +374,30 @@ if (editor) {
       } else {
         editor.value = editor.value.splice(newLinePos, 0, "//");
         editor.setSelectionRange(position + 2, position + 2);
-
       }
 
       codeUpdate(false); //calls hightlighter
+      event.preventDefault();
+      event.stopPropagation();
+
     }
-    if(event.keyCode === 9){ //tab
+    if(event.keyCode === 9 && event.ctrlKey){ //ctrl = tab
       var position = editor.selectionStart;
 
-      var newLinePos = [];
+      var line = [];
       for (var i = position - 1; i > 0; i--) {
         if (editor.value[i] !== "\n") {
-          
+          line.push(editor.value[i]);
+        } else {
+          line = line.reverse();
+          break;
         }
       }
-      
+      alert(line);
+      event.preventDefault();
+      event.stopPropagation();
+
     }
-    event.preventDefault();
-    event.stopPropagation();
   });
 }
 
