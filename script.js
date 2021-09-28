@@ -72,6 +72,7 @@ if (window.process && process.versions.hasOwnProperty("electron")) {
       responseRecieved = true;
       
       var XHR = new XMLHttpRequest();
+      var data = "";
     }
     ping("192.168.43.1", "8080", part2);
     ping("192.168.49.1", "8080", part2);
@@ -430,7 +431,7 @@ if (editor) {
       event.preventDefault();
       event.stopPropagation();
     }
-    if (event.keyCode === 9) {
+    if (event.keyCode === 9 && !event.shiftKey) {
       var position = editor.selectionStart;
 
       var newLinePos = 0;
@@ -458,8 +459,8 @@ if (editor) {
         }
       }
       if (
-        editor.value[newLinePos] === "/" &&
-        editor.value[newLinePos + 1] === "/"
+        editor.value[newLinePos] === " " &&
+        editor.value[newLinePos + 1] === " "
       ) {
         editor.value = editor.value.splice(newLinePos, 2, "");
         editor.setSelectionRange(position - 2, position - 2);
