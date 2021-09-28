@@ -366,12 +366,14 @@ if (editor) {
           break;
         }
       }
-      if (editor.value[newLinePos] !== "/") {
-        editor.value = editor.value.splice(newLinePos, 0, "//");
-        editor.setSelectionRange(position + 2, position + 2);
-      } else {
+      if (editor.value[newLinePos] === "/" && editor.value[newLinePos + 1] === "/") {
         editor.value = editor.value.splice(newLinePos, 2, "");
         editor.setSelectionRange(position - 2, position - 2);
+
+      } else {
+        editor.value = editor.value.splice(newLinePos, 0, "//");
+        editor.setSelectionRange(position + 2, position + 2);
+
       }
 
       codeUpdate(false); //calls hightlighter
