@@ -447,7 +447,7 @@ if (editor) {
         }
       }
       if(action === ''){
-        for(let i = 0; i < actions; i){
+        for(let i = 0; i < actions.length; i++){
           if(actions[i].substr(0, line.length) === line){
             action = actions[i];
             break;
@@ -455,8 +455,12 @@ if (editor) {
         }
       }
       console.log(action);
+      
+      switch(action){
+        case "goto":
+          
+      }
 
-      console.log(actions);
       event.preventDefault();
       event.stopPropagation();
     }
