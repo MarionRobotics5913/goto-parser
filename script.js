@@ -376,24 +376,15 @@ function parseProgram(programString) {
 
 // Actual page functions
 var editor = document.getElementById("editor");
-let prevVersion;
-let prevShortcutUsed = false;
 if (editor) {
   editor.value = editor.value.trim();
   editor.addEventListener("keydown", event => {
     // Function here :)
 
     //NEEDS TO BE FIRST OR IT WILL BREAK!!!!!!
-    if (event.keyCode === 90 && event.ctrlKey) {
-      // if(prevShortcutUsed){
-      let pos = editor.selectionStart;
-      editor.value = prevVersion;
-      editor.setSelectionRange(pos, pos);
-      prevShortcutUsed = false;
-      event.preventDefault();
-      event.stopPropagation();
-      // }
-    }
+//     if (event.keyCode === 90 && event.ctrlKey) {
+
+//     }
 
     if (event.key === "l" && event.ctrlKey) {
       var position = editor.selectionStart;
@@ -409,8 +400,6 @@ if (editor) {
 
     if (event.key === "/" && event.ctrlKey) {
       // alert(editor.type);
-      prevShortcutUsed = true;
-      prevVersion = editor.value;
       var position = editor.selectionStart;
 
       var newLinePos = 0;
@@ -438,8 +427,6 @@ if (editor) {
     if (event.keyCode === 40 && event.ctrlKey) {
       //janky autofill WIP
       //ctrl + down
-      prevShortcutUsed = true;
-      prevVersion = editor.value;
       let actions = new GotoParser().reservedWords;
 
       let line = [];
@@ -535,8 +522,6 @@ if (editor) {
 
     if (event.keyCode === 9 && !event.shiftKey) {
       //tab
-      prevShortcutUsed = true;
-      prevVersion = editor.value;
       var position = editor.selectionStart;
 
       var newLinePos = 0;
@@ -554,8 +539,6 @@ if (editor) {
     }
     if (event.keyCode === 9 && event.shiftKey) {
       //tab + shift
-      prevShortcutUsed = true;
-      prevVersion = editor.value;
       var position = editor.selectionStart;
 
       var newLinePos = 0;
@@ -569,7 +552,6 @@ if (editor) {
         editor.value[newLinePos] === " " &&
         editor.value[newLinePos + 1] === " "
       ) {
-        prevShortcutUsed = true;
         editor.value = editor.value.splice(newLinePos, 2, "");
         editor.setSelectionRange(position - 2, position - 2);
       }
