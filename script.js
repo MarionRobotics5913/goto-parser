@@ -370,13 +370,19 @@ function parseProgram(programString) {
   });
 }
 
-// Actual page functions
+// function changeLine(lineFill, ){
+  
+// }
 
+// Actual page functions
+let prevChange = '';
+let prevLineChangePos;
 var editor = document.getElementById("editor");
 if (editor) {
   editor.value = editor.value.trim();
   editor.addEventListener("keydown", event => {
     // Function here :)
+    
     if (event.key === "l" && event.ctrlKey) {
       var position = editor.selectionStart;
       var first = editor.value.slice(0, position).split("\n");
@@ -413,13 +419,20 @@ if (editor) {
       event.preventDefault();
       event.stopPropagation();
     }
+    
+    if(event.keyCode === 90 && event.ctrlKey){
+      if(prevChange.length >= 0){
+        // editor.value = editor.value.splice(prevLineChangePos, )
+      }
+    }
+    
     if (event.keyCode === 40 && event.ctrlKey) { //janky intellisense WIP
       //ctrl + down
       let actions = new GotoParser().reservedWords;
       
+      let line = [];
       var position = editor.selectionStart;
       let newLinePos = 0;
-      var line = [];
       for (var i = position-1; i >= 0; i--) {
         if (editor.value[i] !== "\n") {
           line.push(editor.value[i]);
@@ -483,6 +496,8 @@ if (editor) {
           lineEnd = lineFill.length;
           break;
       }
+      prevChange = line;
+      prevLineChangePos = newLinePos;
       if(newLinePos === 0){
         editor.value = editor.value.splice(0, 1, "");
         editor.value = editor.value.splice(lineEnd-1, 0, '\n');
