@@ -438,14 +438,20 @@ if (editor) {
         }
       }
       line = line.join('');
-      console.log(line);
       
       let action = '';
       for(let i = 0; i < line.length; i++){
-        if(line[i] !== " "){
-          action += line[i];
-        }else{ //add the detection for a not complete word
+        if(line[i] === " "){
+          action = line.substr(0, i+1);
           break;
+        }
+      }
+      if(action === ''){
+        for(let i = 0; i < actions; i){
+          if(actions[i].substr(0, line.length) === line){
+            action = actions[i];
+            break;
+          }
         }
       }
       console.log(action);
