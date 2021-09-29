@@ -455,22 +455,33 @@ if (editor) {
         }
       }
       
+      let lineEnd = 0;
       switch (action){
         case 'goto':
+          let outstring = "";
           console.log(newLinePos, line.length);
-          editor.value = editor.value.splice(newLinePos, line.length, 
+          editor.value = editor.value.splice(newLinePos, line.length+1, 
           "\ngoto x: # y: # stop");
           editor.setSelectionRange(newLinePos + 9, newLinePos + 10);
           break;
         case 'set':
-          editor.value = editor.value.splice(newLinePos, line.length, 
-          "set periph: # stop");
+          editor.value = editor.value.splice(newLinePos, line.length+1, 
+          "\nset periph: # stop");
           editor.setSelectionRange(newLinePos + 5, newLinePos + 11);
           break;
         case 'start':
+          editor.value = editor.value.splice(newLinePos, line.length+1, 
+          "\nstart x: # y: #");
+          editor.setSelectionRange(newLinePos + 7, newLinePos + 11);
+          lineEnd = 15;
           break;
         case 'radius':
           break;
+      }
+      if(newLinePos === 0){
+        editor.value = editor.value.splice(0, 1, "");
+        editor.value = editor.value.splice(lineEnd, 0, '\n');
+        editor.setSelectionRange(lineEnd, lineEnd);
       }
       event.preventDefault();
       event.stopPropagation();
