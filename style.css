@@ -11,7 +11,30 @@
     z-index: 1;
   }
 }
-
+@keyframes shrink {
+  0% {
+    height: inherit;
+    margin: inherit;
+    padding: inherit;
+  }
+  100% {
+    height: 0%;
+    padding: 0px;
+    margin: 0px;
+  }
+}
+@keyframes expand {
+  0% {
+    height: 0px;
+    padding: 0px;
+    margin: 0px;
+  }
+  100% {
+    height: inherit;
+    margin: inherit;
+    padding: inherit;
+  }
+}
 html {
   background-color: rgb(10, 20, 40);
   color: white;
@@ -72,7 +95,7 @@ button:hover {
   z-index: 0;
   white-space: nowrap;
 }
-#settings {
+#settingsWrapper {
   background-color: rgba(0, 255, 255, 0.2);
   color: white;
   border-color: white;  
@@ -121,6 +144,8 @@ code {
   animation: fadein 0.6s ease-in-out;
 }
 .collapsed {
-/*   height: 0px; */
-  display: none;
+  animation: shrink 1s ease-in-out forwards;
+}
+.expanded {
+  animation: expand 1s ease-in-out forwards;
 }

@@ -395,7 +395,7 @@ if (editor) {
   editor.addEventListener("keydown", event => {
     // Function here :)
 
-    if (event.keyCode === 90 && event.ctrlKey) {
+    if (event.keyCode === 90 && event.ctrlKey) {//ctrl + z
       if (stackPos > 0) {
         stackPos--;
         editor.value = undoStack[stackPos];
@@ -404,7 +404,7 @@ if (editor) {
       event.stopPropagation();
     }
     
-    if(event.keyCode === 89 && event.ctrlKey){
+    if(event.keyCode === 89 && event.ctrlKey){//crtl + y
       if(stackPos < undoStack.length){
         stackPos++;
         editor.value = undoStack[stackPos];
@@ -687,6 +687,15 @@ function loadEntry(name) {
     }
     highlightBlocks();
   }, 300);
+}
+
+function toggleSettings(){
+  var settingsPanel = document.getElementById("settings");
+  if(!settingsPanel) return "I lost the game";
+  
+  settingsPanel.classList.toggle("collapsed");
+  settingsPanel.classList.toggle("expanded");
+  
 }
 
 document.getElementById("cover")?.classList.add("cover");
