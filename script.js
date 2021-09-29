@@ -415,18 +415,29 @@ if (editor) {
     }
     if (event.keyCode === 40 && event.ctrlKey) {
       //ctrl + down
+      let actions = new GotoParser().reservedWords;
+      
       var position = editor.selectionStart;
-
+      let newLinePos = 0;
       var line = [];
       for (var i = position - 1; i > 0; i--) {
         if (editor.value[i] !== "\n") {
           line.push(editor.value[i]);
         } else {
+          newLinePos = i;
           line = line.reverse();
           break;
         }
       }
-      alert(line);
+      for(let i = 0; i < line.length; i++){
+        for(let j = 0; j < actions.length; j++){
+          if(line[i] !== actions[j]){
+            actions.pop(j);
+          }
+        }
+      }
+      act
+      console.log(actions);
       event.preventDefault();
       event.stopPropagation();
     }
