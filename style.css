@@ -72,6 +72,9 @@ button:hover {
   z-index: 0;
   white-space: nowrap;
 }
+#settings {
+  
+}
 code {
   font-family: monospace;
   background-color: black;

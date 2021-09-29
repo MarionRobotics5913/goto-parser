@@ -5,41 +5,69 @@
     <link rel="stylesheet" href="style.css" />
 
     <!-- Import the webpage's javascript file -->
-    <script> var data; </script>
+    <script>
+      var data;
+    </script>
     <script src="data.js" defer></script>
     <script src="script.js" defer></script>
     <title>Goto Editor</title>
-    <link rel="icon" 
-      type="image/png" 
-      href="https://icon2.cleanpng.com/20180416/rhw/kisspng-first-robotics-competition-first-tech-challenge-fo-robotics-5ad4383e48d912.0329978715238574702984.jpg">
+    <link
+      rel="icon"
+      type="image/png"
+      href="https://icon2.cleanpng.com/20180416/rhw/kisspng-first-robotics-competition-first-tech-challenge-fo-robotics-5ad4383e48d912.0329978715238574702984.jpg"
+    />
   </head>
-  <button onclick="window.open('about.html', 'Goto Docs', 'width=600,height='+screen.availHeight)">Open docs</button>
-<!--   <div> -->
-    <div style="padding: 0px; position: relative;">
-<!-- goto x: 0.5 y: 0.2 // Comments work
+  <button
+    onclick="window.open('about.html', 'Goto Docs', 'width=600,height='+screen.availHeight)"
+  >
+    Open docs
+  </button>
+  <!--   <div> -->
+  <div style="padding: 0px; position: relative;">
+    <!-- goto x: 0.5 y: 0.2 // Comments work
 goto x: 0.3 y: 0.4//They even work without spaces
 goto x: 0.8 y: 0.1 -->
-      <textarea id="editor" class="code-block" cols="48" rows="16" oninput="codeUpdate(true); sync_scroll(this);" onscroll="sync_scroll(this);" spellcheck="false">
+    <textarea
+      id="editor"
+      class="code-block"
+      cols="48"
+      rows="16"
+      oninput="codeUpdate(true); sync_scroll(this);"
+      onscroll="sync_scroll(this);"
+      spellcheck="false"
+    >
 start x: 0.8 y: 0.5 // Starting position
 radius x: 0.05 y: 0.05 // Set precision
 goto x: 0.5 y: 0.2 cont // Go to the box
 set arm: 0.9 stop // Reach down to box
-      </textarea>
+      </textarea
+    >
     <div id="highlighter" class="code-block">
       Loading parser...
-      </div>
     </div>
-<!--   </div> -->
-<!--   <div id="editor" class="code-block" contenteditable>
+  </div>
+  <!--   </div> -->
+  <!--   <div id="editor" class="code-block" contenteditable>
     goto x: 0.5 y: 0.2 // Comments work<br />
     goto x: 0.3 y: 0.4//They even work without spaces<br />
     goto x: 0.8 y: 0.1
   </div> -->
-  <input type="checkbox" id="autoparse" checked> Auto-parse on changes <br />
-  <input type="checkbox" id="toggleHighlight" onchange="codeUpdate(false);" checked> Highlight code syntax <br />
-  <input type="checkbox" id="highContrast" onchange="codeUpdate(false);"> High contrast highlighting <br />
+  <div id="settings">
+    <input type="checkbox" id="autoparse" checked /> Auto-parse on changes
+    <br />
+    <input
+      type="checkbox"
+      id="toggleHighlight"
+      onchange="codeUpdate(false);"
+      checked
+    />
+    Highlight code syntax <br />
+    <input type="checkbox" id="highContrast" onchange="codeUpdate(false);" />
+    High contrast highlighting <br />
+  </div>
 
-  <button id="parseButton"
+  <button
+    id="parseButton"
     onclick="parseProgram(document.getElementById('editor').value)"
   >
     Parse

@@ -371,14 +371,17 @@ function parseProgram(programString) {
 }
 
 function addToUndoStack(){
-  if(stackPos === undoStack.length-1){
+  if(stackPos === undoStack.length){
     undoStack.push(editor.value);
-    stackPos = undoStack.length;
+    stackPos++;
   }else{
     var tempStack = [];
     for(let i = 0; i < stackPos; i++){
-      
+      tempStack.push(undoStack[i]);
+      tempStack.push(editor.value);
     }
+    undoStack = tempStack;
+    stackPos = undoStack.length-1;
   }
 }
 
@@ -390,11 +393,17 @@ if (editor) {
   editor.value = editor.value.trim();
   editor.addEventListener("keydown", event => {
     // Function here :)
-
+    addToUndoStack();
+    console.log(undoStack);
+    console.log(undoStack.length);
+    console.log(stackPos);
     //NEEDS TO BE FIRST OR IT WILL BREAK!!!!!!
-//     if (event.keyCode === 90 && event.ctrlKey) {
-
-//     }
+    if (event.keyCode === 90 && event.ctrlKey) {
+      stackPos--;
+      editor.value = undoStack[stackPos];
+      event.preventDefault();
+      event.stopPropagation();
+    }
 
     if (event.key === "l" && event.ctrlKey) {
       var position = editor.selectionStart;
