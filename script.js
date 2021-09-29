@@ -417,7 +417,7 @@ if (editor) {
       event.stopPropagation();
     }
 
-    if (event.key === "l" && event.ctrlKey) {
+    if (event.key === "l" && event.ctrlKey && document.getElementById("ctrlL")?.checked) {
       var position = editor.selectionStart;
       var first = editor.value.slice(0, position).split("\n");
       var second = editor.value.slice(position).split("\n");
