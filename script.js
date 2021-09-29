@@ -388,7 +388,7 @@ function addToUndoStack() {
 
 // Actual page functions
 var editor = document.getElementById("editor");
-var undoStack = [];
+var undoStack = [editor.value];
 var stackPos = 0;
 if (editor) {
   editor.value = editor.value.trim();
@@ -398,6 +398,7 @@ if (editor) {
     if (event.keyCode === 90 && event.ctrlKey) {
       //ctrl + z
       if (stackPos > 0) {
+        console.log(stackPos, undoStack.length-1);
         if(stackPos === undoStack.length-1){
           addToUndoStack();
           stackPos--;
