@@ -429,15 +429,21 @@ if (editor) {
         }
       }
       line = line.reverse();
-      console.log(actions);
-      console.log(line);
+      
+      let removeIndex = [];
       for(let i = 0; i < line.length; i++){
         for(let j = actions.length-1; j >= 0; j--){
-          console.log(actions[j][i]);
+          // console.log(actions[j][i], line[i]);
           if(line[i] !== actions[j][i]){
-            actions.pop(j);
+            if(line[i] !== " "){
+              removeIndex.push[j];
+            }
+            continue;
           }
         }
+      }
+      for(let i = 0; i < removeIndex; i++){
+        actions.pop(remove)
       }
       console.log(actions);
       event.preventDefault();
