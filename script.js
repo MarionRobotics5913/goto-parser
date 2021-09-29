@@ -380,7 +380,7 @@ function parseProgram(programString) {
 
 function addToUndoStack() {
   undoStack[stackPos++] = editor.value;
-  if(stackPos > document.getElementById("undoStackSize").value) {
+  if (stackPos > document.getElementById("undoStackSize").value) {
     undoStack.shift();
     stackPos--;
   }
@@ -395,7 +395,8 @@ if (editor) {
   editor.addEventListener("keydown", event => {
     // Function here :)
 
-    if (event.keyCode === 90 && event.ctrlKey) {//ctrl + z
+    if (event.keyCode === 90 && event.ctrlKey) {
+      //ctrl + z
       if (stackPos > 0) {
         stackPos--;
         editor.value = undoStack[stackPos];
@@ -403,10 +404,12 @@ if (editor) {
       event.preventDefault();
       event.stopPropagation();
     }
-    
-    if(event.keyCode === 89 && event.ctrlKey){//crtl + y
-      console.log(stackPos, undoStack.length-1);
-      if(stackPos < undoStack.length-1){
+
+    if (event.keyCode === 89 && event.ctrlKey) {
+      //crtl + y
+      console.log(stackPos, undoStack.length - 1);
+      console.log(undoStack);
+      if (stackPos < undoStack.length - 1) {
         stackPos++;
         editor.value = undoStack[stackPos];
       }
@@ -591,16 +594,19 @@ if (editor) {
       event.preventDefault();
       event.stopPropagation();
     }
-    
-    if(event.keyCode === 32){//space
+
+    if (event.keyCode === 32) {
+      //space
       addToUndoStack();
     }
-    
-    if(event.keyCode === 13){//enter
+
+    if (event.keyCode === 13) {
+      //enter
       addToUndoStack();
     }
-    
-    if(event.keyCode === 8){//backspace
+
+    if (event.keyCode === 8) {
+      //backspace
       addToUndoStack();
     }
 
@@ -690,13 +696,18 @@ function loadEntry(name) {
   }, 300);
 }
 
-function toggleSettings(){
+function toggleSettings() {
   var settingsPanel = document.getElementById("settings");
-  if(!settingsPanel) return "I lost the game";
+  if (!settingsPanel) return "I lost the game";
   
+  settingsPanel.style.animationDuration = "1s"
+  if (
+    settingsPanel.classList.contains("collapsed") ^
+    settingsPanel.classList.contains("expanded")
+  ) {
+    settingsPanel.classList.toggle("expanded");
+  }
   settingsPanel.classList.toggle("collapsed");
-  settingsPanel.classList.toggle("expanded");
-  
 }
 
 document.getElementById("cover")?.classList.add("cover");

@@ -25,6 +25,22 @@
   <button onclick="toggleSettings();">
     Settings
   </button>
+  <div id="settings" class="collapsed">
+    <input type="checkbox" id="autoparse" checked /> Auto-parse on changes
+    <br />
+    <input
+      type="checkbox"
+      id="toggleHighlight"
+      onchange="codeUpdate(false);"
+      checked
+    />
+    Highlight code syntax <br />
+    <input type="checkbox" id="highContrast" onchange="codeUpdate(false);" />
+    High contrast highlighting <br />
+    <input type="number" id="undoStackSize" name="undoStackSize" value="10" />
+    Undo stack size
+  </div>
+
   <!--   <div> -->
   <div style="padding: 0px; position: relative;">
     <!-- goto x: 0.5 y: 0.2 // Comments work
@@ -49,21 +65,6 @@ set arm: 0.9 stop // Reach down to box
       Loading parser...
     </div>
   </div>
-    <div id="settings" class="expanded">
-      <input type="checkbox" id="autoparse" checked /> Auto-parse on changes
-      <br />
-      <input
-        type="checkbox"
-        id="toggleHighlight"
-        onchange="codeUpdate(false);"
-        checked
-      />
-      Highlight code syntax <br />
-      <input type="checkbox" id="highContrast" onchange="codeUpdate(false);" />
-      High contrast highlighting <br />
-      <input type="number" id="undoStackSize" name="undoStackSize" value="10" />
-      Undo stack size
-    </div>
 
   <button
     id="parseButton"
