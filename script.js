@@ -68,9 +68,9 @@ if (window.process && process.versions.hasOwnProperty("electron")) {
     //   a. Send file as "file" in a multipart form
     var responseRecieved = false;
     function part2(millis) {
-      if(responseRecieved) return;
+      if (responseRecieved) return;
       responseRecieved = true;
-      
+
       var XHR = new XMLHttpRequest();
       var data = "";
     }
@@ -371,7 +371,7 @@ function parseProgram(programString) {
 }
 
 // function changeLine(lineFill, ){
-  
+
 // }
 
 // Actual page functions
@@ -382,19 +382,19 @@ if (editor) {
   editor.value = editor.value.trim();
   editor.addEventListener("keydown", event => {
     // Function here :)
-    
+
     //NEEDS TO BE FIRST OR IT WILL BREAK!!!!!!
-    if(event.keyCode === 90 && event.ctrlKey){
+    if (event.keyCode === 90 && event.ctrlKey) {
       // if(prevShortcutUsed){
-        let pos = editor.selectionStart;
-        editor.value = prevVersion;
-        editor.setSelectionRange(pos, pos);
-        prevShortcutUsed = false;
-        event.preventDefault();
-        event.stopPropagation();
-      // }      
+      let pos = editor.selectionStart;
+      editor.value = prevVersion;
+      editor.setSelectionRange(pos, pos);
+      prevShortcutUsed = false;
+      event.preventDefault();
+      event.stopPropagation();
+      // }
     }
-    
+
     if (event.key === "l" && event.ctrlKey) {
       var position = editor.selectionStart;
       var first = editor.value.slice(0, position).split("\n");
@@ -406,7 +406,7 @@ if (editor) {
       event.preventDefault();
       event.stopPropagation();
     }
-    
+
     if (event.key === "/" && event.ctrlKey) {
       // alert(editor.type);
       prevShortcutUsed = true;
@@ -434,19 +434,18 @@ if (editor) {
       event.preventDefault();
       event.stopPropagation();
     }
-    
-    
-    
-    if (event.keyCode === 40 && event.ctrlKey) { //janky autofill WIP
+
+    if (event.keyCode === 40 && event.ctrlKey) {
+      //janky autofill WIP
       //ctrl + down
       prevShortcutUsed = true;
       prevVersion = editor.value;
       let actions = new GotoParser().reservedWords;
-      
+
       let line = [];
       var position = editor.selectionStart;
       let newLinePos = 0;
-      for (var i = position-1; i >= 0; i--) {
+      for (var i = position - 1; i >= 0; i--) {
         if (editor.value[i] !== "\n") {
           line.push(editor.value[i]);
         } else {
@@ -462,63 +461,80 @@ if (editor) {
           break;
         }
       }
-      line = line.join('');
-      
-      let action = '';
-      for(let i = 0; i < line.length-1; i++){
-        if(line[i] === " "){
+      line = line.join("");
+
+      let action = "";
+      for (let i = 0; i < line.length - 1; i++) {
+        if (line[i] === " ") {
           action = line.substr(0, i);
           break;
         }
       }
-      
-      if(action === ''){
-        for(let i = 0; i < actions.length; i++){
-          if(actions[i].substr(0, line.length) === line){
+
+      if (action === "") {
+        for (let i = 0; i < actions.length; i++) {
+          if (actions[i].substr(0, line.length) === line) {
             action = actions[i];
             break;
           }
         }
       }
-      
+
       let lineEnd = 0;
       let lineFill = "";
-      switch (action){
-        case 'goto':
+      switch (action) {
+        case "goto":
           lineFill = "\ngoto x: # y: # stop";
-          editor.value = editor.value.splice(newLinePos, line.length+1, lineFill);
+          editor.value = editor.value.splice(
+            newLinePos,
+            line.length + 1,
+            lineFill
+          );
           editor.setSelectionRange(newLinePos + 9, newLinePos + 10);
           lineEnd = lineFill.length;
           break;
-        case 'set':
+        case "set":
           lineFill = "\nset periph: # stop";
-          editor.value = editor.value.splice(newLinePos, line.length+1, lineFill);
+          editor.value = editor.value.splice(
+            newLinePos,
+            line.length + 1,
+            lineFill
+          );
           editor.setSelectionRange(newLinePos + 5, newLinePos + 11);
           lineEnd = lineFill.length;
           break;
-        case 'start':
+        case "start":
           lineFill = "\nstart x: # y: #";
-          editor.value = editor.value.splice(newLinePos, line.length+1, lineFill);
+          editor.value = editor.value.splice(
+            newLinePos,
+            line.length + 1,
+            lineFill
+          );
           editor.setSelectionRange(newLinePos + 10, newLinePos + 11);
           lineEnd = lineFill.length;
           break;
-        case 'radius':
+        case "radius":
           lineFill = "\nradius x: # y: #";
-          editor.value = editor.value.splice(newLinePos, line.length+1, lineFill);
+          editor.value = editor.value.splice(
+            newLinePos,
+            line.length + 1,
+            lineFill
+          );
           editor.setSelectionRange(newLinePos + 8, newLinePos + 9);
           lineEnd = lineFill.length;
           break;
       }
-      if(newLinePos === 0){
+      if (newLinePos === 0) {
         editor.value = editor.value.splice(0, 1, "");
-        editor.value = editor.value.splice(lineEnd-1, 0, '\n');
-        editor.setSelectionRange(0, lineEnd-1); //because chances are the action will be start
+        editor.value = editor.value.splice(lineEnd - 1, 0, "\n");
+        editor.setSelectionRange(0, lineEnd - 1); //because chances are the action will be start
       }
       event.preventDefault();
       event.stopPropagation();
     }
-    
-    if (event.keyCode === 9 && !event.shiftKey) { //tab
+
+    if (event.keyCode === 9 && !event.shiftKey) {
+      //tab
       prevShortcutUsed = true;
       prevVersion = editor.value;
       var position = editor.selectionStart;
@@ -536,7 +552,8 @@ if (editor) {
       event.preventDefault();
       event.stopPropagation();
     }
-    if (event.keyCode === 9 && event.shiftKey) { //tab + shift
+    if (event.keyCode === 9 && event.shiftKey) {
+      //tab + shift
       prevShortcutUsed = true;
       prevVersion = editor.value;
       var position = editor.selectionStart;
@@ -561,7 +578,7 @@ if (editor) {
       event.stopPropagation();
     }
 
-      codeUpdate(true); //calls hightlighter and parser (if enabled)
+    codeUpdate(true); //calls hightlighter and parser (if enabled)
   });
 }
 
