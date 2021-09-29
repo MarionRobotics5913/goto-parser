@@ -424,7 +424,7 @@ if (editor) {
         if (editor.value[i] !== "\n") {
           line.push(editor.value[i]);
         } else {
-          newLinePos = i;
+          newLinePos = i + 1;
           break;
         }
       }
@@ -433,7 +433,7 @@ if (editor) {
         if (editor.value[i] !== "\n") {
           line.push(editor.value[i]);
         } else {
-          newLinePos = i;
+          newLinePos = i + 1;
           break;
         }
       }
@@ -458,7 +458,7 @@ if (editor) {
       
       switch (action){
         case 'goto':
-          editor.value = editor.value.splice(newLinePos, line.length-1, 
+          editor.value = editor.value.splice(newLinePos, line.length, 
           "goto x: # y: # stop");
           editor.setSelectionRange(newLinePos + 8, newLinePos + 9);
           break;
