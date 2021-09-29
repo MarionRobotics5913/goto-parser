@@ -92,7 +92,7 @@ function GotoParser() {
   this.parse; // Parser
   this.analyze; // Semantic analyzer
   this.highlight; // Syntax highlighter that returns HTML content
-  this.reservedWords = ["goto", "set", "start", "radius", "cont", "stop"];
+  this.reservedWords = ["goto", "set", "start", "radius", "cont", "stop", "iltg"];
 
   this.lex = function(programString) {
     var x = -1; // Gets incremented to 0 immediately and updates the character
@@ -370,12 +370,22 @@ function parseProgram(programString) {
   });
 }
 
-// function changeLine(lineFill, ){
-
-// }
+function addToUndoStack(){
+  if(stackPos === undoStack.length-1){
+    undoStack.push(editor.value);
+    stackPos = undoStack.length;
+  }else{
+    var tempStack = [];
+    for(let i = 0; i < stackPos; i++){
+      
+    }
+  }
+}
 
 // Actual page functions
 var editor = document.getElementById("editor");
+var undoStack = [];
+var stackPos = 0;
 if (editor) {
   editor.value = editor.value.trim();
   editor.addEventListener("keydown", event => {
