@@ -456,9 +456,13 @@ if (editor) {
       }
       console.log(action);
       
-      switch(action){
-        case "goto":
-          
+      switch (action){
+        case 'goto':
+          console.log("goo");
+          break;
+        case 'set':
+          console.log("shh");
+          break;
       }
 
       event.preventDefault();
