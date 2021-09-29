@@ -424,7 +424,7 @@ if (editor) {
         if (editor.value[i] !== "\n") {
           line.push(editor.value[i]);
         } else {
-          newLinePos = i + 1;
+          newLinePos = i;
           break;
         }
       }
@@ -433,7 +433,6 @@ if (editor) {
         if (editor.value[i] !== "\n") {
           line.push(editor.value[i]);
         } else {
-          newLinePos = i + 1;
           break;
         }
       }
@@ -458,19 +457,25 @@ if (editor) {
       
       switch (action){
         case 'goto':
+          console.log(newLinePos, line.length);
           editor.value = editor.value.splice(newLinePos, line.length, 
-          "goto x: # y: # stop");
-          editor.setSelectionRange(newLinePos + 8, newLinePos + 9);
+          "\ngoto x: # y: # stop");
+          editor.setSelectionRange(newLinePos + 9, newLinePos + 10);
           break;
         case 'set':
-          console.log("shh");
+          editor.value = editor.value.splice(newLinePos, line.length, 
+          "set periph: # stop");
+          editor.setSelectionRange(newLinePos + 5, newLinePos + 11);
+          break;
+        case 'start':
+          break;
+        case 'radius':
           break;
       }
-      
-
       event.preventDefault();
       event.stopPropagation();
     }
+    
     if (event.keyCode === 9 && !event.shiftKey) {
       var position = editor.selectionStart;
 
