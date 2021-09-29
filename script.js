@@ -92,7 +92,7 @@ function GotoParser() {
   this.parse; // Parser
   this.analyze; // Semantic analyzer
   this.highlight; // Syntax highlighter that returns HTML content
-  this.reservedWords = ["goto", "set", "radius", "cont", "stop", "start"];
+  this.reservedWords = ["goto", "set", "start", "radius", "cont", "stop"];
 
   this.lex = function(programString) {
     var x = -1; // Gets incremented to 0 immediately and updates the character
@@ -456,32 +456,37 @@ if (editor) {
       }
       
       let lineEnd = 0;
+      let lineFill = "";
       switch (action){
         case 'goto':
-          let outstring = "";
-          console.log(newLinePos, line.length);
-          editor.value = editor.value.splice(newLinePos, line.length+1, 
-          "\ngoto x: # y: # stop");
+          lineFill = "\ngoto x: # y: # stop";
+          editor.value = editor.value.splice(newLinePos, line.length+1, lineFill);
           editor.setSelectionRange(newLinePos + 9, newLinePos + 10);
+          lineEnd = lineFill.length;
           break;
         case 'set':
-          editor.value = editor.value.splice(newLinePos, line.length+1, 
-          "\nset periph: # stop");
+          lineFill = "\nset periph: # stop";
+          editor.value = editor.value.splice(newLinePos, line.length+1, lineFill);
           editor.setSelectionRange(newLinePos + 5, newLinePos + 11);
+          lineEnd = lineFill.length;
           break;
         case 'start':
-          editor.value = editor.value.splice(newLinePos, line.length+1, 
-          "\nstart x: # y: #");
-          editor.setSelectionRange(newLinePos + 7, newLinePos + 11);
-          lineEnd = 15;
+          lineFill = "\nstart x: # y: #";
+          editor.value = editor.value.splice(newLinePos, line.length+1, lineFill);
+          editor.setSelectionRange(newLinePos + 10, newLinePos + 11);
+          lineEnd = lineFill.length;
           break;
         case 'radius':
+          lineFill = "\nradius x: # y: #";
+          editor.value = editor.value.splice(newLinePos, line.length+1, lineFill);
+          editor.setSelectionRange(newLinePos + 8, newLinePos + 9);
+          lineEnd = lineFill.length;
           break;
       }
       if(newLinePos === 0){
         editor.value = editor.value.splice(0, 1, "");
-        editor.value = editor.value.splice(lineEnd, 0, '\n');
-        editor.setSelectionRange(lineEnd, lineEnd);
+        editor.value = editor.value.splice(lineEnd-1, 0, '\n');
+        editor.setSelectionRange(9, 10); //because chances are the action will be start
       }
       event.preventDefault();
       event.stopPropagation();
