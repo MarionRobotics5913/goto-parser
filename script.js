@@ -442,11 +442,7 @@ if (editor) {
       let action = '';
       for(let i = 0; i < line.length-1; i++){
         if(line[i] === " "){
-          for(let j = 0; j < actions.length; j++){
-            if(actions[j] === line.substr(0, i)){
-             action = actions[i]; 
-            }
-          }
+          action = line.substr(0, i);
           break;
         }
       }
@@ -459,20 +455,18 @@ if (editor) {
           }
         }
       }
-      console.log(action);
-      console.log(action === "goto");
       
-      if(action === "goto"){
-        console.log("here");
-      }
       switch (action){
         case 'goto':
-          console.log("goo");
+          editor.value = editor.value.splice(newLinePos, line.length-1, 
+          "goto x: # y: # stop");
+          editor.setSelectionRange(newLinePos + 8, newLinePos + 9);
           break;
         case 'set':
           console.log("shh");
           break;
       }
+      
 
       event.preventDefault();
       event.stopPropagation();
