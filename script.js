@@ -429,22 +429,29 @@ if (editor) {
         }
       }
       line = line.reverse();
+      for (var i = 0; i < editor.value.length; i++) {
+        if (editor.value[i] !== "\n") {
+          line.push(editor.value[i]);
+        } else {
+          newLinePos = i;
+          break;
+        }
+      }
+      line = line.join('');
+      console.log(line);
       
-      let removeIndex = [];
       for(let i = 0; i < line.length; i++){
         for(let j = actions.length-1; j >= 0; j--){
-          // console.log(actions[j][i], line[i]);
+          console.log(actions[j][i], line[i]);
           if(line[i] !== actions[j][i]){
             if(line[i] !== " "){
-              removeIndex.push[j];
+              actions.pop(j);
+              break;
             }
-            continue;
           }
         }
       }
-      for(let i = 0; i < removeIndex; i++){
-        actions.pop(remove)
-      }
+
       console.log(actions);
       event.preventDefault();
       event.stopPropagation();
