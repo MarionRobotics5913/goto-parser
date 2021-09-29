@@ -385,14 +385,14 @@ if (editor) {
     
     //NEEDS TO BE FIRST OR IT WILL BREAK!!!!!!
     if(event.keyCode === 90 && event.ctrlKey){
-      if(prevShortcutUsed){
+      // if(prevShortcutUsed){
         let pos = editor.selectionStart;
         editor.value = prevVersion;
         editor.setSelectionRange(pos, pos);
         prevShortcutUsed = false;
         event.preventDefault();
         event.stopPropagation();
-      }      
+      // }      
     }
     
     if (event.key === "l" && event.ctrlKey) {
@@ -406,12 +406,10 @@ if (editor) {
       event.preventDefault();
       event.stopPropagation();
     }
-    prevVersion = editor.value;
     
     if (event.key === "/" && event.ctrlKey) {
       // alert(editor.type);
       prevShortcutUsed = true;
-      prevVersion = editor.value;
       prevVersion = editor.value;
       var position = editor.selectionStart;
 
@@ -514,7 +512,7 @@ if (editor) {
       if(newLinePos === 0){
         editor.value = editor.value.splice(0, 1, "");
         editor.value = editor.value.splice(lineEnd-1, 0, '\n');
-        editor.setSelectionRange(9, 10); //because chances are the action will be start
+        editor.setSelectionRange(0, lineEnd-1); //because chances are the action will be start
       }
       event.preventDefault();
       event.stopPropagation();
@@ -538,7 +536,7 @@ if (editor) {
       event.preventDefault();
       event.stopPropagation();
     }
-    if (event.keyCode === 9 && event.shiftKey) {
+    if (event.keyCode === 9 && event.shiftKey) { //tab + shift
       prevShortcutUsed = true;
       prevVersion = editor.value;
       var position = editor.selectionStart;
