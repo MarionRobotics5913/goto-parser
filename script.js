@@ -410,7 +410,6 @@ if (editor) {
         editor.setSelectionRange(position + 2, position + 2);
       }
 
-      codeUpdate(false); //calls hightlighter
       event.preventDefault();
       event.stopPropagation();
     }
@@ -444,7 +443,6 @@ if (editor) {
 
       editor.value = editor.value.splice(newLinePos, 0, "  ");
       editor.setSelectionRange(position + 2, position + 2);
-      codeUpdate(false); //calls hightlighter
       event.preventDefault();
       event.stopPropagation();
     }
@@ -466,10 +464,10 @@ if (editor) {
         editor.setSelectionRange(position - 2, position - 2);
       }
 
-      codeUpdate(false); //calls hightlighter
       event.preventDefault();
       event.stopPropagation();
     }
+      codeUpdate(true); //calls hightlighter and parser (if enabled)
   });
 }
 
