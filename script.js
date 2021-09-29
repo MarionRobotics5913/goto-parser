@@ -429,7 +429,7 @@ if (editor) {
         }
       }
       line = line.reverse();
-      for (var i = 0; i < editor.value.length; i++) {
+      for (var i = position; i < editor.value.length; i++) {
         if (editor.value[i] !== "\n") {
           line.push(editor.value[i]);
         } else {
@@ -440,17 +440,15 @@ if (editor) {
       line = line.join('');
       console.log(line);
       
+      let action = '';
       for(let i = 0; i < line.length; i++){
-        for(let j = actions.length-1; j >= 0; j--){
-          console.log(actions[j][i], line[i]);
-          if(line[i] !== actions[j][i]){
-            if(line[i] !== " "){
-              actions.pop(j);
-              break;
-            }
-          }
+        if(line[i] !== " "){
+          action += line[i];
+        }else{ //add the detection for a not complete word
+          break;
         }
       }
+      console.log(action);
 
       console.log(actions);
       event.preventDefault();
