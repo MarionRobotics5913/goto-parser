@@ -398,23 +398,19 @@ if (editor) {
     if (event.keyCode === 90 && event.ctrlKey) {
       //ctrl + z
       if (stackPos > 0) {
-        console.log(stackPos, undoStack.length-1);
-        if(stackPos === undoStack.length-1){
+        if(stackPos === undoStack.length){
           addToUndoStack();
           stackPos--;
         }
         stackPos--;
         editor.value = undoStack[stackPos];
       }
-      console.log(undoStack);
       event.preventDefault();
       event.stopPropagation();
     }
 
     if (event.keyCode === 89 && event.ctrlKey) {
       //crtl + y
-      console.log(stackPos, undoStack.length - 1);
-      console.log(undoStack);
       if (stackPos < undoStack.length - 1) {
         stackPos++;
         editor.value = undoStack[stackPos];
