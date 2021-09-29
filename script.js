@@ -398,9 +398,14 @@ if (editor) {
     if (event.keyCode === 90 && event.ctrlKey) {
       //ctrl + z
       if (stackPos > 0) {
+        if(stackPos === undoStack.length-1){
+          addToUndoStack();
+          stackPos--;
+        }
         stackPos--;
         editor.value = undoStack[stackPos];
       }
+      console.log(undoStack);
       event.preventDefault();
       event.stopPropagation();
     }
