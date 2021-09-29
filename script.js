@@ -405,7 +405,8 @@ if (editor) {
     }
     
     if(event.keyCode === 89 && event.ctrlKey){//crtl + y
-      if(stackPos < undoStack.length){
+      console.log(stackPos, undoStack.length-1);
+      if(stackPos < undoStack.length-1){
         stackPos++;
         editor.value = undoStack[stackPos];
       }
@@ -603,7 +604,7 @@ if (editor) {
       addToUndoStack();
     }
 
-    console.log(undoStack);
+    // console.log(undoStack);
     codeUpdate(true); //calls hightlighter and parser (if enabled)
   });
 }
