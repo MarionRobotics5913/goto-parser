@@ -398,7 +398,7 @@ if (editor) {
     if (event.keyCode === 90 && event.ctrlKey) {
       //ctrl + z
       if (stackPos > 0) {
-        if(stackPos === undoStack.length){
+        if (stackPos === undoStack.length) {
           addToUndoStack();
           stackPos--;
         }
@@ -419,7 +419,11 @@ if (editor) {
       event.stopPropagation();
     }
 
-    if (event.key === "l" && event.ctrlKey && document.getElementById("ctrlL")?.checked) {
+    if (
+      event.key === "l" &&
+      event.ctrlKey &&
+      document.getElementById("ctrlL")?.checked
+    ) {
       var position = editor.selectionStart;
       var first = editor.value.slice(0, position).split("\n");
       var second = editor.value.slice(position).split("\n");
@@ -546,7 +550,7 @@ if (editor) {
           lineEnd = lineFill.length;
           break;
       }
-      if (newLinePos === 0) {
+      if (newLinePos === 0 && lineFill !== "") {
         editor.value = editor.value.splice(0, 1, "");
         editor.value = editor.value.splice(lineEnd - 1, 0, "\n");
         editor.setSelectionRange(0, lineEnd - 1); //because chances are the action will be start
@@ -701,8 +705,8 @@ function loadEntry(name) {
 function toggleSettings() {
   var settingsPanel = document.getElementById("settings");
   if (!settingsPanel) return "I lost the game";
-  
-  settingsPanel.style.animationDuration = "1s"
+
+  settingsPanel.style.animationDuration = "1s";
   if (
     settingsPanel.classList.contains("collapsed") ^
     settingsPanel.classList.contains("expanded")

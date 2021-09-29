@@ -13,4 +13,4 @@ Ctrl+/ shortcut added as comment and uncomment line
 TAB & shift+TAB shortcuts added
 
 9/29/21
-Ctrl+down autofill added and Ctrl+z added for shortcuts 
+Ctrl+down autofill added, Ctrl + z && Ctrl + y added as undo and redo
