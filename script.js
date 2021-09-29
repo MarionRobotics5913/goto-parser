@@ -413,7 +413,7 @@ if (editor) {
       event.preventDefault();
       event.stopPropagation();
     }
-    if (event.keyCode === 40 && event.ctrlKey) {
+    if (event.keyCode === 40 && event.ctrlKey) { //janky intellisense WIP
       //ctrl + down
       let actions = new GotoParser().reservedWords;
       
