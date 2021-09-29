@@ -562,6 +562,7 @@ if (editor) {
       event.preventDefault();
       event.stopPropagation();
     }
+
       codeUpdate(true); //calls hightlighter and parser (if enabled)
   });
 }
