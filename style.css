@@ -73,7 +73,14 @@ button:hover {
   white-space: nowrap;
 }
 #settings {
-  
+  background-color: rgba(0, 255, 255, 0.2);
+  color: white;
+  border-color: white;  
+  border: 3px solid cyan;
+  border-radius: 15px;
+  margin: 3px;
+  padding: 10px;
+  transition: all 0.2s;
 }
 code {
   font-family: monospace;
@@ -111,4 +118,7 @@ code {
 }
 .cover {
   animation: fadein 0.6s ease-in-out;
+}
+.collapsed {
+  height: 0px;
 }

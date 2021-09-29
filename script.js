@@ -92,7 +92,15 @@ function GotoParser() {
   this.parse; // Parser
   this.analyze; // Semantic analyzer
   this.highlight; // Syntax highlighter that returns HTML content
-  this.reservedWords = ["goto", "set", "start", "radius", "cont", "stop", "iltg"];
+  this.reservedWords = [
+    "goto",
+    "set",
+    "start",
+    "radius",
+    "cont",
+    "stop",
+    "iltg"
+  ];
 
   this.lex = function(programString) {
     var x = -1; // Gets incremented to 0 immediately and updates the character
@@ -370,19 +378,20 @@ function parseProgram(programString) {
   });
 }
 
-function addToUndoStack(){
-  if(stackPos === undoStack.length){
-    undoStack.push(editor.value);
-    stackPos++;
-  }else{
-    var tempStack = [];
-    for(let i = 0; i < stackPos; i++){
-      tempStack.push(undoStack[i]);
-      tempStack.push(editor.value);
-    }
-    undoStack = tempStack;
-    stackPos = undoStack.length-1;
-  }
+function addToUndoStack() {
+  // if (stackPos === undoStack.length) {
+  //   undoStack.push(editor.value);
+  //   stackPos++;
+  // } else {
+  //   var tempStack = [];
+  //   for (let i = 0; i < stackPos; i++) {
+  //     tempStack.push(undoStack[i]);
+  //   }
+  //   tempStack.push(editor.value);
+  //   undoStack = tempStack;
+  //   stackPos = undoStack.length - 1;
+  // }
+  undoStack[stackPos++] = editor.value;
 }
 
 // Actual page functions
@@ -393,12 +402,15 @@ if (editor) {
   editor.value = editor.value.trim();
   editor.addEventListener("keydown", event => {
     // Function here :)
-    addToUndoStack();
+
     console.log(undoStack);
     console.log(undoStack.length);
     console.log(stackPos);
     //NEEDS TO BE FIRST OR IT WILL BREAK!!!!!!
     if (event.keyCode === 90 && event.ctrlKey) {
+      if (stackPos > 0) {
+        stackPos--;
+      }
       stackPos--;
       editor.value = undoStack[stackPos];
       event.preventDefault();
@@ -419,6 +431,7 @@ if (editor) {
 
     if (event.key === "/" && event.ctrlKey) {
       // alert(editor.type);
+      addToUndoStack();
       var position = editor.selectionStart;
 
       var newLinePos = 0;
@@ -446,6 +459,7 @@ if (editor) {
     if (event.keyCode === 40 && event.ctrlKey) {
       //janky autofill WIP
       //ctrl + down
+      addToUndoStack();
       let actions = new GotoParser().reservedWords;
 
       let line = [];
@@ -541,6 +555,7 @@ if (editor) {
 
     if (event.keyCode === 9 && !event.shiftKey) {
       //tab
+      addToUndoStack();
       var position = editor.selectionStart;
 
       var newLinePos = 0;
@@ -558,6 +573,7 @@ if (editor) {
     }
     if (event.keyCode === 9 && event.shiftKey) {
       //tab + shift
+      addToUndoStack();
       var position = editor.selectionStart;
 
       var newLinePos = 0;
