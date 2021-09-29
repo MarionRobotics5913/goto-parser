@@ -440,12 +440,17 @@ if (editor) {
       line = line.join('');
       
       let action = '';
-      for(let i = 0; i < line.length; i++){
+      for(let i = 0; i < line.length-1; i++){
         if(line[i] === " "){
-          action = line.substr(0, i+1);
+          for(let j = 0; j < actions.length; j++){
+            if(actions[j] === line.substr(0, i)){
+             action = actions[i]; 
+            }
+          }
           break;
         }
       }
+      
       if(action === ''){
         for(let i = 0; i < actions.length; i++){
           if(actions[i].substr(0, line.length) === line){
@@ -455,7 +460,11 @@ if (editor) {
         }
       }
       console.log(action);
+      console.log(action === "goto");
       
+      if(action === "goto"){
+        console.log("here");
+      }
       switch (action){
         case 'goto':
           console.log("goo");
