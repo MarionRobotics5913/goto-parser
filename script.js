@@ -379,19 +379,11 @@ function parseProgram(programString) {
 }
 
 function addToUndoStack() {
-  // if (stackPos === undoStack.length) {
-  //   undoStack.push(editor.value);
-  //   stackPos++;
-  // } else {
-  //   var tempStack = [];
-  //   for (let i = 0; i < stackPos; i++) {
-  //     tempStack.push(undoStack[i]);
-  //   }
-  //   tempStack.push(editor.value);
-  //   undoStack = tempStack;
-  //   stackPos = undoStack.length - 1;
-  // }
   undoStack[stackPos++] = editor.value;
+  if(stackPos > document.getElementById("undoStackSize").value) {
+    undoStack.shift();
+    stackPos--;
+  }
 }
 
 // Actual page functions
@@ -403,16 +395,11 @@ if (editor) {
   editor.addEventListener("keydown", event => {
     // Function here :)
 
-    console.log(undoStack);
-    console.log(undoStack.length);
-    console.log(stackPos);
-    //NEEDS TO BE FIRST OR IT WILL BREAK!!!!!!
     if (event.keyCode === 90 && event.ctrlKey) {
       if (stackPos > 0) {
         stackPos--;
+        editor.value = undoStack[stackPos];
       }
-      stackPos--;
-      editor.value = undoStack[stackPos];
       event.preventDefault();
       event.stopPropagation();
     }
@@ -594,7 +581,21 @@ if (editor) {
       event.preventDefault();
       event.stopPropagation();
     }
+    
+    if(event.keyCode === 32){//space
+      addToUndoStack();
+    }
+    
+    if(event.keyCode === 13){//enter
+      addToUndoStack();
+    }
+    
+    if(event.keyCode === 8){//backspace
+      addToUndoStack();
+    }
 
+    console.log(undoStack);
+    
     codeUpdate(true); //calls hightlighter and parser (if enabled)
   });
 }
@@ -678,6 +679,13 @@ function loadEntry(name) {
     }
     highlightBlocks();
   }, 300);
+}
+
+function toggleSettings(){
+  var settingsPanel = document.getElementById("settings");
+  if(!settingsPanel) return "I lost the game";
+  
+  
 }
 
 document.getElementById("cover")?.classList.add("cover");

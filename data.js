@@ -12,8 +12,7 @@ var data = {
       goto x: 0 y: 0 cont<br>
       set x: 0.9 y: 0.1 stop
     </div>`,
-    end: "Terminate the program early. <code>end</code>",
-    
+    end: "Terminate the program early. <code>end</code>"
   },
   "Not found": {
     _main: "Oops! Looks like you found an entry that hasn't been created yet.",
@@ -35,8 +34,12 @@ var data = {
     _seealso: ["set", "cont", "stop"]
   },
   Comments: {
-    _main: "Haven't actually written this one yet blah blah blah",
-    Examples: "",
+    _main: "Remember what you were doing with two simple characters!",
+    Examples: `<div class="code-block">
+      // This is a comment :)<br>
+      goto x: 0 y: 0 stop // Go to the left corner
+    </div>
+    `,
     _seealso: ["goto", "set"]
   }
 };
