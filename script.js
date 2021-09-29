@@ -375,14 +375,24 @@ function parseProgram(programString) {
 // }
 
 // Actual page functions
-let prevChange = '';
-let prevLineChangePos;
 var editor = document.getElementById("editor");
+let prevVersion;
+let prevShortcutUsed = false;
 if (editor) {
   editor.value = editor.value.trim();
   editor.addEventListener("keydown", event => {
     // Function here :)
     
+    //NEEDS TO BE FIRST OR IT WILL BREAK!!!!!!
+    if(event.keyCode === 90 && event.ctrlKey){
+      if(prevShortcutUsed){
+        let pos = editor.selectionStart;
+        editor.value = prevVersion;
+        editor.setSelectionRange(pos, pos);
+      }
+    }
+    
+    prevVersion = editor.value;
     if (event.key === "l" && event.ctrlKey) {
       var position = editor.selectionStart;
       var first = editor.value.slice(0, position).split("\n");
@@ -396,6 +406,8 @@ if (editor) {
     }
     if (event.key === "/" && event.ctrlKey) {
       // alert(editor.type);
+      prevShortcutUsed = true;
+      prevVersion = editor.value;
       var position = editor.selectionStart;
 
       var newLinePos = 0;
@@ -420,14 +432,12 @@ if (editor) {
       event.stopPropagation();
     }
     
-    if(event.keyCode === 90 && event.ctrlKey){
-      if(prevChange.length >= 0){
-        // editor.value = editor.value.splice(prevLineChangePos, )
-      }
-    }
+    
     
     if (event.keyCode === 40 && event.ctrlKey) { //janky intellisense WIP
       //ctrl + down
+      prevShortcutUsed = true;
+      prevVersion = editor.value;
       let actions = new GotoParser().reservedWords;
       
       let line = [];
@@ -496,8 +506,6 @@ if (editor) {
           lineEnd = lineFill.length;
           break;
       }
-      prevChange = line;
-      prevLineChangePos = newLinePos;
       if(newLinePos === 0){
         editor.value = editor.value.splice(0, 1, "");
         editor.value = editor.value.splice(lineEnd-1, 0, '\n');
@@ -507,7 +515,8 @@ if (editor) {
       event.stopPropagation();
     }
     
-    if (event.keyCode === 9 && !event.shiftKey) {
+    if (event.keyCode === 9 && !event.shiftKey) { //tab
+      prevShortcutUsed = true;
       var position = editor.selectionStart;
 
       var newLinePos = 0;
