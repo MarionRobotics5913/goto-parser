@@ -403,6 +403,15 @@ if (editor) {
       event.preventDefault();
       event.stopPropagation();
     }
+    
+    if(event.keyCode === 89 && event.ctrlKey){
+      if(stackPos < undoStack.length){
+        stackPos++;
+        editor.value = undoStack[stackPos];
+      }
+      event.preventDefault();
+      event.stopPropagation();
+    }
 
     if (event.key === "l" && event.ctrlKey) {
       var position = editor.selectionStart;
@@ -595,7 +604,6 @@ if (editor) {
     }
 
     console.log(undoStack);
-    
     codeUpdate(true); //calls hightlighter and parser (if enabled)
   });
 }
@@ -679,13 +687,6 @@ function loadEntry(name) {
     }
     highlightBlocks();
   }, 300);
-}
-
-function toggleSettings(){
-  var settingsPanel = document.getElementById("settings");
-  if(!settingsPanel) return "I lost the game";
-  
-  
 }
 
 document.getElementById("cover")?.classList.add("cover");
