@@ -420,23 +420,25 @@ if (editor) {
       var position = editor.selectionStart;
       let newLinePos = 0;
       var line = [];
-      for (var i = position - 1; i > 0; i--) {
+      for (var i = position-1; i >= 0; i--) {
         if (editor.value[i] !== "\n") {
           line.push(editor.value[i]);
         } else {
           newLinePos = i;
-          line = line.reverse();
           break;
         }
       }
+      line = line.reverse();
+      console.log(actions);
+      console.log(line);
       for(let i = 0; i < line.length; i++){
-        for(let j = 0; j < actions.length; j++){
-          if(line[i] !== actions[j]){
+        for(let j = actions.length-1; j >= 0; j--){
+          console.log(actions[j][i]);
+          if(line[i] !== actions[j][i]){
             actions.pop(j);
           }
         }
       }
-      act
       console.log(actions);
       event.preventDefault();
       event.stopPropagation();
