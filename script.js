@@ -221,7 +221,6 @@ function GotoParser() {
   };
 
   this.parse = function(tokens) {
-    return tokens;
     var x = -1; // Gets incremented to 0 immediately and updates the character
     var actions = [];
     var currAction = {
@@ -282,7 +281,7 @@ function GotoParser() {
           break;
       }
     }
-    // return actions;
+    return actions;
   };
 
   this.analyze = function(actions) {
@@ -327,7 +326,7 @@ function GotoParser() {
     var index = 0;
     // Repeatedly:
     var infiniteLoopStopper = 0;
-    while (tokens[index] && infiniteLoopStopper < 500) {
+    while (tokens[index] && infiniteLoopStopper < 1000000) {
       infiniteLoopStopper++;
       // Check the position of the next token
       // If it's at the right position:
