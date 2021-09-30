@@ -182,9 +182,9 @@ function GotoParser() {
             break;
           case undefined:
             throw "Lexer recieved undefined token";
-            break;
+            // break;
           case "/":
-            if (nextChar !== undefined && nextChar === "/") {
+            if (/*nextChar !== undefined &&*/ nextChar === "/") {
               currToken.type = "comment";
               while (char && char !== "\n") {
                 currToken.value += char;
