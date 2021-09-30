@@ -263,8 +263,15 @@ function GotoParser() {
         case "set":
         case "start":
         case "radius":
+          increment();
           // Eat arguments until a newline or a semicolon, then make a new Action
+          while(token.type !== "newline"){
+            if(token.type === "identifier"){
 
+            } else {
+              // Heck
+            }
+          }
           actions.push(token);
           break;
         default:
@@ -394,8 +401,8 @@ if (editor) {
   editor.value = editor.value.trim();
   editor.addEventListener("keydown", event => {
     // Function here :)
-
-    if (event.keyCode === 90 && event.ctrlKey) {
+    var startSelectPos = editor.selectionStart;
+    if (event.keyCode === 90 && event.ctrlKey && document.getElementById("ctrlZ")?.checked) {
       //ctrl + z
       if (stackPos > 0) {
         if (stackPos === undoStack.length) {
@@ -405,11 +412,15 @@ if (editor) {
         stackPos--;
         editor.value = undoStack[stackPos];
       }
+      editor.setSelectionRange(
+        position - first[first.length - 1].length,
+        position + second[0].length
+      );
       event.preventDefault();
       event.stopPropagation();
     }
 
-    if (event.keyCode === 89 && event.ctrlKey) {
+    if (event.keyCode === 89 && event.ctrlKey && document.getElementById("ctrlZ")?.checked) {
       //crtl + y
       if (stackPos < undoStack.length - 1) {
         stackPos++;
@@ -435,7 +446,7 @@ if (editor) {
       event.stopPropagation();
     }
 
-    if (event.key === "/" && event.ctrlKey) {
+    if (event.key === "/" && event.ctrlKey && document.getElementById("ctrl/")?.checked) {
       // alert(editor.type);
       addToUndoStack();
       var position = editor.selectionStart;
@@ -462,7 +473,7 @@ if (editor) {
       event.stopPropagation();
     }
 
-    if (event.keyCode === 40 && event.ctrlKey) {
+    if (event.keyCode === 40 && event.ctrlKey && document.getElementById("ctrlDown")?.checked) {
       //janky autofill WIP
       //ctrl + down
       addToUndoStack();
@@ -559,7 +570,7 @@ if (editor) {
       event.stopPropagation();
     }
 
-    if (event.keyCode === 9 && !event.shiftKey) {
+    if (event.keyCode === 9 && !event.shiftKey && document.getElementById("tab")?.checked) {
       //tab
       addToUndoStack();
       var position = editor.selectionStart;
@@ -577,7 +588,7 @@ if (editor) {
       event.preventDefault();
       event.stopPropagation();
     }
-    if (event.keyCode === 9 && event.shiftKey) {
+    if (event.keyCode === 9 && event.shiftKey && document.getElementById("tab")?.checked) {
       //tab + shift
       addToUndoStack();
       var position = editor.selectionStart;
@@ -601,17 +612,17 @@ if (editor) {
       event.stopPropagation();
     }
 
-    if (event.keyCode === 32) {
+    if (event.keyCode === 32 && document.getElementById("ctrlZ")?.checked) {
       //space
       addToUndoStack();
     }
 
-    if (event.keyCode === 13) {
+    if (event.keyCode === 13 && document.getElementById("ctrlZ")?.checked) {
       //enter
       addToUndoStack();
     }
 
-    if (event.keyCode === 8) {
+    if (event.keyCode === 8 && document.getElementById("ctrlZ")?.checked) {
       //backspace
       addToUndoStack();
     }
