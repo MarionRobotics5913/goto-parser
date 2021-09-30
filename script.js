@@ -127,8 +127,8 @@ function GotoParser() {
     var infiniteLoopStopper = 0;
     function increment() {
       infiniteLoopStopper++;
-      if (infiniteLoopStopper > 1000) {
-        throw "Lexer has incremented over 1000 times";
+      if (infiniteLoopStopper > 100000) {
+        throw "Lexer has incremented over 100000 times";
       }
       x++;
       char = programString[x];
