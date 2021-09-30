@@ -193,16 +193,17 @@ function GotoParser() {
                 column++;
               }
               newToken();
-              if (char) {
-                currToken.type = "symbol";
-                currToken.value = char;
-                x--;
-                increment();
-                newToken();
-              } else {
-                currToken.type = "eof";
-                newToken();
-              }
+              // if (char) {
+              //   currToken.type = "newline";
+              //   currToken.value = char;
+              //   x--;
+              //   increment();
+              //   newToken();
+              // } else {
+              //   currToken.type = "eof";
+              //   newToken();
+              // }
+              x--;
             } else {
               currToken.type = "symbol";
               currToken.value = char;
