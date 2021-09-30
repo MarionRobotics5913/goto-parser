@@ -220,6 +220,7 @@ function GotoParser() {
   };
 
   this.parse = function(tokens) {
+    return tokens;
     var x = -1; // Gets incremented to 0 immediately and updates the character
     var actions = [];
     var currAction = {
@@ -281,7 +282,6 @@ function GotoParser() {
       }
     }
     // return actions;
-    return tokens;
   };
 
   this.analyze = function(actions) {
