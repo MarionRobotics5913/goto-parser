@@ -380,7 +380,7 @@ function parseProgram(programString) {
 
 function addToUndoStack() {
   undoStack[stackPos++] = editor.value;
-  if (stackPos > document.getElementById("undoStackSize").value) {
+  if (stackPos > document.getElementById("undoStackSize")?.value) {
     undoStack.shift();
     stackPos--;
   }
@@ -388,7 +388,7 @@ function addToUndoStack() {
 
 // Actual page functions
 var editor = document.getElementById("editor");
-var undoStack = [editor.value];
+var undoStack = [editor?.value];
 var stackPos = 0;
 if (editor) {
   editor.value = editor.value.trim();

@@ -26,6 +26,7 @@
     Settings
   </button>
   <div id="settings" class="collapsed">
+    <h3>Editor options</h3>
     <input type="checkbox" id="autoparse" checked /> Auto-parse on changes
     <br />
     <input
@@ -39,10 +40,19 @@
     High contrast highlighting <br />
     <input type="number" id="undoStackSize" name="undoStackSize" value="10" />
     Undo stack size<br />
+    <h3>
+      Shortcuts
+    </h3>
     <input type="checkbox" id="ctrlL" checked/>
-    Select Line shortcut (Ctrl + L) <br />
+    Select Line shortcut (Ctrl+L) <br />
     <input type="checkbox" id="ctrl/" checked/>
-    Comment/uncomment line shortcut (Ctrl + /) <br />
+    Comment/uncomment line shortcut (Ctrl+/) <br />
+    <input type="checkbox" id="ctrl/" checked/>
+    Add/remove tab shortcut (Tab, Ctrl+Tab) <br />
+    <input type="checkbox" id="ctrlX" checked/>
+    Smart undo/redo (Ctrl+X, Ctrl+Y) <br />
+    <input type="checkbox" id="ctrlDown" checked/>
+    Autofill (Ctrl+Down)<br />
 
   </div>
 
