@@ -280,7 +280,8 @@ function GotoParser() {
           break;
       }
     }
-    return actions;
+    // return actions;
+    return tokens;
   };
 
   this.analyze = function(actions) {
