@@ -284,7 +284,7 @@ function GotoParser() {
           currAction.name = token.value;
           // increment();
           // Eat arguments until a newline or a semicolon, then make a new Action
-          while (token && token.type !== "terminataor") {
+          while (token && token.type !== "terminator") {
             var name = "";
             increment();            
             if (token?.type === "identifier") {
@@ -307,6 +307,7 @@ function GotoParser() {
               
             } else if(token && token.type !== "terminator"){
               console.log(token);
+              handleError();
             }
             
           }
