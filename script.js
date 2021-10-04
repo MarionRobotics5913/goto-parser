@@ -230,12 +230,13 @@ function GotoParser() {
     function newAction() {
       actions.push(currAction);
       currAction = {
+        type: "action"
         name: "",
-        args: {}
+        args: {},
       };
     } // Handling for unexpected weird tokens will be here, like "" or " " if they somehow end up being produced
     function errorAction(msg){
-      
+      currAction.name
     }
     var token;
     var nextToken;
