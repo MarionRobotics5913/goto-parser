@@ -256,9 +256,12 @@ function GotoParser() {
       // alert(token);
     }
 
-    function handleError(msg){
+    function handleError(msg, type){
+      if (msg === "" && type){
+        msg = `Expected type ${type}, got %t${token?.value?" %v ":" "}instead`;
+      }
       currAction.type = "error";
-      currAction.name = msg.replace(/%t/g, token.type).replace(/%v/g, token.value);
+      currAction.name = msg.replace(/%t/g, token?.type).replace(/%v/g, token?.value);
       currAction.args = token;
       while(token&& token.type !== "newline"){
         increment();
@@ -292,7 +295,7 @@ function GotoParser() {
                   currAction.args[name] = token.value*1;
                   console.log(JSON.stringify(currAction));
                 } else {
-                  handleError("Expected a number, got %t instead");
+                  handleError("", "number");
                 }
               } else {
                 currAction.args[name] = true;
@@ -300,6 +303,7 @@ function GotoParser() {
               }
               
             } else {
+              handleError("", "identifier or newline");
               // Heck
             }
             

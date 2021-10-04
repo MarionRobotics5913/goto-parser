@@ -156,3 +156,9 @@ code {
 .expanded {
   animation: expand ease-out forwards;
 }
+.squiggle {
+  text-decoration: underline red wavy;
+}
+.squiggle:hover {
+  background-color: rgba(255, 0, 0, 0.1);
+}
