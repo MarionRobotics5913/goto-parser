@@ -258,9 +258,9 @@ function GotoParser() {
 
     function handleError(msg){
       currAction.type = "error";
-      currAction.name = msg.replace(/%/g, token.value);
+      currAction.name = msg.replace(/%t/g, token.type).replace(/%v/g, token.value);
       currAction.args = token;
-      while(token.type !== "newline"){
+      while(token&& token.type !== "newline"){
         increment();
       }
     }
@@ -292,7 +292,7 @@ function GotoParser() {
                   currAction.args[name] = token.value*1;
                   console.log(JSON.stringify(currAction));
                 } else {
-                  handleError("Expected a number, got % instead");
+                  handleError("Expected a number, got %t instead");
                 }
               } else {
                 currAction.args[name] = true;
@@ -316,7 +316,7 @@ function GotoParser() {
   };
 
   this.analyze = function(actions) {
-    
+    return actions;
   };
 
   this.highlight = function(programString) {
@@ -406,7 +406,7 @@ function runRoScriptActions(actionObject, callback) {
   //       callback(`Unrecognized command ${actionObject[x].command} run`);
   //   }
   // }
-  callback(`<br />${actionObject.map(JSON.stringify).join("<br />")}`);
+  callback(`<br />${actionObject?.map(JSON.stringify)?.join("<br />")}`);
 }
 
 function parseProgram(programString) {
