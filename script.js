@@ -183,7 +183,7 @@ function GotoParser() {
             break;
           case undefined:
             throw "Lexer recieved undefined token";
-            // break;
+          // break;
           case "/":
             if (/*nextChar !== undefined &&*/ nextChar === "/") {
               currToken.type = "comment";
@@ -234,7 +234,7 @@ function GotoParser() {
       currAction = {
         type: "action",
         name: "",
-        args: {},
+        args: {}
       };
     } // Handling for unexpected weird tokens will be here, like "" or " " if they somehow end up being produced
     var token;
@@ -257,16 +257,20 @@ function GotoParser() {
       // alert(token);
     }
 
-    function handleError(msg, type){
-      if (msg === "" && type){
-        msg = `Expected type ${type}, got %t${token?.value?" %v ":" "}instead`;
-      } else if(!msg){
-        msg = `Unexpected token "%v"`
+    function handleError(msg, type) {
+      if (msg === "" && type) {
+        msg = `Expected type ${type}, got %t${
+          token?.value ? " %v " : " "
+        }instead`;
+      } else if (!msg) {
+        msg = `Unexpected token "%v"`;
       }
       currAction.type = "error";
-      currAction.name = msg.replace(/%t/g, token?.type).replace(/%v/g, token?.value);
+      currAction.name = msg
+        .replace(/%t/g, token?.type)
+        .replace(/%v/g, token?.value);
       currAction.args = token;
-      while(token&& token.type !== "terminator"){
+      while (token && token.type !== "terminator") {
         increment();
       }
     }
@@ -286,16 +290,16 @@ function GotoParser() {
           // Eat arguments until a newline or a semicolon, then make a new Action
           while (token && token.type !== "terminator") {
             var name = "";
-            increment();            
+            increment();
             if (token?.type === "identifier") {
               name = token.value;
-              
+
               increment();
-              
-              if(token?.value === ":"){
+
+              if (token?.value === ":") {
                 increment();
-                if(token?.type === "number"){
-                  currAction.args[name] = token.value*1;
+                if (token?.type === "number") {
+                  currAction.args[name] = token.value * 1;
                   console.log(JSON.stringify(currAction));
                 } else {
                   handleError("", "number");
@@ -304,15 +308,13 @@ function GotoParser() {
                 currAction.args[name] = true;
                 console.log(JSON.stringify(currAction));
               }
-              
-            } else if(token && token.type !== "terminator"){
+            } else if (token && token.type !== "terminator") {
               console.log(token);
               handleError();
             }
-            
           }
           // actions.push(token);
-          newAction();          
+          newAction();
           break;
         default:
           // actions.push(token);
@@ -333,7 +335,7 @@ function GotoParser() {
     var colorSet = document.getElementById("highContrast")?.checked ? 1 : 0;
 
     function prepText(token) {
-      if(token.value === "eof"){
+      if (token.value === "eof") {
         return "";
       }
       var coloredWords = {
@@ -416,12 +418,21 @@ function runRoScriptActions(actionObject, callback) {
   //       callback(`Unrecognized command ${actionObject[x].command} run`);
   //   }
   // }
-  callback(`<br />${actionObject
-           ?.map((action) => {
-    if()
-    return `<div class='box'><strong>${action.name}</strong> - ${Object.entries(action.args).map(([x, v]) => `${x}: ${v}`).join(", ")}</div>`
-                             })
-           ?.join("")}`);
+  callback(
+    `<br />${actionObject
+      ?.map(action => {
+        if (action.type === "error") {
+          return `<div class='errorbox'><strong>Error</strong>: ${action.name}</div>`;
+        } else {
+          return `<div class='box'><strong>${
+            action.name
+          }</strong> - ${Object.entries(action.args)
+            .map(([x, v]) => `${x}: ${v}`)
+            .join(", ")}</div>`;
+        }
+      })
+      ?.join("")}`
+  );
 }
 
 function parseProgram(programString) {
