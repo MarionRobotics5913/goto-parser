@@ -146,7 +146,8 @@ function GotoParser() {
       increment();
       if (char === undefined) {
         //End of file
-        currToken.type = "eof";
+        currToken.type = "terminator";
+        currToken.value = "eof";
         newToken();
       } else if (/[a-zA-Z]/.test(char)) {
         // Identifier
@@ -173,7 +174,7 @@ function GotoParser() {
         switch (char) {
           case "\n":
           case ";":
-            currToken.type = "newline";
+            currToken.type = "terminator";
             currToken.value = char;
             newToken();
             break;
@@ -259,11 +260,13 @@ function GotoParser() {
     function handleError(msg, type){
       if (msg === "" && type){
         msg = `Expected type ${type}, got %t${token?.value?" %v ":" "}instead`;
+      } else if(!msg){
+        msg = `Unexpected token "%v"`
       }
       currAction.type = "error";
       currAction.name = msg.replace(/%t/g, token?.type).replace(/%v/g, token?.value);
       currAction.args = token;
-      while(token&& token.type !== "newline"){
+      while(token&& token.type !== "terminator"){
         increment();
       }
     }
@@ -281,7 +284,7 @@ function GotoParser() {
           currAction.name = token.value;
           // increment();
           // Eat arguments until a newline or a semicolon, then make a new Action
-          while (token && token.type !== "newline") {
+          while (token && token.type !== "terminataor") {
             var name = "";
             increment();            
             if (token?.type === "identifier") {
@@ -302,9 +305,8 @@ function GotoParser() {
                 console.log(JSON.stringify(currAction));
               }
               
-            } else {
-              handleError("", "identifier or newline");
-              // Heck
+            } else if(token && token.type !== "terminator"){
+              console.log(token);
             }
             
           }
@@ -330,6 +332,9 @@ function GotoParser() {
     var colorSet = document.getElementById("highContrast")?.checked ? 1 : 0;
 
     function prepText(token) {
+      if(token.value === "eof"){
+        return "";
+      }
       var coloredWords = {
         ";": ["grey", "white"]
       };
