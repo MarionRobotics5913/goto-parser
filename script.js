@@ -224,20 +224,18 @@ function GotoParser() {
     var x = -1; // Gets incremented to 0 immediately and updates the character
     var actions = [];
     var currAction = {
+      type: "action",
       name: "",
       args: {}
     };
     function newAction() {
       actions.push(currAction);
       currAction = {
-        type: "action"
+        type: "action",
         name: "",
         args: {},
       };
     } // Handling for unexpected weird tokens will be here, like "" or " " if they somehow end up being produced
-    function errorAction(msg){
-      currAction.name
-    }
     var token;
     var nextToken;
     var infiniteLoopStopper = 0;
@@ -258,6 +256,15 @@ function GotoParser() {
       // alert(token);
     }
 
+    function handleError(msg){
+      currAction.type = "error";
+      currAction.name = msg.replace(/%/g, token.value);
+      currAction.args = token;
+      while(token.type !== "newline"){
+        increment();
+      }
+    }
+
     var infiniteLoopStopper = 0;
     tokens = tokens.filter(token => token.type !== "comment");
     while (x < tokens.length - 1) {
@@ -273,7 +280,6 @@ function GotoParser() {
           // Eat arguments until a newline or a semicolon, then make a new Action
           while (token && token.type !== "newline") {
             var name = "";
-            var value = true;
             increment();            
             if (token?.type === "identifier") {
               name = token.value;
@@ -283,14 +289,16 @@ function GotoParser() {
               if(token?.value === ":"){
                 increment();
                 if(token?.type === "number"){
-                  value = token.value*1;
+                  currAction.args[name] = token.value*1;
+                  console.log(JSON.stringify(currAction));
                 } else {
-                  
+                  handleError("Expected a number, got % instead");
                 }
+              } else {
+                currAction.args[name] = true;
+                console.log(JSON.stringify(currAction));
               }
               
-            currAction.args[name] = value;
-            console.log(JSON.stringify(currAction));              
             } else {
               // Heck
             }
@@ -596,7 +604,7 @@ if (editor) {
             line.length + 1,
             lineFill
           );
-          editor.setSelectionRange(newLinePos + 8, newLinePos + 9);
+          editor.setSelectionRange(newLinePos + 11, newLinePos + 12);
           lineEnd = lineFill.length;
           break;
       }
