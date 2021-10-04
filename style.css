@@ -102,7 +102,7 @@ button:hover {
   z-index: 0;
   white-space: nowrap;
 }
-#settings {
+.box {
   background-color: rgba(0, 255, 255, 0.2);
   color: white;
   border-color: white;  

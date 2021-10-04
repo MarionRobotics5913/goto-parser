@@ -416,7 +416,12 @@ function runRoScriptActions(actionObject, callback) {
   //       callback(`Unrecognized command ${actionObject[x].command} run`);
   //   }
   // }
-  callback(`<br />${actionObject?.map(JSON.stringify)?.join("<br />")}`);
+  callback(`<br />${actionObject
+           ?.map((action) => {
+    if()
+    return `<div class='box'><strong>${action.name}</strong> - ${Object.entries(action.args).map(([x, v]) => `${x}: ${v}`).join(", ")}</div>`
+                             })
+           ?.join("")}`);
 }
 
 function parseProgram(programString) {
@@ -778,8 +783,8 @@ function loadEntry(name) {
   }, 300);
 }
 
-function toggleSettings() {
-  var settingsPanel = document.getElementById("settings");
+function toggleCollapse(name) {
+  var settingsPanel = document.getElementById(name);
   if (!settingsPanel) return "I lost the game";
 
   settingsPanel.style.animationDuration = "0.8s";
