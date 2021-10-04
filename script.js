@@ -267,12 +267,21 @@ function GotoParser() {
           increment();
           // Eat arguments until a newline or a semicolon, then make a new Action
           while (token.type !== "newline") {
+            var name = "";
+            var value = true;
             if (token.type === "identifier") {
-              
+              name = token.value;
             } else {
               // Heck
             }
+            
             increment();
+            if(token.value === ":"){
+              increment();
+              if(token.type === "number"){
+                
+              }
+            }
           }
           actions.push(token);
           break;
@@ -741,7 +750,7 @@ function toggleSettings() {
   var settingsPanel = document.getElementById("settings");
   if (!settingsPanel) return "I lost the game";
 
-  settingsPanel.style.animationDuration = "1s";
+  settingsPanel.style.animationDuration = "0.8s";
   if (
     settingsPanel.classList.contains("collapsed") ^
     settingsPanel.classList.contains("expanded")
