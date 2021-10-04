@@ -234,6 +234,9 @@ function GotoParser() {
         args: {}
       };
     } // Handling for unexpected weird tokens will be here, like "" or " " if they somehow end up being produced
+    function errorAction(msg){
+      
+    }
     var token;
     var nextToken;
     var infiniteLoopStopper = 0;
@@ -265,29 +268,32 @@ function GotoParser() {
         case "start":
         case "radius":
           currAction.name = token.value;
-          increment();
+          // increment();
           // Eat arguments until a newline or a semicolon, then make a new Action
           while (token && token.type !== "newline") {
             var name = "";
             var value = true;
+            increment();            
             if (token?.type === "identifier") {
               name = token.value;
+              
+              increment();
+              
+              if(token?.value === ":"){
+                increment();
+                if(token?.type === "number"){
+                  value = token.value*1;
+                } else {
+                  
+                }
+              }
+              
+            currAction.args[name] = value;
+            console.log(JSON.stringify(currAction));              
             } else {
               // Heck
             }
             
-            increment();
-            if(token?.value === ":"){
-              increment();
-              if(token?.type === "number"){
-                value = token.value*1;
-              } else {
-                // Heck
-              }
-            }
-            
-            currAction.args[name] = value;
-            console.log(JSON.stringify(currAction));
           }
           // actions.push(token);
           newAction();          
@@ -301,7 +307,7 @@ function GotoParser() {
   };
 
   this.analyze = function(actions) {
-    return actions;
+    
   };
 
   this.highlight = function(programString) {
