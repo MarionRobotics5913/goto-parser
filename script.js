@@ -225,13 +225,13 @@ function GotoParser() {
     var actions = [];
     var currAction = {
       name: "",
-      arguments: {}
+      args: {}
     };
-    function newToken() {
+    function newAction() {
       actions.push(currAction);
       currAction = {
-        type: undefined,
-        value: ""
+        name: "",
+        args: {}
       };
     } // Handling for unexpected weird tokens will be here, like "" or " " if they somehow end up being produced
     var token;
@@ -264,26 +264,33 @@ function GotoParser() {
         case "set":
         case "start":
         case "radius":
+          currAction.name = token.value;
           increment();
           // Eat arguments until a newline or a semicolon, then make a new Action
-          while (token.type !== "newline") {
+          while (token && token.type !== "newline") {
             var name = "";
             var value = true;
-            if (token.type === "identifier") {
+            if (token?.type === "identifier") {
               name = token.value;
             } else {
               // Heck
             }
             
             increment();
-            if(token.value === ":"){
+            if(token?.value === ":"){
               increment();
-              if(token.type === "number"){
-                
+              if(token?.type === "number"){
+                value = token.value*1;
+              } else {
+                // Heck
               }
             }
+            
+            currAction.args[name] = value;
+            console.log(JSON.stringify(currAction));
           }
-          actions.push(token);
+          // actions.push(token);
+          newAction();          
           break;
         default:
           // actions.push(token);
