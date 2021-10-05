@@ -259,7 +259,7 @@ function GotoParser() {
           token?.value.replace(/\n/g, "newline").replace("eof", "end of file")
         );
       currAction.args = token;
-      token.error = true;
+      token.error = msg;
       while (token && token.type !== "terminator") {
         increment();
       }
@@ -329,7 +329,7 @@ function GotoParser() {
       issues.push({ message: msg, token: actions[pos] });
     }
 
-    if (actions[0].name !== "start") {
+    if (actions[0]?.name !== "start") {
       handleError("The program does not begin with a starting position (use <code>start</code>')");
     }
     
@@ -379,7 +379,7 @@ function GotoParser() {
         returnText = value;
       }
       if (token.error) {
-        returnText = `<span class="squiggle">${returnText}</span>`;
+        returnText = `<span class="squiggle" title="${token.error}">${returnText}</span>`;
       }
       return returnText;
     }
@@ -454,7 +454,7 @@ function runRoScriptActions(actionObject, callback) {
         if (action.type === "error") {
           return `<div class='errorbox'>
             <strong>Error</strong>:
-            ${action.name}
+            ${action.name} (at ${action.args.line}:${action.args.column})
           </div>`;
         } else {
           return `<div class='box'>
