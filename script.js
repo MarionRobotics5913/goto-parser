@@ -1,17 +1,3 @@
-/*
-RoScript
-
-Parse to
-{
-  command: "goto"
-  args: {
-    x: value
-    y: value
-  }
-  type: "await"
-}
-*/
-
 // Credit to StackOverflow: https://stackoverflow.com/questions/4282151/is-it-possible-to-ping-a-server-from-javascript
 function ping(host, port, pong) {
   var started = new Date().getTime();
@@ -270,6 +256,7 @@ function GotoParser() {
         .replace(/%t/g, token?.type)
         .replace(/%v/g, token?.value);
       currAction.args = token;
+      token.error = true;
       while (token && token.type !== "terminator") {
         increment();
       }
@@ -330,11 +317,14 @@ function GotoParser() {
 
   this.highlight = function(programString) {
     var tokens = this.lex(programString);
+    var actions = this.parse(tokens);
+    var errors = actions.filter((action) => action.type === "error");
     var text = "";
     var reservedWords = this.reservedWords;
     var colorSet = document.getElementById("highContrast")?.checked ? 1 : 0;
 
     function prepText(token) {
+      var returnText = "";
       if (token.value === "eof") {
         return "";
       }
@@ -355,12 +345,16 @@ function GotoParser() {
         .replace(/\ /g, "&nbsp;")
         .replace(/\n/g, "<br />");
       if (coloredWords.hasOwnProperty(token.value)) {
-        return `<span style="color: ${coloredWords[token.value][colorSet]}; font-weight: bold;">${value}</span>`;
+        returnText = `<span style="color: ${coloredWords[token.value][colorSet]}; font-weight: bold;">${value}</span>`;
       } else if (coloredTypes.hasOwnProperty(token.type)) {
-        return `<span style="color: ${coloredTypes[token.type][colorSet]}">${value}</span>`;
+        returnText = `<span style="color: ${coloredTypes[token.type][colorSet]}">${value}</span>`;
       } else {
-        return value;
+        returnText = value;
       }
+      if(token.error){
+        returnText = `<span class="squiggle">${returnText}</span>`;
+      }
+      return returnText;
     }
 
     // Start at 1, 1
