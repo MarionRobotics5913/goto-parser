@@ -323,12 +323,20 @@ function GotoParser() {
 
   this.analyze = function(actions) {
     var issues = [];
+    var commands = actions.filter(action => action.type === "action");
+    
     function handleError(msg, pos) {
-      issues.push({ type: "error", name: msg, args: actions[pos] });
+      issues.push({ message: msg, token: actions[pos] });
     }
 
     if (actions[0].name !== "start") {
-      handleError("The program does not begin with a starting position (use 'start')");
+      handleError("The program does not begin with a starting position (use <code>start</code>')");
+    }
+    
+    for(var x in commands){
+      if(Object.entries(commands[x].args).length === 0){
+        handleError(`There is a command <code>${commands[x].name}</code> without arguments`)
+      }
     }
 
     return issues;
@@ -438,9 +446,8 @@ function runRoScriptActions(actionObject, callback) {
     var res = `<br />
     ${
     actionObject.issues?.map(issue => `<div class='warnbox'>
-    ${issue.}</div>`)
+    ${issue.message}</div>`)
     }
-    <br />
     ${
       actionObject.actions
       ?.map(action => {

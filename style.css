@@ -124,6 +124,17 @@ button:hover {
   height: auto;
   transition: all 0.5s;
 }
+.warnbox {
+  background-color: rgba(255, 150, 0, 0.2);
+  color: white;
+  border-color: white;  
+  border: 3px solid rgb(255, 150, 0);
+  border-radius: 15px;
+  margin: 3px;
+  padding: 10px;
+  height: auto;
+  transition: all 0.5s;
+}
 code {
   font-family: monospace;
   background-color: black;
