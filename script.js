@@ -254,7 +254,10 @@ function GotoParser() {
       currAction.type = "error";
       currAction.name = msg
         .replace(/%t/g, token?.type)
-        .replace(/%v/g, token?.value);
+        .replace(
+          /%v/g,
+          token?.value.replace(/\n/g, "newline").replace("eof", "end of file")
+        );
       currAction.args = token;
       token.error = true;
       while (token && token.type !== "terminator") {
@@ -319,13 +322,22 @@ function GotoParser() {
   };
 
   this.analyze = function(actions) {
-    return actions;
+    var issues = [];
+    function handleError(msg, pos) {
+      issues.push({ type: "error", name: msg, args: actions[pos] });
+    }
+
+    if (actions[0].name !== "start") {
+      handleError("The program does not begin with a starting position (use 'start')");
+    }
+
+    return issues;
   };
 
   this.highlight = function(programString) {
     var tokens = this.lex(programString);
     var actions = this.parse(tokens);
-    var errors = actions.filter((action) => action.type === "error");
+    var errors = actions.filter(action => action.type === "error");
     var text = "";
     var reservedWords = this.reservedWords;
     var colorSet = document.getElementById("highContrast")?.checked ? 1 : 0;
@@ -358,7 +370,7 @@ function GotoParser() {
       } else {
         returnText = value;
       }
-      if(token.error){
+      if (token.error) {
         returnText = `<span class="squiggle">${returnText}</span>`;
       }
       return returnText;
@@ -400,7 +412,7 @@ function GotoParser() {
   };
 
   this.parseProgram = function(programString) {
-    return this.analyze(this.parse(this.lex(programString)));
+    return this.parse(this.lex(programString));
   };
 }
 
