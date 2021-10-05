@@ -281,9 +281,8 @@ function GotoParser() {
             if (token?.type === "identifier") {
               name = token.value;
 
-              increment();
-
-              if (token?.value === ":") {
+              if (nextToken?.value === ":") {
+                increment();
                 increment();
                 if (token?.type === "number") {
                   currAction.args[name] = token.value * 1;
@@ -296,6 +295,7 @@ function GotoParser() {
                 console.log(JSON.stringify(currAction));
               }
             } else if (token && token.type !== "terminator") {
+              // increment();
               console.log(token);
               handleError();
             }
@@ -303,8 +303,15 @@ function GotoParser() {
           // actions.push(token);
           newAction();
           break;
+        case "eof":
+        case "\n":
+        case ";":
+          increment();
+          break;
         default:
           // actions.push(token);
+          handleError();
+          newAction();
           break;
       }
     }
