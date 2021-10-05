@@ -412,7 +412,11 @@ function GotoParser() {
   };
 
   this.parseProgram = function(programString) {
-    return this.parse(this.lex(programString));
+    var actions = this.parse(this.lex(programString));
+    return {
+      actions,
+      issues: this.analyze(actions)
+    };
   };
 }
 
@@ -431,21 +435,32 @@ function runRoScriptActions(actionObject, callback) {
   //       callback(`Unrecognized command ${actionObject[x].command} run`);
   //   }
   // }
-  callback(
-    `<br />${actionObject
+    var res = `<br />
+    ${
+    actionObject.issues?.map(issue => `<div class='warnbox'>
+    ${issue.}</div>`)
+    }
+    <br />
+    ${
+      actionObject.actions
       ?.map(action => {
         if (action.type === "error") {
-          return `<div class='errorbox'><strong>Error</strong>: ${action.name}</div>`;
+          return `<div class='errorbox'>
+            <strong>Error</strong>:
+            ${action.name}
+          </div>`;
         } else {
-          return `<div class='box'><strong>${
-            action.name
-          }</strong> - ${Object.entries(action.args)
+          return `<div class='box'>
+            <strong>${action.name}</strong> -
+            ${Object.entries(action.args)
             .map(([x, v]) => `${x}: ${v}`)
-            .join(", ")}</div>`;
+            .join(", ")}
+          </div>`;
         }
       })
-      ?.join("")}`
-  );
+      ?.join("")
+    }`;
+  callback(res);
 }
 
 function parseProgram(programString) {
