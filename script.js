@@ -310,7 +310,7 @@ function GotoParser() {
         case "eof":
         case "\n":
         case ";":
-          increment();
+          // increment();
           console.log("terminator")
           break;
         default:
