@@ -168,8 +168,9 @@ code {
   animation: expand ease-out forwards;
 }
 .squiggle {
-  text-decoration: underline red wavy;
+  background-color: rgba(255, 0, 0, 0.1);
+  text-decoration: underline red dotted;
 }
 .squiggle:hover {
-  background-color: rgba(255, 0, 0, 0.1);
+  background-color: rgba(255, 0, 0, 0.3);
 }
