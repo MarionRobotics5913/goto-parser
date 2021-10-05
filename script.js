@@ -289,13 +289,13 @@ function GotoParser() {
                 increment();
                 if (token?.type === "number") {
                   currAction.args[name] = token.value * 1;
-                  console.log(JSON.stringify(currAction));
+                  // console.log(JSON.stringify(currAction));
                 } else {
                   handleError("", "number");
                 }
               } else {
                 currAction.args[name] = true;
-                console.log(JSON.stringify(currAction));
+                // console.log(JSON.stringify(currAction));
               }
             } else if (token && token.type !== "terminator") {
               // increment();
