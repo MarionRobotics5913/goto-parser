@@ -269,6 +269,7 @@ function GotoParser() {
     tokens = tokens.filter(token => token.type !== "comment");
     while (x < tokens.length - 1) {
       increment();
+      console.log(token);
       // console.log(token);
       switch (token.value) {
         case "goto":
@@ -310,6 +311,7 @@ function GotoParser() {
         case "\n":
         case ";":
           increment();
+          console.log("terminator")
           break;
         default:
           // actions.push(token);
@@ -318,6 +320,7 @@ function GotoParser() {
           break;
       }
     }
+    console.log(actions);
     return actions;
   };
 
@@ -330,7 +333,7 @@ function GotoParser() {
     }
 
     if (actions[0]?.name !== "start") {
-      handleError("The program does not begin with a starting position (use <code>start</code>')");
+      handleError("The program does not begin with a starting position (use <code>start</code>)");
     }
     
     for(var x in commands){
