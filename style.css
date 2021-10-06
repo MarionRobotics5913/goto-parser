@@ -101,6 +101,7 @@ button:hover {
   left: 0;
   z-index: 0;
   white-space: nowrap;
+  pointer-events: none;
 }
 .box {
   background-color: rgba(0, 255, 255, 0.2);
@@ -181,6 +182,7 @@ code {
 .squiggle {
   background-color: rgba(255, 0, 0, 0.1);
   text-decoration: underline red dotted;
+  pointer-events: auto;
 }
 .squiggle:hover {
   background-color: rgba(255, 0, 0, 0.3);
