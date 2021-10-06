@@ -846,9 +846,9 @@ function toggleCollapse(name) {
   settingsPanel.classList.toggle("collapsed");
 }
 
-function activateVisualEditor(){
-  
-}
+// function activateVisualEditor(){
+//   textarea.visible
+// }
 
 if(localStorage.ok){
   var inputs = document.getElementsByTagName("input");
@@ -856,7 +856,7 @@ if(localStorage.ok){
 
   }
 }else{
-  if(prompt("This page would like to use localStorage to save settings"))
+  if(prompt("This page would like to use localStorage to save settings"));
 }
 
 document.getElementById("cover")?.classList.add("cover");
