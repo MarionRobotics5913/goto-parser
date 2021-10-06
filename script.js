@@ -850,5 +850,10 @@ function activateVisualEditor(){
   
 }
 
+var inputs = document.getElementsByTagName("input");
+for(var i in inputs){
+  
+}
+
 document.getElementById("cover")?.classList.add("cover");
 loadEntry("Welcome!");

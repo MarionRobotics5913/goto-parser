@@ -45,6 +45,10 @@ var data = {
   //Commands
   goto: {
     _main: "Gives a specific position for the robot or an attachment to travel to.",
+    Examples: `<div class="code-block">
+      goto x: 0.3 y: 0.7 // Move to 30% across and 70% down the field<br />
+      goto arm: 0.6 // Not implemented
+    </div>`,
     _syntax: "goto x: # y: # stop"
   }
 };
