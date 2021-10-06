@@ -846,9 +846,10 @@ function toggleCollapse(name) {
   settingsPanel.classList.toggle("collapsed");
 }
 
-// function activateVisualEditor(){
-//   textarea.visible
-// }
+function activateVisualEditor(){
+    document.getElementById('jttjyt').style.visible = false;
+    console.log('activated');
+}
 
 if(localStorage.ok){
   var inputs = document.getElementsByTagName("input");
