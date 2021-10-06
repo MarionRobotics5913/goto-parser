@@ -847,7 +847,7 @@ function toggleCollapse(name) {
 }
 
 function activateVisualEditor(){
-    document.getElementById('jttjyt').style.visible = false;
+    document.getElementById('editor').style.visibiity = 'hidden';
     console.log('activated');
 }
 
