@@ -850,9 +850,13 @@ function activateVisualEditor(){
   
 }
 
-var inputs = document.getElementsByTagName("input");
-for(var i in inputs){
-  
+if(localStorage.ok){
+  var inputs = document.getElementsByTagName("input");
+  for(var i in inputs){
+
+  }
+}else{
+  if(prompt("This page would like to use localStorage to save settings"))
 }
 
 document.getElementById("cover")?.classList.add("cover");
