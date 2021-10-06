@@ -41,5 +41,10 @@ var data = {
     </div>
     `,
     _seealso: ["goto", "set"]
+  },
+  //Commands
+  goto: {
+    _main: "Gives a specific position for the robot or an attachment to travel to.",
+    _syntax: "goto x: # y: # stop"
   }
 };
