@@ -846,5 +846,9 @@ function toggleCollapse(name) {
   settingsPanel.classList.toggle("collapsed");
 }
 
+function activateVisualEditor(){
+  
+}
+
 document.getElementById("cover")?.classList.add("cover");
 loadEntry("Welcome!");
