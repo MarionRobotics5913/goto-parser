@@ -852,17 +852,18 @@ function toggleCollapse(name) {
 
 var visualeditor = document.getElementById('visualeditor');
 function visualEditor(){
-  if(document.getElementById('visualeditor').style.display !== 'none' || VEactivated === true){
+  console.log(document.getElementById('editor').style.display);
+  if(document.getElementById('visualeditor').style.display === true || VEactivated === true){
     VEactivated = true;
     document.getElementById('editor').style.visibility = 'visible';
-    document.getElementById('editor').style.display = 'show';
+    document.getElementById('editor').style.display = '';
     document.getElementById('highlighter').style.visibility = 'visible';
-    document.getElementById('highlighter').style.display = 'show';
+    document.getElementById('highlighter').style.display = '';
     document.getElementById('visualeditor').style.display = 'none';
     document.getElementById('visualeditor').style.visibility = 'hidden';
     console.log('deactivated');
     
-  }else if(document.getElementById('visualeditor').style.display === 'none' || VEactivated === false){
+  }else if(document.getElementById('visualeditor').style.display === false || VEactivated === false){
     VEactivated = false;
     document.getElementById('editor').style.visibility = 'hidden';
     document.getElementById('editor').style.display = 'none';
@@ -870,7 +871,7 @@ function visualEditor(){
     document.getElementById('highlighter').style.display = 'none';
     document.getElementById('visualeditor').style.display = 'show';
     document.getElementById('visualeditor').style.visibility = 'visible';
-    console.log('actiaved');
+    console.log('activated');
     
   }
 }
