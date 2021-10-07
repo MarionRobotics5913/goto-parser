@@ -852,26 +852,25 @@ function toggleCollapse(name) {
 
 var visualeditor = document.getElementById('visualeditor');
 function visualEditor(){
-  console.log(document.getElementById('editor').style.display);
-  if(document.getElementById('visualeditor').style.display === true || VEactivated === true){
-    VEactivated = true;
-    document.getElementById('editor').style.visibility = 'visible';
-    document.getElementById('editor').style.display = '';
-    document.getElementById('highlighter').style.visibility = 'visible';
-    document.getElementById('highlighter').style.display = '';
-    document.getElementById('visualeditor').style.display = 'none';
-    document.getElementById('visualeditor').style.visibility = 'hidden';
-    console.log('deactivated');
-    
-  }else if(document.getElementById('visualeditor').style.display === false || VEactivated === false){
+  if(visualeditor.style.display === true || VEactivated === true){
+    //deactivating the visual editor
     VEactivated = false;
+    document.getElementById('editor').style.visibility = 'visible';
+    document.getElementById('editor').style.display = true;
+    document.getElementById('highlighter').style.visibility = 'visible';
+    document.getElementById('highlighter').style.display = true;
+    visualeditor.style.display = false;
+    visualeditor.style.visibility = 'hidden';
+    
+  }else if(visualeditor.style.display === false || VEactivated === false){
+    //
+    VEactivated = true;
     document.getElementById('editor').style.visibility = 'hidden';
-    document.getElementById('editor').style.display = 'none';
+    document.getElementById('editor').style.display = false;
     document.getElementById('highlighter').style.visibility = 'hidden';
-    document.getElementById('highlighter').style.display = 'none';
-    document.getElementById('visualeditor').style.display = 'show';
-    document.getElementById('visualeditor').style.visibility = 'visible';
-    console.log('activated');
+    document.getElementById('highlighter').style.display = false;
+    visualeditor.style.display = true;
+    visualeditor.style.visibility = 'visible';
     
   }
 }
