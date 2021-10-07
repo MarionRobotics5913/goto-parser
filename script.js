@@ -847,8 +847,11 @@ function toggleCollapse(name) {
 }
 
 function activateVisualEditor(){
-    document.getElementById('editor').style.visibiity = 'hidden';
-    console.log('activated');
+  document.getElementById('editor').style.visibility = 'hidden';
+  document.getElementById('editor').style.display = 'none';
+  // document.getElementById('visualeditor').style.display = 'show';
+  // document.getElementById('visualeditor').style.visibility = 'visible';
+  console.log('activated');
 }
 
 if(localStorage.ok){
