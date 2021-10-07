@@ -846,11 +846,15 @@ function toggleCollapse(name) {
   settingsPanel.classList.toggle("collapsed");
 }
 
+var visualeditor = document.getElementById('visualeditor');
+
 function activateVisualEditor(){
   document.getElementById('editor').style.visibility = 'hidden';
   document.getElementById('editor').style.display = 'none';
-  // document.getElementById('visualeditor').style.display = 'show';
-  // document.getElementById('visualeditor').style.visibility = 'visible';
+  document.getElementById('highlighter').style.visibility = 'hidden';
+  document.getElementById('highlighter').style.display = 'none';
+  document.getElementById('visualeditor').style.display = 'show';
+  document.getElementById('visualeditor').style.visibility = 'visible';
   console.log('activated');
 }
 
