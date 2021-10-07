@@ -452,14 +452,14 @@ function runRoScriptActions(actionObject, callback) {
   // }
     var res = `<br />
     ${
-    actionObject.issues?.map(issue => `<div class='command-block warn'>
+    actionObject.issues?.map(issue => `<div class='warn command-block'>
     ${issue.message}</div>`)
     }
     ${
       actionObject.actions
       ?.map(action => {
         if (action.type === "error") {
-          return `<div class='command-block error'>
+          return `<div class='error command-block'>
             <strong>Error</strong>:
             ${action.name} (at&nbsp${action.args.line}:${action.args.column})
           </div>`;
