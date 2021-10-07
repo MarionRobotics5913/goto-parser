@@ -10,7 +10,7 @@ function ping(host, port, pong) {
 
   http.open("GET", "http://" + host + ":" + port, /*async*/ true);
   http.onreadystatechange = function() {
-    if (http.readyState == 4) {
+    if (http.readyState == 4 && http.status == 200) {
       var ended = new Date().getTime();
       var milliseconds = ended - started;
       if (pong != null) {
@@ -49,7 +49,7 @@ if (!String.prototype.splice) {
 if (window.process && process.versions.hasOwnProperty("electron")) {
 } else {
   function upload() {
-    var name = window.prompt("What should the program be called?");
+    var name = "Meepably";
     if (!name) return;
     // Robot is at either http://192.168.43.1:8080 or http://192.168.49.1:8080
     // Process:
@@ -57,12 +57,20 @@ if (window.process && process.versions.hasOwnProperty("electron")) {
     // 2. Send POST request to <server>/java/file/upload
     //   a. Send file as "file" in a multipart form
     var responseRecieved = false;
-    function part2(millis) {
+    function part2(url, millis) {
       if (responseRecieved) return;
       responseRecieved = true;
 
-      var XHR = new XMLHttpRequest();
-      var data = "";
+      var xhr = new XMLHttpRequest();
+      var file = "package org.firstinsprites.ftc.teamcode;\n" +
+        "@GotoProgram(name=\"" + name + "\", code=" + JSON.stringify(
+          document.getElementById("editor").value
+        ) +
+        ")\npublic class Goto" + name + " {}";
+      var data = new FormData();
+      data.append("file", new Blob([file], {type: "text/x-java"}), "goto."+name+".java");
+      xhr.open("POST", url + "/java/file/upload");
+      xhr.send(data);
     }
     ping("192.168.43.1", "8080", part2);
     ping("192.168.49.1", "8080", part2);
@@ -854,14 +862,14 @@ var visualeditor = document.getElementById('visualeditor');
 visualeditor.getContext('2d');
 visualeditor.drawRect(0,0,50,50);
 function visualEditor(){
-  if(visualeditor.style.display === true || VEactivated === true){
+  if(visualeditor.style.display === 'auto' || VEactivated === true){
     //deactivating the visual editor
     VEactivated = false;
     document.getElementById('editor').style.visibility = 'visible';
-    document.getElementById('editor').style.display = true;
+    document.getElementById('editor').style.display = "initial";
     document.getElementById('highlighter').style.visibility = 'visible';
-    document.getElementById('highlighter').style.display = true;
-    visualeditor.style.display = false;
+    document.getElementById('highlighter').style.display = "initial";
+    visualeditor.style.display = 'none';
     visualeditor.style.visibility = 'hidden';
     console.log('deactivated');
     
@@ -869,10 +877,10 @@ function visualEditor(){
     //activating the visual editor
     VEactivated = true;
     document.getElementById('editor').style.visibility = 'hidden';
-    document.getElementById('editor').style.display = false;
+    document.getElementById('editor').style.display = "none";
     document.getElementById('highlighter').style.visibility = 'hidden';
-    document.getElementById('highlighter').style.display = false;
-    visualeditor.style.display = '';
+    document.getElementById('highlighter').style.display = "none";
+    visualeditor.style.display = 'block';
     visualeditor.style.visibility = 'visible';
     console.log('activated');
     visualeditor.getContext('2d');
