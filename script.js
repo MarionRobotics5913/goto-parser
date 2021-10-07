@@ -851,6 +851,8 @@ function toggleCollapse(name) {
 }
 
 var visualeditor = document.getElementById('visualeditor');
+visualeditor.getContext('2d');
+visualeditor.drawRect(0,0,50,50);
 function visualEditor(){
   if(visualeditor.style.display === true || VEactivated === true){
     //deactivating the visual editor
@@ -861,25 +863,31 @@ function visualEditor(){
     document.getElementById('highlighter').style.display = true;
     visualeditor.style.display = false;
     visualeditor.style.visibility = 'hidden';
+    console.log('deactivated');
     
   }else if(visualeditor.style.display === false || VEactivated === false){
-    //
+    //activating the visual editor
     VEactivated = true;
     document.getElementById('editor').style.visibility = 'hidden';
     document.getElementById('editor').style.display = false;
     document.getElementById('highlighter').style.visibility = 'hidden';
     document.getElementById('highlighter').style.display = false;
-    visualeditor.style.display = true;
+    visualeditor.style.display = '';
     visualeditor.style.visibility = 'visible';
+    console.log('activated');
+    visualeditor.getContext('2d');
+    
+    visualeditor.rect(20,20,100,100);
+    
     
   }
 }
 
 if(localStorage.ok){
-  var inputs = document.getElementsByTagName("input");
-  for(var i in inputs){
-
-  }
+//   var inputs = document.getElementsByTagName("input");
+//   for(var i in inputs){
+    
+//   }
 }else{
   if(confirm("This page would like to use localStorage to save settings and programs. Is that okay?")){
     localStorage.ok = true;
