@@ -1,4 +1,8 @@
 // Credit to StackOverflow: https://stackoverflow.com/questions/4282151/is-it-possible-to-ping-a-server-from-javascript
+document.getElementById('visualeditor').style.display = 'none';
+document.getElementById('visualeditor').style.visibility = 'hidden';
+var VEactivated = false;
+
 function ping(host, port, pong) {
   var started = new Date().getTime();
 
@@ -74,10 +78,10 @@ if (window.process && process.versions.hasOwnProperty("electron")) {
 var data;
 
 function GotoParser() {
-  this.lex; // Lexer
-  this.parse; // Parser
-  this.analyze; // Semantic analyzer
-  this.highlight; // Syntax highlighter that returns HTML content
+  // this.lex; // Lexer
+  // this.parse; // Parser
+  // this.analyze; // Semantic analyzer
+  // this.highlight; // Syntax highlighter that returns HTML content
   this.reservedWords = [
     "goto",
     "set",
@@ -448,16 +452,16 @@ function runRoScriptActions(actionObject, callback) {
   // }
     var res = `<br />
     ${
-    actionObject.issues?.map(issue => `<div class='warnbox'>
+    actionObject.issues?.map(issue => `<div class='warn box'>
     ${issue.message}</div>`)
     }
     ${
       actionObject.actions
       ?.map(action => {
         if (action.type === "error") {
-          return `<div class='errorbox'>
+          return `<div class='error box'>
             <strong>Error</strong>:
-            ${action.name} (at ${action.args.line}:${action.args.column})
+            ${action.name} (at&nbsp${action.args.line}:${action.args.column})
           </div>`;
         } else {
           return `<div class='box'>
@@ -847,14 +851,27 @@ function toggleCollapse(name) {
 }
 
 var visualeditor = document.getElementById('visualeditor');
-
-function activateVisualEditor(){
-  document.getElementById('editor').style.visibility = 'hidden';
-  document.getElementById('editor').style.display = 'none';
-  document.getElementById('highlighter').style.visibility = 'hidden';
-  document.getElementById('highlighter').style.display = 'none';
-  document.getElementById('visualeditor').style.display = 'show';
-  document.getElementById('visualeditor').style.visibility = 'visible';
+function visualEditor(){
+  if(document.getElementById('visualeditor').style.hidden !== 'none' || VEactivated === true){
+    VEactivated = false;
+    document.getElementById('editor').style.visibility = 'hidden';
+    document.getElementById('editor').style.display = 'none';
+    document.getElementById('highlighter').style.visibility = 'hidden';
+    document.getElementById('highlighter').style.display = 'none';
+    document.getElementById('visualeditor').style.display = 'show';
+    document.getElementById('visualeditor').style.visibility = 'visible';
+    console.log('deactiaved');
+  }
+  if(document.getElementById('visualeditor').style.hidden === 'none' || VEactivated === false){
+    VEactivated = true;
+    document.getElementById('editor').style.visibility = 'visible';
+    document.getElementById('editor').style.display = 'show';
+    document.getElementById('highlighter').style.visibility = 'visible';
+    document.getElementById('highlighter').style.display = 'show';
+    document.getElementById('visualeditor').style.display = 'none';
+    document.getElementById('visualeditor').style.visibility = 'hidden';
+    console.log('activated');
+  }
   console.log('activated');
 }
 
@@ -864,7 +881,9 @@ if(localStorage.ok){
 
   }
 }else{
-  if(prompt("This page would like to use localStorage to save settings"));
+  if(confirm("This page would like to use localStorage to save settings and programs. Is that okay?")){
+    localStorage.ok = true;
+  };
 }
 
 document.getElementById("cover")?.classList.add("cover");
