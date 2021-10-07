@@ -452,19 +452,19 @@ function runRoScriptActions(actionObject, callback) {
   // }
     var res = `<br />
     ${
-    actionObject.issues?.map(issue => `<div class='warn box'>
+    actionObject.issues?.map(issue => `<div class='command-block warn'>
     ${issue.message}</div>`)
     }
     ${
       actionObject.actions
       ?.map(action => {
         if (action.type === "error") {
-          return `<div class='error box'>
+          return `<div class='command-block error'>
             <strong>Error</strong>:
             ${action.name} (at&nbsp${action.args.line}:${action.args.column})
           </div>`;
         } else {
-          return `<div class='box'>
+          return `<div class='command-block'>
             <strong>${action.name}</strong> -
             ${Object.entries(action.args)
             .map(([x, v]) => `${x}: ${v}`)
@@ -852,17 +852,7 @@ function toggleCollapse(name) {
 
 var visualeditor = document.getElementById('visualeditor');
 function visualEditor(){
-  if(document.getElementById('visualeditor').style.hidden !== 'none' || VEactivated === true){
-    VEactivated = false;
-    document.getElementById('editor').style.visibility = 'hidden';
-    document.getElementById('editor').style.display = 'none';
-    document.getElementById('highlighter').style.visibility = 'hidden';
-    document.getElementById('highlighter').style.display = 'none';
-    document.getElementById('visualeditor').style.display = 'show';
-    document.getElementById('visualeditor').style.visibility = 'visible';
-    console.log('deactiaved');
-  }
-  if(document.getElementById('visualeditor').style.hidden === 'none' || VEactivated === false){
+  if(document.getElementById('visualeditor').style.display !== 'none' || VEactivated === true){
     VEactivated = true;
     document.getElementById('editor').style.visibility = 'visible';
     document.getElementById('editor').style.display = 'show';
@@ -870,9 +860,19 @@ function visualEditor(){
     document.getElementById('highlighter').style.display = 'show';
     document.getElementById('visualeditor').style.display = 'none';
     document.getElementById('visualeditor').style.visibility = 'hidden';
-    console.log('activated');
+    console.log('deactivated');
+    
+  }else if(document.getElementById('visualeditor').style.display === 'none' || VEactivated === false){
+    VEactivated = false;
+    document.getElementById('editor').style.visibility = 'hidden';
+    document.getElementById('editor').style.display = 'none';
+    document.getElementById('highlighter').style.visibility = 'hidden';
+    document.getElementById('highlighter').style.display = 'none';
+    document.getElementById('visualeditor').style.display = 'show';
+    document.getElementById('visualeditor').style.visibility = 'visible';
+    console.log('actiaved');
+    
   }
-  console.log('activated');
 }
 
 if(localStorage.ok){
