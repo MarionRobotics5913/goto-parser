@@ -884,8 +884,9 @@ function visualEditor(){
     visualeditor.style.visibility = 'visible';
     console.log('activated');
     visualeditor.getContext('2d');
-    
+    visualeditor.beginPath();
     visualeditor.rect(20,20,100,100);
+    visualeditor.stroke();
     
     
   }
