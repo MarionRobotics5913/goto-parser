@@ -1,3 +1,5 @@
+var GotoParser; // Stop complaining, Glitch, it's defined in the HTML
+
 // Credit to StackOverflow: https://stackoverflow.com/questions/4282151/is-it-possible-to-ping-a-server-from-javascript
 document.getElementById('visualeditor').style.display = 'none';
 document.getElementById('visualeditor').style.visibility = 'hidden';
@@ -6,7 +8,7 @@ var VEactivated = false;
 function ping(host, port, pong) {
   var started = new Date().getTime();
 
-  var http = new XMLHttpRequest();
+  var http = new XMLHttpRequest(); // Fetch API?
 
   http.open("GET", "http://" + host + ":" + port, /*async*/ true);
   http.onreadystatechange = function() {
@@ -61,7 +63,7 @@ if (window.process && process.versions.hasOwnProperty("electron")) {
       if (responseRecieved) return;
       responseRecieved = true;
 
-      var xhr = new XMLHttpRequest();
+      var xhr = new XMLHttpRequest(); // Fetch API?
       var file = "package org.firstinsprites.ftc.teamcode;\n" +
         "@GotoProgram(name=\"" + name + "\", code=" + JSON.stringify(
           document.getElementById("editor").value
@@ -103,7 +105,7 @@ function runRoScriptActions(actionObject, callback) {
     var res = `<br />
     ${
     actionObject.issues?.map(issue => `<div class='warn command-block'>
-    ${issue.message}</div>`)
+    ${issue.message}</div>`).join("")
     }
     ${
       actionObject.actions
