@@ -261,7 +261,7 @@ function GotoParser() {
       issues.push({ message: msg + (token?` (at ${token.line}:${token.column})`:""), action: actions[pos] });
     }
 
-    if (actions[0]?.name !== "start" || !actions[0]?.args[0]?.includes("x") || !actions[0]?.args[0]?.inclueds("y")) {
+    if (actions[0]?.name !== "start" || actions[0]?.args[0]?.includes("x") || actions[0]?.args[0]?.inclueds("y")) {
       handleError("The program does not begin with a functional starting position (use <code>start</code>)", 0);
     }
     
