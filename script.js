@@ -515,7 +515,6 @@ function visualEditor(){
     document.getElementById('highlighter').style.display = "initial";
     visualeditor.style.display = 'none';
     visualeditor.style.visibility = 'hidden';
-    console.log('deactivated');
     
   }else if(visualeditor.style.display === false || VEactivated === false){
     //activating the visual editor
@@ -526,9 +525,10 @@ function visualEditor(){
     document.getElementById('highlighter').style.display = "none";
     visualeditor.style.display = 'block';
     visualeditor.style.visibility = 'visible';
-    console.log('activated');
     visualeditor.getContext('2d');
     visualeditor.beginPath();
+    visualeditor.lineWidth = "6"
+    visualeditor.strokeStyle = "red"
     visualeditor.rect(20,20,100,100);
     visualeditor.stroke();
     
