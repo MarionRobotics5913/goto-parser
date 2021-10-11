@@ -511,6 +511,8 @@ function toggleCollapse(name) {
 }
 
 var visualeditor = document.getElementById("visualeditor");
+var x = 50;
+var y = 50;
 function visualEditor() {
   if (visualeditor.style.display === "auto" || VEactivated === true) {
     //deactivating the visual editor
@@ -533,6 +535,9 @@ function visualEditor() {
     var ctx = visualeditor.getContext("2d");
     ctx.fillStyle = "#f1ffb8";
     ctx.fillRect(0,0,600,300);
+    ctx.fillStyle = "#FFFFFF";
+    ctx.fillRect(x,y,50,50);
+    
   }
 }
 
