@@ -1,8 +1,8 @@
 var GotoParser; // Stop complaining, Glitch, it's defined in the HTML
 
 // Credit to StackOverflow: https://stackoverflow.com/questions/4282151/is-it-possible-to-ping-a-server-from-javascript
-document.getElementById('visualeditor').style.display = 'none';
-document.getElementById('visualeditor').style.visibility = 'hidden';
+document.getElementById("visualeditor").style.display = "none";
+document.getElementById("visualeditor").style.visibility = "hidden";
 var VEactivated = false;
 
 function ping(host, port, pong) {
@@ -64,13 +64,21 @@ if (window.process && process.versions.hasOwnProperty("electron")) {
       responseRecieved = true;
 
       var xhr = new XMLHttpRequest(); // Fetch API?
-      var file = "package org.firstinsprites.ftc.teamcode;\n" +
-        "@GotoProgram(name=\"" + name + "\", code=" + JSON.stringify(
-          document.getElementById("editor").value
-        ) +
-        ")\npublic class Goto" + name + " {}";
+      var file =
+        "package org.firstinsprites.ftc.teamcode;\n" +
+        '@GotoProgram(name="' +
+        name +
+        '", code=' +
+        JSON.stringify(document.getElementById("editor").value) +
+        ")\npublic class Goto" +
+        name +
+        " {}";
       var data = new FormData();
-      data.append("file", new Blob([file], {type: "text/x-java"}), "goto."+name+".java");
+      data.append(
+        "file",
+        new Blob([file], { type: "text/x-java" }),
+        "goto." + name + ".java"
+      );
       xhr.open("POST", url + "/java/file/upload");
       xhr.send(data);
     }
@@ -102,13 +110,14 @@ function runRoScriptActions(actionObject, callback) {
   //       callback(`Unrecognized command ${actionObject[x].command} run`);
   //   }
   // }
-    var res = `<br />
-    ${
-    actionObject.issues?.map(issue => `<div class='warn command-block'>
-    ${issue.message}</div>`).join("")
-    }
-    ${
-      actionObject.actions
+  var res = `<br />
+    ${actionObject.issues
+      ?.map(
+        issue => `<div class='warn command-block'>
+    ${issue.message}</div>`
+      )
+      .join("")}
+    ${actionObject.actions
       ?.map(action => {
         if (action.type === "error") {
           return `<div class='error command-block'>
@@ -119,13 +128,12 @@ function runRoScriptActions(actionObject, callback) {
           return `<div class='command-block'>
             <strong>${action.name}</strong> -
             ${Object.entries(action.args)
-            .map(([x, v]) => `${x}: ${v}`)
-            .join(", ")}
+              .map(([x, v]) => `${x}: ${v}`)
+              .join(", ")}
           </div>`;
         }
       })
-      ?.join("")
-    }`;
+      ?.join("")}`;
   callback(res);
 }
 
@@ -502,49 +510,48 @@ function toggleCollapse(name) {
   settingsPanel.classList.toggle("collapsed");
 }
 
-var visualeditor = document.getElementById('visualeditor');
-visualeditor.getContext('2d');
-visualeditor.drawRect(0,0,50,50);
-function visualEditor(){
-  if(visualeditor.style.display === 'auto' || VEactivated === true){
+var visualeditor = document.getElementById("visualeditor");
+visualeditor.getContext("2d");
+visualeditor.drawRect(0, 0, 50, 50);
+function visualEditor() {
+  if (visualeditor.style.display === "auto" || VEactivated === true) {
     //deactivating the visual editor
     VEactivated = false;
-    document.getElementById('editor').style.visibility = 'visible';
-    document.getElementById('editor').style.display = "initial";
-    document.getElementById('highlighter').style.visibility = 'visible';
-    document.getElementById('highlighter').style.display = "initial";
-    visualeditor.style.display = 'none';
-    visualeditor.style.visibility = 'hidden';
-    
-  }else if(visualeditor.style.display === false || VEactivated === false){
+    document.getElementById("editor").style.visibility = "visible";
+    document.getElementById("editor").style.display = "initial";
+    document.getElementById("highlighter").style.visibility = "visible";
+    document.getElementById("highlighter").style.display = "initial";
+    visualeditor.style.display = "none";
+    visualeditor.style.visibility = "hidden";
+  } else if (visualeditor.style.display === false || VEactivated === false) {
     //activating the visual editor
     VEactivated = true;
-    document.getElementById('editor').style.visibility = 'hidden';
-    document.getElementById('editor').style.display = "none";
-    document.getElementById('highlighter').style.visibility = 'hidden';
-    document.getElementById('highlighter').style.display = "none";
-    visualeditor.style.display = 'block';
-    visualeditor.style.visibility = 'visible';
-    visualeditor.getContext('2d');
+    document.getElementById("editor").style.visibility = "hidden";
+    document.getElementById("editor").style.display = "none";
+    document.getElementById("highlighter").style.visibility = "hidden";
+    document.getElementById("highlighter").style.display = "none";
+    visualeditor.style.display = "block";
+    visualeditor.style.visibility = "visible";
+    visualeditor.getContext("2d");
     visualeditor.beginPath();
-    visualeditor.lineWidth = "6"
-    visualeditor.strokeStyle = "red"
-    visualeditor.rect(20,20,100,100);
+    visualeditor.lineWidth = "6";
+    visualeditor.strokeStyle = "red";
+    visualeditor.rect(20, 20, 100, 100);
     visualeditor.stroke();
-    
-    
   }
 }
 
-if(localStorage.ok){
-//   var inputs = document.getElementsByTagName("input");
-//   for(var i in inputs){
-    
-//   }
-}else{
-  if(confirm("This page would like to use localStorage to save settings and programs. Is that okay?")){
+if (localStorage.ok) {
+  //   var inputs = document.getElementsByTagName("input");
+  //   for(var i in inputs){
+  //   }
+} else {
+  if (
+    confirm(
+      "This page would like to use localStorage to save settings and programs. Is that okay?"
+    )
+  )
     localStorage.ok = true;
-  };
 }
 
 document.getElementById("cover")?.classList.add("cover");
