@@ -533,11 +533,7 @@ function visualEditor() {
     visualeditor.style.display = "block";
     visualeditor.style.visibility = "visible";
     visualeditor.getContext("2d");
-    visualeditor.beginPath();
-    visualeditor.lineWidth = "6";
-    visualeditor.strokeStyle = "red";
-    visualeditor.rect(20, 20, 100, 100);
-    visualeditor.stroke();
+    visualeditor.startScripts();
   }
 }
 
