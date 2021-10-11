@@ -532,6 +532,7 @@ function visualEditor() {
     document.getElementById("highlighter").style.display = "none";
     visualeditor.style.display = "block";
     visualeditor.style.visibility = "visible";
+    
     visualeditor.getContext("2d");
     visualeditor.startScripts();
   }
