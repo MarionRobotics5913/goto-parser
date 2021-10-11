@@ -531,7 +531,7 @@ function visualEditor() {
     visualeditor.style.display = "block";
     visualeditor.style.visibility = "visible";
     var ctx = visualeditor.getContext("2d");
-    ctx.fillRect(0,0,1200,600);
+    ctx.fillRect(0,0,600,300);
     console.log(editor.width);
   }
 }
