@@ -96,7 +96,7 @@ if (window.process && process.versions.hasOwnProperty("electron")) {
 var data;
 
 // This is just for handling stuff on this page and testing
-function runRoScriptActions(actionObject, callback) {
+function runGotoActions(actionObject, callback) {
   // for (var x in actionObject) {
   //   switch (actionObject[x].command) {
   //     case "error":
@@ -141,7 +141,7 @@ function parseProgram(programString) {
   document.getElementById("output").innerHTML = document.getElementById(
     "output"
   ).innerHTML = "Running...<br /><br />";
-  runRoScriptActions(new GotoParser().parseProgram(programString), output => {
+  runGotoActions(new GotoParser().parseProgram(programString), output => {
     document.getElementById("output").innerHTML = output;
   });
 }
@@ -511,8 +511,6 @@ function toggleCollapse(name) {
 }
 
 var visualeditor = document.getElementById("visualeditor");
-visualeditor.getContext("2d");
-visualeditor.drawRect(0, 0, 50, 50);
 function visualEditor() {
   if (visualeditor.style.display === "auto" || VEactivated === true) {
     //deactivating the visual editor
@@ -532,9 +530,9 @@ function visualEditor() {
     document.getElementById("highlighter").style.display = "none";
     visualeditor.style.display = "block";
     visualeditor.style.visibility = "visible";
-    
-    visualeditor.getContext("2d");
-    visualeditor.startScripts();
+    var ctx = visualeditor.getContext("2d");
+    ctx.fillRect(0,0,1200,600);
+    console.log(editor.width);
   }
 }
 
