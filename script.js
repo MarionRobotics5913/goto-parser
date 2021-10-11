@@ -533,10 +533,14 @@ function visualEditor() {
     visualeditor.style.display = "block";
     visualeditor.style.visibility = "visible";
     var ctx = visualeditor.getContext("2d");
+    var width = 100, height = 100;
     ctx.fillStyle = "#f1ffb8";
     ctx.fillRect(0,0,600,300);
-    ctx.fillStyle = "#FFFFFF";
-    ctx.fillRect(x,y,50,50);
+    ctx.fillStyle = "#c9c9c9";
+    ctx.fillRect(x,y,width,height);
+    ctx.fillStyle = "#000000";
+    ctx.fillRect(x-5,y-5,width/5,height+10);
+    
     
   }
 }
