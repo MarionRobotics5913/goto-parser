@@ -564,6 +564,10 @@ function visualEditor() {
     //battery
     ctx.fillStyle = "#000000";
     ctx.fillRect(x+(width/1.43),y+(height/2.1),width/8,height/3.3);
+    //drawing the individual squares (the squares)
+    for(var i = 0; i < 36; i++){
+      ctx.fillRect()
+    }
 
     
     
