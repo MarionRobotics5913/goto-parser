@@ -533,7 +533,7 @@ function visualEditor() {
     visualeditor.style.display = "block";
     visualeditor.style.visibility = "visible";
     var ctx = visualeditor.getContext("2d");
-    var width = 100, height = 100;
+    var width = 50, height = 50;
     // credit to google's color picker for the colors
     ctx.fillStyle = "#f1ffb8";
     //the feild
@@ -548,9 +548,9 @@ function visualEditor() {
     //front right
     ctx.fillRect(x+(width/1.4),y+(height/21),width/3,height/8);
     //back left
-      //ctx.fillRect();
+    ctx.fillRect(x+(width/16),y+(height/1.2),width/3,height/8);
     //back right
-      //ctx.fillRect();
+    ctx.fillRect(x+(width/1.4),y+(height/1.2),width/3,height/8);
     //the treads
     ctx.fillStyle = "#000000";
     ctx.fillRect(x-(width/10),y-(height/10),width/5,height+(height/5));
