@@ -547,6 +547,10 @@ function visualEditor() {
     ctx.fillRect(x+(width/16),y+(height/21),width/3,height/8);
     //front right
     ctx.fillRect(x+(width/1.4),y+(height/21),width/3,height/8);
+    //back left
+      //ctx.fillRect();
+    //back right
+      //ctx.fillRect();
     //the treads
     ctx.fillStyle = "#000000";
     ctx.fillRect(x-(width/10),y-(height/10),width/5,height+(height/5));
