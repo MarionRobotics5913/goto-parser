@@ -513,6 +513,9 @@ function toggleCollapse(name) {
 var visualeditor = document.getElementById("visualeditor");
 var x = 50;
 var y = 50;
+var grid_squares = [];
+var gridX = 1;
+var gridY = 1;
 function visualEditor() {
   if (visualeditor.style.display === "auto" || VEactivated === true) {
     //deactivating the visual editor
@@ -534,10 +537,10 @@ function visualEditor() {
     visualeditor.style.visibility = "visible";
     var ctx = visualeditor.getContext("2d");
     var width = 50, height = 50;
-    // credit to google's color picker for the colors
+    // credit to google's color picker for the hex versions of the colors
     ctx.fillStyle = "#f1ffb8";
     //the feild
-    ctx.fillRect(0,0,600,300);
+    ctx.fillRect(0,0,300,300);
     ctx.fillStyle = "#c9c9c9";
     //the robot
     ctx.fillRect(x,y,width,height);
@@ -564,9 +567,13 @@ function visualEditor() {
     //battery
     ctx.fillStyle = "#000000";
     ctx.fillRect(x+(width/1.43),y+(height/2.1),width/8,height/3.3);
-    //drawing the individual squares (the squares)
-    for(var i = 0; i < 36; i++){
-      ctx.fillRect()
+    //drawing the individual squares (the grid spaces)
+    for(var i = 0; i < 6;){
+      for(var j = 0; j < 6;){
+        ctx.fillRect(i*50,j*50,50,50);
+        j++;
+      }
+      i++;
     }
 
     
@@ -577,6 +584,7 @@ function visualEditor() {
 if (localStorage.ok) {
   //   var inputs = document.getElementsByTagName("input");
   //   for(var i in inputs){
+  
   //   }
 } else {
   if (
