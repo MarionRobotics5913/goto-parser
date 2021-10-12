@@ -538,11 +538,24 @@ function visualEditor() {
     var ctx = visualeditor.getContext("2d");
     var width = 50, height = 50;
     // credit to google's color picker for the hex versions of the colors
-    ctx.fillStyle = "#f1ffb8";
     //the feild
-    ctx.fillRect(0,0,300,300);
-    ctx.fillStyle = "#c9c9c9";
+    ctx.fillStyle = "#f1ffb8";
+    ctx.strokeWeight = "6";
+    ctx.strokeColor = ""
+    for(var i = 0; i < 6;){
+      for(var j = 0; j < 6;){
+        ctx.beginPath();
+        ctx.fillRect(i*50,j*50,50,50);
+        ctx.stroke();
+        var ii = i;
+        grid_squares.push(""+(ii)+","+j);
+        j++;
+      }
+      i++;
+    }
+    console.log(grid_squares);
     //the robot
+    ctx.fillStyle = "#c9c9c9";
     ctx.fillRect(x,y,width,height);
     //motors
     ctx.fillStyle = "#696969";
@@ -568,13 +581,7 @@ function visualEditor() {
     ctx.fillStyle = "#000000";
     ctx.fillRect(x+(width/1.43),y+(height/2.1),width/8,height/3.3);
     //drawing the individual squares (the grid spaces)
-    for(var i = 0; i < 6;){
-      for(var j = 0; j < 6;){
-        ctx.fillRect(i*50,j*50,50,50);
-        j++;
-      }
-      i++;
-    }
+    
 
     
     
