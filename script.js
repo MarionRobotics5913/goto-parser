@@ -548,8 +548,12 @@ function visualEditor() {
     //the control bub and the expantion hub
     ctx.fillStyle = "#4a4a4a";
     ctx.fillRect(x+(width/5),y+(height/1.5), width/3, height/4);
+    //battery holder
     ctx.fillStyle = "#7ce800"
-    ctx.fillRect(x+(width/3),t)
+    ctx.fillRect(x+(width/1.5),y+(height/1.75),width/5,height/2.6)
+    //battery
+    ctx.fillStyle = "#000000"
+    ctx.fillRect(x+(width/1.5),y+(height/1.75),width/8,height/3.3)
     
     
   }
