@@ -541,10 +541,16 @@ function visualEditor() {
     ctx.fillStyle = "#c9c9c9";
     //the robot
     ctx.fillRect(x,y,width,height);
-    ctx.fillStyle = "#000000";
+    //motors
+    ctx.fillStyle = "#696969";
+    //front left
+    ctx.fillRect(x+(width/16),y+(height/21),width/3,height/8);
+    //front right
+    ctx.fillRect(x+(width/1.4),y+(height/21),width/3,height/8);
     //the treads
-    ctx.fillRect(x-(width/10),y-(height/10),width/5,height+10);
-    ctx.fillRect(x+width,y-(width/10),width/5,height+10);
+    ctx.fillStyle = "#000000";
+    ctx.fillRect(x-(width/10),y-(height/10),width/5,height+(height/5));
+    ctx.fillRect(x+width,y-(width/10),width/5,height+(height/5));
     //the control bub and the expantion hub
     ctx.fillStyle = "#4a4a4a";
     ctx.fillRect(x+(width/5),y+(height/2), width/3, height/4);
@@ -554,10 +560,7 @@ function visualEditor() {
     //battery
     ctx.fillStyle = "#000000";
     ctx.fillRect(x+(width/1.43),y+(height/2.1),width/8,height/3.3);
-    //motors
-    ctx.fillStyle = "#696969";
-    //front left
-    ctx.fillRect(x-(width/5),y-(height/5),width/3,height/8)
+
     
     
   }
