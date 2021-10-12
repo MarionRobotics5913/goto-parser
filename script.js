@@ -533,7 +533,7 @@ function visualEditor() {
     visualeditor.style.display = "block";
     visualeditor.style.visibility = "visible";
     var ctx = visualeditor.getContext("2d");
-    var width = 50, height = 50;
+    var width = 100, height = 100;
     // credit to google's color picker for the colors
     ctx.fillStyle = "#f1ffb8";
     //the feild
@@ -543,17 +543,21 @@ function visualEditor() {
     ctx.fillRect(x,y,width,height);
     ctx.fillStyle = "#000000";
     //the treads
-    ctx.fillRect(x-5,y-5,width/5,height+10);
-    ctx.fillRect(x+width,y-5,width/5,height+10);
+    ctx.fillRect(x-(width/10),y-(height/10),width/5,height+10);
+    ctx.fillRect(x+width,y-(width/10),width/5,height+10);
     //the control bub and the expantion hub
     ctx.fillStyle = "#4a4a4a";
-    ctx.fillRect(x+(width/5),y+(height/1.5), width/3, height/4);
+    ctx.fillRect(x+(width/5),y+(height/2), width/3, height/4);
     //battery holder
-    ctx.fillStyle = "#7ce800"
-    ctx.fillRect(x+(width/1.5),y+(height/1.75),width/5,height/2.6)
+    ctx.fillStyle = "#7ce800";
+    ctx.fillRect(x+(width/1.5) ,y+(height/2.25),width/5,height/2.6);
     //battery
-    ctx.fillStyle = "#000000"
-    ctx.fillRect(x+(width/1.5),y+(height/1.75),width/8,height/3.3)
+    ctx.fillStyle = "#000000";
+    ctx.fillRect(x+(width/1.43),y+(height/2.1),width/8,height/3.3);
+    //motors
+    ctx.fillStyle = "#696969";
+    //front left
+    ctx.fillRect(x-(width/5),y-(height/5),width/3,height/8)
     
     
   }
