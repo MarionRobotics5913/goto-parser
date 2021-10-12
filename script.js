@@ -533,13 +533,23 @@ function visualEditor() {
     visualeditor.style.display = "block";
     visualeditor.style.visibility = "visible";
     var ctx = visualeditor.getContext("2d");
-    var width = 100, height = 100;
+    var width = 50, height = 50;
+    // credit to google's color picker for the colors
     ctx.fillStyle = "#f1ffb8";
+    //the feild
     ctx.fillRect(0,0,600,300);
     ctx.fillStyle = "#c9c9c9";
+    //the robot
     ctx.fillRect(x,y,width,height);
     ctx.fillStyle = "#000000";
+    //the treads
     ctx.fillRect(x-5,y-5,width/5,height+10);
+    ctx.fillRect(x+width,y-5,width/5,height+10);
+    //the control bub and the expantion hub
+    ctx.fillStyle = "#4a4a4a";
+    ctx.fillRect(x+(width/5),y+(height/1.5), width/3, height/4);
+    ctx.fillStyle = "#7ce800"
+    ctx.fillRect(x+(width/3),t)
     
     
   }
