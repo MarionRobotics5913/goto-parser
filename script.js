@@ -536,26 +536,24 @@ function visualEditor() {
     document.getElementById("highlighter").style.display = "none";
     visualeditor.style.display = "block";
     visualeditor.style.visibility = "visible";
+    grid_squares.length = 36;
     var ctx = visualeditor.getContext("2d");
     var width = 37,
       height = 37;
-    // credit to google's color picker for the hex versions of the colors
+    //credit to google's color picker for the hex versions of the colors
     //the feild
     ctx.fillStyle = "#f1ffb8";
     ctx.strokeStyle = "#4a4a4a";
     ctx.strokeWeight = "6";
     for (var i = 0; i < 6; ) {
       for (var j = 0; j < 6; ) {
-        // ctx.beginPath();
         ctx.fillRect(i * 50, j * 50, 50, 50);
         ctx.strokeRect(i * 50, j * 50, 50, 50);
-        var ii = i;
-        grid_squares.push("" + ii + "," + j);
+        grid_squares.push("" + i + "," + j);
         j++;
       }
       i++;
     }
-    console.log(grid_squares);
     //the robot
     ctx.fillStyle = "#c9c9c9";
     ctx.fillRect(x, y, width, height);
@@ -587,7 +585,6 @@ function visualEditor() {
     //battery
     ctx.fillStyle = "#000000";
     ctx.fillRect(x + width / 1.43, y + height / 2.1, width / 8, height / 3.3);
-    //drawing the individual squares (the grid spaces)
   }
 }
 
