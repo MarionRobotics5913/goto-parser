@@ -10,15 +10,38 @@
     opacity: 0;        
   }
   50% {
+    display: block;
+    visibility: initial;
+    opacity: 0;        
+  }
+  100% {
+    display: block;
+    visibility: initial;
+    opacity: 100;            
+  }
+}
+@keyframes editorout {
+  0% {
+    display: block;
+    visibility: initial;
+    opacity: 100;            
+  }
+  50% {
+    display: block;
+    visibility: initial;
+    opacity: 0;        
+  }
+  50% {
     display: none;
     visibility: hidden;
     opacity: 0;        
   }
   100% {
-    
+    display: none;
+    visibility: hidden;
+    opacity: 0;    
   }
-}
-@keyframes fadein {
+}@keyframes fadein {
   0% {
     background-color: rgba(10, 20, 40, 0);
     z-index: 1;
@@ -192,6 +215,12 @@ code {
 }
 .expanded {
   animation: expand ease-out forwards;
+}
+.editorin {
+  animation: editorin ease-out forwards;
+}
+.editorout {
+  animation: editorout ease-out forwards;
 }
 .squiggle {
   background-color: rgba(255, 0, 0, 0.1);

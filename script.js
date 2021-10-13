@@ -501,7 +501,7 @@ function loadEntry(name) {
 
 function toggleCollapse(name) {
   var settingsPanel = document.getElementById(name);
-  if (!settingsPanel) return "I lost the game";
+  if (!settingsPanel) return "I lost the game"; // Darn you me from the past
 
   settingsPanel.style.animationDuration = "0.8s";
   if (
@@ -575,6 +575,17 @@ var grid_squares = [];
 var gridX = 1;
 var gridY = 1;
 function visualEditor() {
+  var veElement = document.getElementById(name);
+  if (!veElement) return "I lost the game"; // Darn you me from the past
+
+  veElement.style.animationDuration = "0.8s";
+  if (
+    veElement.classList.contains("editorout") ^
+    veElement.classList.contains("editorin")
+  ) {
+    veElement.classList.toggle("editoro");
+  }
+  veElement.classList.toggle("collapsed");
   if (visualeditor.style.display === "auto" || VEactivated === true) {
     //deactivating the visual editor
     VEactivated = false;
