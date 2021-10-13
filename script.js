@@ -3,6 +3,7 @@ var GotoParser; // Stop complaining, Glitch, it's defined in the HTML
 // Credit to StackOverflow: https://stackoverflow.com/questions/4282151/is-it-possible-to-ping-a-server-from-javascript
 document.getElementById("visualeditor").style.display = "none";
 document.getElementById("visualeditor").style.visibility = "hidden";
+var visualeditor = document.getElementById("visualeditor");
 var VEactivated = false;
 
 function ping(host, port, pong) {
@@ -510,8 +511,9 @@ function toggleCollapse(name) {
   settingsPanel.classList.toggle("collapsed");
 }
 
+var ctx = visualeditor.getContext("2d");
+
 function draw(){
-  var ctx = visualeditor.getContext("2d");
   var width = 37,
   height = 37;
   //credit to google's color picker for the hex versions of the colors
@@ -561,7 +563,6 @@ function draw(){
   ctx.fillRect(x + width / 1.43, y + height / 2.1, width / 8, height / 3.3);
 }
 
-var visualeditor = document.getElementById("visualeditor");
 var x = 50;
 var y = 50;
 var grid_squares = [];
@@ -589,7 +590,7 @@ function visualEditor() {
     visualeditor.style.visibility = "visible";
     grid_squares.length = 36;
     var robot = draw();
-    
+    ctx.rotate("90");
   }
 }
 
