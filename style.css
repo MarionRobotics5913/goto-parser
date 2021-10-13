@@ -1,9 +1,18 @@
 @keyframes editorin {
   0% {
-    
+    display: none;
+    visibility: hidden;
+    opacity: 0;    
   }
   50% {
-    
+    display: none;
+    visibility: hidden;
+    opacity: 0;        
+  }
+  50% {
+    display: none;
+    visibility: hidden;
+    opacity: 0;        
   }
   100% {
     
@@ -214,4 +223,7 @@ code {
 /*   padding: 10px; */
 /*   height: auto; */
 /*   transition: all 0.5s; */
+}
+#settings > h3 {
+  margin: 15px 0px 0px 0px;
 }

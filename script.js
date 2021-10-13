@@ -565,6 +565,10 @@ function draw(){
   ctx.fillRect(x + width / 1.43, y + height / 2.1, width / 8, height / 3.3);
 }
 
+function toggleGrid(){
+  drawSquares = false;
+}
+
 var x = 50;
 var y = 50;
 var grid_squares = [];
