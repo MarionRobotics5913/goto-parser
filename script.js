@@ -574,8 +574,12 @@ var y = 50;
 var grid_squares = [];
 var gridX = 1;
 var gridY = 1;
+
 function visualEditor() {
-  var veElement = document.getElementById(name);
+  if (visualeditor.style.display === "auto" || VEactivated === true) {
+  var veElement = document.getElementById("editor");
+  var editor = document.geElementById("editor");
+  var highlighter = document.getElementById("editor");
   if (!veElement) return "I lost the game"; // Darn you me from the past
 
   veElement.style.animationDuration = "0.8s";
@@ -583,11 +587,11 @@ function visualEditor() {
     veElement.classList.contains("editorout") ^
     veElement.classList.contains("editorin")
   ) {
-    veElement.classList.toggle("editoro");
+    veElement.classList.toggle("editorin");
   }
-  veElement.classList.toggle("collapsed");
-  if (visualeditor.style.display === "auto" || VEactivated === true) {
-    //deactivating the visual editor
+  veElement.classList.toggle("editorout");
+
+    //deactivate
     VEactivated = false;
     document.getElementById("editor").style.visibility = "visible";
     document.getElementById("editor").style.display = "initial";
@@ -597,7 +601,7 @@ function visualEditor() {
     visualeditor.style.visibility = "hidden";
     grid_squares.length = 0;
   } else if (visualeditor.style.display === false || VEactivated === false) {
-    //activating the visual editor
+    //activate
     VEactivated = true;
     document.getElementById("editor").style.visibility = "hidden";
     document.getElementById("editor").style.display = "none";
@@ -610,6 +614,7 @@ function visualEditor() {
     ctx.rotate(90);
   }
 }
+
 
 if (localStorage.ok) {
   //   var inputs = document.getElementsByTagName("input");

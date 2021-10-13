@@ -45,23 +45,21 @@
     <h3>
       Shortcuts
     </h3>
-    <input type="checkbox" id="ctrlL" checked/>
+    <input type="checkbox" id="ctrlL" checked />
     Select Line shortcut (Ctrl+L) <br />
-    <input type="checkbox" id="ctrl/" checked/>
+    <input type="checkbox" id="ctrl/" checked />
     Comment/uncomment line shortcut (Ctrl+/) <br />
-    <input type="checkbox" id="tab" checked/>
+    <input type="checkbox" id="tab" checked />
     Add/remove tab shortcut (Tab, Ctrl+Tab) <br />
-    <input type="checkbox" id="ctrlZ" checked/>
+    <input type="checkbox" id="ctrlZ" checked />
     Smart undo/redo (Ctrl+Z, Ctrl+Y) <br />
-    <input type="checkbox" id="ctrlDown" checked/>
-    Autofill (Ctrl+Down)<br/>
+    <input type="checkbox" id="ctrlDown" checked />
+    Autofill (Ctrl+Down)<br />
     <h3>
       Visual Editor
     </h3>
-    <input type="checkbox" id="gridActivated" onclick = "toggleGrid()" checked> Activate grid</input>
-    
-    
-
+    <input type="checkbox" id="gridActivated" onclick="toggleGrid()" checked />
+    <label>Activate grid lines</label>
   </div>
 
   <!--   <div> -->
@@ -88,8 +86,8 @@ set arm: 0.9 stop // Reach down to box
       Loading scrpts...
     </div>
   </div>
-  
-  <canvas id ="visualeditor" height = "300" x = 200 y = 200>
+
+  <canvas id="visualeditor" height="300" x="200" y="200">
     there is text here
   </canvas>
 
@@ -99,15 +97,11 @@ set arm: 0.9 stop // Reach down to box
   >
     Parse
   </button>
-  <button
-          id = "visualeditor"
-          onclick = "visualEditor()"
-  >
-  Visual Editor
+  <button id="visualeditor" onclick="visualEditor()">
+    Visual Editor
   </button>
-  
+
   Output:<br />
   <div id="output"></div>
-<!--   add visual editor here -->
+  <!--   add visual editor here -->
 </html>
-
