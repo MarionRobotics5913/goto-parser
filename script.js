@@ -3,8 +3,10 @@ var GotoParser; // Stop complaining, Glitch, it's defined in the HTML
 // Credit to StackOverflow: https://stackoverflow.com/questions/4282151/is-it-possible-to-ping-a-server-from-javascript
 document.getElementById("visualeditor").style.display = "none";
 document.getElementById("visualeditor").style.visibility = "hidden";
+document.getElementById("visualeditor").style.opacity = "0";
 var visualeditor = document.getElementById("visualeditor");
 var VEactivated = false;
+var drawSquares = true;
 
 function ping(host, port, pong) {
   var started = new Date().getTime();
@@ -524,7 +526,7 @@ function draw(){
   for (var i = 0; i < 6; ) {
     for (var j = 0; j < 6; ) {
       ctx.fillRect(i * 50, j * 50, 50, 50);
-      ctx.strokeRect(i * 50, j * 50, 50, 50);
+      if(drawSquares === true) ctx.strokeRect(i * 50, j * 50, 50, 50);
       grid_squares.push("" + i + "," + j);
       j++;
     }
