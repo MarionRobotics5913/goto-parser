@@ -590,7 +590,7 @@ function visualEditor() {
     visualeditor.style.visibility = "visible";
     grid_squares.length = 36;
     var robot = draw();
-    ctx.rotate("90");
+    ctx.rotate(90);
   }
 }
 
