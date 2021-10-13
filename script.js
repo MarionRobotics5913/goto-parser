@@ -1,8 +1,8 @@
 var GotoParser; // Stop complaining, Glitch, it's defined in the HTML
 
 // Credit to StackOverflow: https://stackoverflow.com/questions/4282151/is-it-possible-to-ping-a-server-from-javascript
-// document.getElementById("visualeditor").style.display = "none";
-// document.getElementById("visualeditor").style.visibility = "hidden";
+document.getElementById("visualeditor").style.display = "none";
+document.getElementById("visualeditor").style.visibility = "hidden";
 // document.getElementById("visualeditor").style.opacity = "0";
 var visualeditor = document.getElementById("visualeditor");
 var VEactivated = false;
@@ -582,37 +582,37 @@ function visualEditor() {
 
   if (visualeditor.style.display === "auto" || VEactivated === true) {
     //deactivate
-    veElement.classList.remove("editorin");
-    veElement.classList.add("editorout");
-    editor.classList.remove("editorout");
-    editor.classList.add("editorin");
-    highlighter.classList.remove("editorout");
-    highlighter.classList.add("editorin");
+    // veElement.classList.remove("editorin");
+    // veElement.classList.add("editorout");
+    // editor.classList.remove("editorout");
+    // editor.classList.add("editorin");
+    // highlighter.classList.remove("editorout");
+    // highlighter.classList.add("editorin");
 
     VEactivated = false;
-    // document.getElementById("editor").style.visibility = "visible";
-    // document.getElementById("editor").style.display = "initial";
-    // document.getElementById("highlighter").style.visibility = "visible";
-    // document.getElementById("highlighter").style.display = "initial";
-    // visualeditor.style.display = "none";
-    // visualeditor.style.visibility = "hidden";
+    document.getElementById("editor").style.visibility = "visible";
+    document.getElementById("editor").style.display = "initial";
+    document.getElementById("highlighter").style.visibility = "visible";
+    document.getElementById("highlighter").style.display = "initial";
+    visualeditor.style.display = "none";
+    visualeditor.style.visibility = "hidden";
     grid_squares.length = 0;
   } else if (visualeditor.style.display === false || VEactivated === false) {
     //activate
-    veElement.classList.remove("editorout");
-    veElement.classList.add("editorin");
-    editor.classList.remove("editorin");
-    editor.classList.add("editorout");
-    highlighter.classList.remove("editorin");
-    highlighter.classList.add("editorout");
+    // veElement.classList.remove("editorout");
+    // veElement.classList.add("editorin");
+    // editor.classList.remove("editorin");
+    // editor.classList.add("editorout");
+    // highlighter.classList.remove("editorin");
+    // highlighter.classList.add("editorout");
 
     VEactivated = true;
-    // document.getElementById("editor").style.visibility = "hidden";
-    // document.getElementById("editor").style.display = "none";
-    // document.getElementById("highlighter").style.visibility = "hidden";
-    // document.getElementById("highlighter").style.display = "none";
-    // visualeditor.style.display = "block";
-    // visualeditor.style.visibility = "visible";
+    document.getElementById("editor").style.visibility = "hidden";
+    document.getElementById("editor").style.display = "none";
+    document.getElementById("highlighter").style.visibility = "hidden";
+    document.getElementById("highlighter").style.display = "none";
+    visualeditor.style.display = "block";
+    visualeditor.style.visibility = "visible";
     grid_squares.length = 36;
     var robot = draw();
     ctx.rotate(90);

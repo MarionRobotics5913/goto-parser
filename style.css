@@ -229,12 +229,12 @@ code {
 .expanded {
   animation: expand ease-out forwards;
 }
-.editorin {
+/* .editorin {
   animation: editorin 1s ease-out forwards;
 }
 .editorout {
   animation: editorout 1s ease-out forwards;
-}
+} */
 .squiggle {
   background-color: rgba(255, 0, 0, 0.1);
 /*   text-decoration: underline red dotted; */
