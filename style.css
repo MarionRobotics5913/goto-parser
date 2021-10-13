@@ -3,21 +3,27 @@
     display: none;
     visibility: hidden;
     opacity: 0;    
+    position: fixed;
+    top: 100vh;
   }
   50% {
     display: none;
     visibility: hidden;
     opacity: 0;   
+    position: fixed;
+    top: 100vh;
   }
   50% {
     display: block;
     visibility: visible;
     opacity: 0;        
+    position: static;
   }
   100% {
     display: block;
     visibility: visible;
     opacity: 1;            
+    position: static;
   }
 }
 @keyframes editorout {
@@ -25,23 +31,30 @@
     display: block;
     visibility: visible;
     opacity: 1;            
+    position: static;
   }
   50% {
     display: block;
     visibility: visible;
     opacity: 0;        
+    position: static;
   }
   50% {
     display: none;
     visibility: hidden;
     opacity: 0;        
+    position: fixed;
+    top: 100vh;
   }
   100% {
     display: none;
     visibility: hidden;
     opacity: 0;    
+    position: fixed;
+    top: 100vh;
   }
-}@keyframes fadein {
+}
+@keyframes fadein {
   0% {
     background-color: rgba(10, 20, 40, 0);
     z-index: 1;

@@ -69,7 +69,7 @@ goto x: 0.3 y: 0.4//They even work without spaces
 goto x: 0.8 y: 0.1 -->
     <textarea
       id="editor"
-      class="code-block"
+      class="code-block editorin"
       cols="48"
       rows="16"
       oninput="codeUpdate(true); sync_scroll(this);"
@@ -82,12 +82,12 @@ goto x: 0.5 y: 0.2 cont // Go to the box
 set arm: 0.9 stop // Reach down to box
       </textarea
     >
-    <div id="highlighter" class="code-block">
+    <div id="highlighter" class="code-block editorin">
       Loading scripts...
     </div>
   </div>
 
-  <canvas id="visualeditor" height="300" x="200" y="200">
+  <canvas id="visualeditor" class="editorout" height="300" x="200" y="200">
     there is text here
   </canvas>
 
