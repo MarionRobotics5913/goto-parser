@@ -576,39 +576,43 @@ var gridX = 1;
 var gridY = 1;
 
 function visualEditor() {
+  var veElement = document.getElementById("visualeditor");
+  var editor = document.getElementById("editor");
+  var highlighter = document.getElementById("highlighter");
+
   if (visualeditor.style.display === "auto" || VEactivated === true) {
-  var veElement = document.getElementById("editor");
-  var editor = document.geElementById("editor");
-  var highlighter = document.getElementById("editor");
-  if (!veElement) return "I lost the game"; // Darn you me from the past
-
-  veElement.style.animationDuration = "0.8s";
-  if (
-    veElement.classList.contains("editorout") ^
-    veElement.classList.contains("editorin")
-  ) {
-    veElement.classList.toggle("editorin");
-  }
-  veElement.classList.toggle("editorout");
-
     //deactivate
+    veElement.classList.remove("editorin");
+    veElement.classList.add("editorout");
+    editor.classList.remove("editorout");
+    editor.classList.add("editorin");
+    highlighter.classList.remove("editorout");
+    highlighter.classList.add("editorin");
+
     VEactivated = false;
-    document.getElementById("editor").style.visibility = "visible";
-    document.getElementById("editor").style.display = "initial";
-    document.getElementById("highlighter").style.visibility = "visible";
-    document.getElementById("highlighter").style.display = "initial";
-    visualeditor.style.display = "none";
-    visualeditor.style.visibility = "hidden";
+    // document.getElementById("editor").style.visibility = "visible";
+    // document.getElementById("editor").style.display = "initial";
+    // document.getElementById("highlighter").style.visibility = "visible";
+    // document.getElementById("highlighter").style.display = "initial";
+    // visualeditor.style.display = "none";
+    // visualeditor.style.visibility = "hidden";
     grid_squares.length = 0;
   } else if (visualeditor.style.display === false || VEactivated === false) {
     //activate
+    veElement.classList.remove("editorout");
+    veElement.classList.add("editorin");
+    editor.classList.remove("editorin");
+    editor.classList.add("editorout");
+    highlighter.classList.remove("editorin");
+    highlighter.classList.add("editorout");
+
     VEactivated = true;
-    document.getElementById("editor").style.visibility = "hidden";
-    document.getElementById("editor").style.display = "none";
-    document.getElementById("highlighter").style.visibility = "hidden";
-    document.getElementById("highlighter").style.display = "none";
-    visualeditor.style.display = "block";
-    visualeditor.style.visibility = "visible";
+    // document.getElementById("editor").style.visibility = "hidden";
+    // document.getElementById("editor").style.display = "none";
+    // document.getElementById("highlighter").style.visibility = "hidden";
+    // document.getElementById("highlighter").style.display = "none";
+    // visualeditor.style.display = "block";
+    // visualeditor.style.visibility = "visible";
     grid_squares.length = 36;
     var robot = draw();
     ctx.rotate(90);

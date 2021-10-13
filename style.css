@@ -7,28 +7,28 @@
   50% {
     display: none;
     visibility: hidden;
-    opacity: 0;        
+    opacity: 0;   
   }
   50% {
     display: block;
-    visibility: initial;
+    visibility: visible;
     opacity: 0;        
   }
   100% {
     display: block;
-    visibility: initial;
-    opacity: 100;            
+    visibility: visible;
+    opacity: 1;            
   }
 }
 @keyframes editorout {
   0% {
     display: block;
-    visibility: initial;
-    opacity: 100;            
+    visibility: visible;
+    opacity: 1;            
   }
   50% {
     display: block;
-    visibility: initial;
+    visibility: visible;
     opacity: 0;        
   }
   50% {
@@ -217,10 +217,10 @@ code {
   animation: expand ease-out forwards;
 }
 .editorin {
-  animation: editorin ease-out forwards;
+  animation: editorin 1s ease-out forwards;
 }
 .editorout {
-  animation: editorout ease-out forwards;
+  animation: editorout 1s ease-out forwards;
 }
 .squiggle {
   background-color: rgba(255, 0, 0, 0.1);
