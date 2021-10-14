@@ -9,7 +9,10 @@ export default function GotoParser() {
     "start",
     "radius",
     "cont",
-    "stop"
+    "stop",
+    "iltg",
+    "if",
+    "else"
   ];
 
   this.lex = function(programString) {
@@ -130,6 +133,7 @@ export default function GotoParser() {
     }
     return tokens;
   };
+  
 
   this.parse = function(tokens) {
     var x = -1; // Gets incremented to 0 immediately and updates the character

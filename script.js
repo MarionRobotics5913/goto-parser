@@ -539,7 +539,7 @@ ctx.fillRect(x + width / 1.5, y + height / 2.25, width / 5, height / 2.6);
 //battery
 ctx.fillStyle = "#000000";
 ctx.fillRect(x + width / 1.43, y + height / 2.1, width / 8, height / 3.3);
-ctx.rotate(180)
+//ctx.rotate(20 * Math.PI / 180);
 //end of paste
 
 
