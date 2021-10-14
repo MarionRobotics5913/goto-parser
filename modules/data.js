@@ -52,3 +52,4 @@ var data = {
     _syntax: "goto x: # y: # stop"
   }
 };
+export default data;

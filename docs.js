@@ -1,4 +1,5 @@
 import GotoParser from "./modules/parser.js";
+import data from "./modules/data.js"
 
 // Credit to StackOverflow: https://stackoverflow.com/questions/4313841/insert-a-string-at-a-specific-index
 if (!String.prototype.splice) {
@@ -20,8 +21,6 @@ if (!String.prototype.splice) {
     );
   };
 }
-
-var data;
 
 // Code for the about page
 window.highlightBlocks = function() {

@@ -241,10 +241,7 @@ code {
   border-style: none none dashed none;
   border-width: 1px;
   border-color: red;
-  pointer-events: auto;
-}
-.squiggle:hover {
-  background-color: rgba(255, 0, 0, 0.3);
+  background-color: rgba(255, 0, 0, 0.2);
 }
 .error {
   background-color: rgba(255, 0, 0, 0.2);

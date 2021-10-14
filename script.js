@@ -98,50 +98,6 @@ if (window.process && process.versions.hasOwnProperty("electron")) {
 
 var data;
 
-window.highlightBlocks = function() {
-  var codeBlocks = [
-    ...document.getElementsByTagName("code"),
-    // ...document.getElementsByClassName("code-block")
-  ];
-  for (var x of codeBlocks) {
-    x.innerHTML = new GotoParser().highlight(x.innerText);
-  }
-}
-
-window.codeUpdate = function(parse) {
-  // Run every time the textarea updates
-  var textarea = document.getElementById("editor");
-  var highlighter = document.getElementById("highlighter");
-  if (!textarea || !highlighter) return;
-
-  var text = document.getElementById("toggleHighlight")?.checked
-    ? new GotoParser().highlight(textarea?.value)
-    : textarea?.value
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/\ /g, "&nbsp;")
-        .replace(/\n/g, "<br />");
-  if (text.endsWith("<br />")) text += " ";
-  highlighter.height = textarea.clientHeight;
-  highlighter.innerHTML = text;
-
-  // alert(text);
-  if (parse && document.getElementById("autoparse").checked) {
-    parseProgram(textarea.value);
-  }
-}
-
-window.sync_scroll = function(element) {
-  /* Scroll result to scroll coords of event - sync with textarea */
-  // let result_element = document.querySelector("#highlighting");
-  let result_element = document.getElementById("highlighter");
-  // Get and set x and y
-  result_element.scrollTop = element.scrollTop;
-  result_element.scrollLeft = element.scrollLeft;
-}
-
-codeUpdate(true);
-
 // This is just for handling stuff on this page and testing
 function runGotoActions(actionObject, callback) {
   // for (var x in actionObject) {
@@ -184,6 +140,16 @@ function runGotoActions(actionObject, callback) {
   callback(res);
 }
 
+window.highlightBlocks = function() {
+  var codeBlocks = [
+    ...document.getElementsByTagName("code"),
+    // ...document.getElementsByClassName("code-block")
+  ];
+  for (var x of codeBlocks) {
+    x.innerHTML = new GotoParser().highlight(x.innerText);
+  }
+}
+
 window.parseProgram = function(programString) {
   document.getElementById("output").innerHTML = document.getElementById(
     "output"
@@ -193,6 +159,40 @@ window.parseProgram = function(programString) {
   });
   highlightBlocks();
 }
+
+window.codeUpdate = function(parse) {
+  // Run every time the textarea updates
+  var textarea = document.getElementById("editor");
+  var highlighter = document.getElementById("highlighter");
+  if (!textarea || !highlighter) return;
+
+  var text = document.getElementById("toggleHighlight")?.checked
+    ? new GotoParser().highlight(textarea?.value)
+    : textarea?.value
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/\ /g, "&nbsp;")
+        .replace(/\n/g, "<br />");
+  if (text.endsWith("<br />")) text += " ";
+  highlighter.height = textarea.clientHeight;
+  highlighter.innerHTML = text;
+
+  // alert(text);
+  if (parse && document.getElementById("autoparse").checked) {
+    parseProgram(textarea.value);
+  }
+}
+
+window.sync_scroll = function(element) {
+  /* Scroll result to scroll coords of event - sync with textarea */
+  // let result_element = document.querySelector("#highlighting");
+  let result_element = document.getElementById("highlighter");
+  // Get and set x and y
+  result_element.scrollTop = element.scrollTop;
+  result_element.scrollLeft = element.scrollLeft;
+}
+
+codeUpdate(true);
 
 function addToUndoStack() {
   undoStack[stackPos++] = editor.value;
@@ -479,49 +479,10 @@ window.toggleCollapse = function(name) {
 
 var ctx = visualeditor.getContext("2d");
 
+
+
 window.draw = function() {
-  var width = 37,
-    height = 37;
-  //credit to google's color picker for the hex versions of the colors
-  //the feild
-  ctx.fillStyle = "#f1ffb8";
-  ctx.strokeStyle = "#4a4a4a";
-  ctx.strokeWeight = "6";
-  for (var i = 0; i < 6; ) {
-    for (var j = 0; j < 6; ) {
-      ctx.fillRect(i * 50, j * 50, 50, 50);
-      if (drawSquares === true) ctx.strokeRect(i * 50, j * 50, 50, 50);
-      grid_squares.push("" + i + "," + j);
-      j++;
-    }
-    i++;
-  }
-  //the robot
-  ctx.fillStyle = "#c9c9c9";
-  ctx.fillRect(x, y, width, height);
-  //motors
-  ctx.fillStyle = "#696969";
-  //front left
-  ctx.fillRect(x + width / 16, y + height / 21, width / 3, height / 8);
-  //front right
-  ctx.fillRect(x + width / 1.4, y + height / 21, width / 3, height / 8);
-  //back left
-  ctx.fillRect(x + width / 16, y + height / 1.2, width / 3, height / 8);
-  //back right
-  ctx.fillRect(x + width / 1.4, y + height / 1.2, width / 3, height / 8);
-  //the treads
-  ctx.fillStyle = "#000000";
-  ctx.fillRect(x - width / 10, y - height / 10, width / 5, height + height / 5);
-  ctx.fillRect(x + width, y - width / 10, width / 5, height + height / 5);
-  //the control bub and the expantion hub
-  ctx.fillStyle = "#4a4a4a";
-  ctx.fillRect(x + width / 5, y + height / 2, width / 3, height / 4);
-  //battery holder
-  ctx.fillStyle = "#7ce800";
-  ctx.fillRect(x + width / 1.5, y + height / 2.25, width / 5, height / 2.6);
-  //battery
-  ctx.fillStyle = "#000000";
-  ctx.fillRect(x + width / 1.43, y + height / 2.1, width / 8, height / 3.3);
+  
 }
 
 window.toggleGrid = function() {
@@ -533,6 +494,55 @@ var y = 50;
 var grid_squares = [];
 var gridX = 1;
 var gridY = 1;
+
+//start of paste
+
+var width = 37,
+height = 37;
+//credit to google's color picker for the hex versions of the colors
+//the feild
+ctx.fillStyle = "#f1ffb8";
+ctx.strokeStyle = "#4a4a4a";
+ctx.strokeWeight = "6";
+for (var i = 0; i < 6; ) {
+  for (var j = 0; j < 6; ) {
+    ctx.fillRect(i * 50, j * 50, 50, 50);
+    if (drawSquares === true) ctx.strokeRect(i * 50, j * 50, 50, 50);
+    grid_squares.push("" + i + "," + j);
+    j++;
+  }
+  i++;
+}
+//the robot
+ctx.fillStyle = "#c9c9c9";
+ctx.fillRect(x, y, width, height);
+//motors
+ctx.fillStyle = "#696969";
+//front left
+ctx.fillRect(x + width / 16, y + height / 21, width / 3, height / 8);
+//front right
+ctx.fillRect(x + width / 1.4, y + height / 21, width / 3, height / 8);
+//back left
+ctx.fillRect(x + width / 16, y + height / 1.2, width / 3, height / 8);
+//back right
+ctx.fillRect(x + width / 1.4, y + height / 1.2, width / 3, height / 8);
+//the treads
+ctx.fillStyle = "#000000";
+ctx.fillRect(x - width / 10, y - height / 10, width / 5, height + height / 5);
+ctx.fillRect(x + width, y - width / 10, width / 5, height + height / 5);
+//the control bub and the expantion hub
+ctx.fillStyle = "#4a4a4a";
+ctx.fillRect(x + width / 5, y + height / 2, width / 3, height / 4);
+//battery holder
+ctx.fillStyle = "#7ce800";
+ctx.fillRect(x + width / 1.5, y + height / 2.25, width / 5, height / 2.6);
+//battery
+ctx.fillStyle = "#000000";
+ctx.fillRect(x + width / 1.43, y + height / 2.1, width / 8, height / 3.3);
+ctx.rotate(180)
+//end of paste
+
+
 
 window.visualEditor = function() {
   var veElement = document.getElementById("visualeditor");
@@ -575,6 +585,10 @@ window.visualEditor = function() {
     grid_squares.length = 36;
     var robot = window.draw();
     ctx.rotate(90);
+    
+    
+    
+    
   }
 }
 
