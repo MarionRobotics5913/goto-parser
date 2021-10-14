@@ -495,7 +495,7 @@ var grid_squares = [];
 var gridX = 1;
 var gridY = 1;
 
-//start of paste
+;
 
 var width = 37,
 height = 37;
@@ -539,8 +539,7 @@ ctx.fillRect(x + width / 1.5, y + height / 2.25, width / 5, height / 2.6);
 //battery
 ctx.fillStyle = "#000000";
 ctx.fillRect(x + width / 1.43, y + height / 2.1, width / 8, height / 3.3);
-//ctx.rotate(20 * Math.PI / 180);
-//end of paste
+ctx.rotate(20 * Math.PI / 180);
 
 
 

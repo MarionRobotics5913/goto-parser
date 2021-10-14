@@ -12,7 +12,10 @@ export default function GotoParser() {
     "stop",
     "iltg",
     "if",
-    "else"
+    "else",
+    "import",
+    "return",
+    "macro"
   ];
 
   this.lex = function(programString) {

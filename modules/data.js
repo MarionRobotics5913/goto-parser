@@ -12,7 +12,14 @@ var data = {
       goto x: 0 y: 0 cont<br>
       set x: 0.9 y: 0.1 stop
     </div>`,
-    end: "Terminate the program early. <code>end</code>"
+    end: "Terminate the program early. <code>end</code>",
+    Conditionals: `
+    Rustic
+    <code>if condition {goto}</code>
+    `,
+    Macros: `
+    `,
+    "New operators": `+ - / *`
   },
   "Not found": {
     _main: "Oops! Looks like you found an entry that hasn't been created yet.",
