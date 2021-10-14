@@ -418,6 +418,17 @@ if (editor) {
   });
 }
 
+window.highlightBlocks = function() {
+  var codeBlocks = [
+    ...document.getElementsByTagName("code"),
+    // ...document.getElementsByClassName("code-block")
+  ];
+  for (var x of codeBlocks) {
+    x.innerHTML = new GotoParser().highlight(x.innerText);
+  }
+}
+
+
 window.codeUpdate = function(parse) {
   // Run every time the textarea updates
   var textarea = document.getElementById("editor");
@@ -438,6 +449,7 @@ window.codeUpdate = function(parse) {
   // alert(text);
   if (parse && document.getElementById("autoparse").checked) {
     parseProgram(textarea.value);
+    highlightBlocks();
   }
 }
 
@@ -451,53 +463,6 @@ window.sync_scroll = function(element) {
 }
 
 codeUpdate(true);
-
-// Code for the about page
-window.highlightBlocks = function() {
-  var codeBlocks = [
-    ...document.getElementsByTagName("code"),
-    ...document.getElementsByClassName("code-block")
-  ];
-  for (var x of codeBlocks) {
-    x.innerHTML = new GotoParser().highlight(x.innerText);
-  }
-}
-
-window.loadEntry = function(name) {
-  if (!data) return;
-
-  var cover = document.getElementsByClassName("cover")[0];
-  if (!cover) return;
-
-  cover.classList.remove("cover");
-  void cover.offsetWidth;
-  cover.classList.add("cover");
-
-  setTimeout(() => {
-    var { _main, _seealso, _availability, ...fields } =
-      data[name] || data["Not found"];
-    var mainElem = document.getElementById("content");
-    // var footerElem
-
-    document.getElementById("heading").innerHTML = name;
-    mainElem.innerHTML = _main;
-
-    for (var x in Object.entries(fields)) {
-      var [title, content] = Object.entries(fields)[x];
-      //     <div class="divider"></div>
-      mainElem.innerHTML += `<div class='divider'></div><h2>${title}</h2>${content}`;
-    }
-    if (_seealso) {
-      mainElem.innerHTML += `<div class='divider'></div><h2>See also:</h2>${_seealso
-        .map(
-          entry =>
-            `<span class='doclink' onclick='loadEntry("${entry}")'>${entry}</span>`
-        )
-        .join(", ")}`;
-    }
-    highlightBlocks();
-  }, 300);
-}
 
 window.toggleCollapse = function(name) {
   var settingsPanel = document.getElementById(name);
@@ -626,6 +591,3 @@ if (localStorage.ok) {
   )
     localStorage.ok = true;
 }
-
-document.getElementById("cover")?.classList.add("cover");
-loadEntry("Welcome!");
