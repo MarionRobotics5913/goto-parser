@@ -98,6 +98,50 @@ if (window.process && process.versions.hasOwnProperty("electron")) {
 
 var data;
 
+window.highlightBlocks = function() {
+  var codeBlocks = [
+    ...document.getElementsByTagName("code"),
+    // ...document.getElementsByClassName("code-block")
+  ];
+  for (var x of codeBlocks) {
+    x.innerHTML = new GotoParser().highlight(x.innerText);
+  }
+}
+
+window.codeUpdate = function(parse) {
+  // Run every time the textarea updates
+  var textarea = document.getElementById("editor");
+  var highlighter = document.getElementById("highlighter");
+  if (!textarea || !highlighter) return;
+
+  var text = document.getElementById("toggleHighlight")?.checked
+    ? new GotoParser().highlight(textarea?.value)
+    : textarea?.value
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/\ /g, "&nbsp;")
+        .replace(/\n/g, "<br />");
+  if (text.endsWith("<br />")) text += " ";
+  highlighter.height = textarea.clientHeight;
+  highlighter.innerHTML = text;
+
+  // alert(text);
+  if (parse && document.getElementById("autoparse").checked) {
+    parseProgram(textarea.value);
+  }
+}
+
+window.sync_scroll = function(element) {
+  /* Scroll result to scroll coords of event - sync with textarea */
+  // let result_element = document.querySelector("#highlighting");
+  let result_element = document.getElementById("highlighter");
+  // Get and set x and y
+  result_element.scrollTop = element.scrollTop;
+  result_element.scrollLeft = element.scrollLeft;
+}
+
+codeUpdate(true);
+
 // This is just for handling stuff on this page and testing
 function runGotoActions(actionObject, callback) {
   // for (var x in actionObject) {
@@ -147,6 +191,7 @@ window.parseProgram = function(programString) {
   runGotoActions(new GotoParser().parseProgram(programString), output => {
     document.getElementById("output").innerHTML = output;
   });
+  highlightBlocks();
 }
 
 function addToUndoStack() {
@@ -417,52 +462,6 @@ if (editor) {
     codeUpdate(true); //calls hightlighter and parser (if enabled)
   });
 }
-
-window.highlightBlocks = function() {
-  var codeBlocks = [
-    ...document.getElementsByTagName("code"),
-    // ...document.getElementsByClassName("code-block")
-  ];
-  for (var x of codeBlocks) {
-    x.innerHTML = new GotoParser().highlight(x.innerText);
-  }
-}
-
-
-window.codeUpdate = function(parse) {
-  // Run every time the textarea updates
-  var textarea = document.getElementById("editor");
-  var highlighter = document.getElementById("highlighter");
-  if (!textarea || !highlighter) return;
-
-  var text = document.getElementById("toggleHighlight")?.checked
-    ? new GotoParser().highlight(textarea?.value)
-    : textarea?.value
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/\ /g, "&nbsp;")
-        .replace(/\n/g, "<br />");
-  if (text.endsWith("<br />")) text += " ";
-  highlighter.height = textarea.clientHeight;
-  highlighter.innerHTML = text;
-
-  // alert(text);
-  if (parse && document.getElementById("autoparse").checked) {
-    parseProgram(textarea.value);
-    highlightBlocks();
-  }
-}
-
-window.sync_scroll = function(element) {
-  /* Scroll result to scroll coords of event - sync with textarea */
-  // let result_element = document.querySelector("#highlighting");
-  let result_element = document.getElementById("highlighter");
-  // Get and set x and y
-  result_element.scrollTop = element.scrollTop;
-  result_element.scrollLeft = element.scrollLeft;
-}
-
-codeUpdate(true);
 
 window.toggleCollapse = function(name) {
   var settingsPanel = document.getElementById(name);
