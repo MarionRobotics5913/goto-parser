@@ -1,4 +1,4 @@
-var GotoParser; // Stop complaining, Glitch, it's defined in the HTML
+import GotoParser from "parser.js";
 
 // Credit to StackOverflow: https://stackoverflow.com/questions/4282151/is-it-possible-to-ping-a-server-from-javascript
 document.getElementById("visualeditor").style.display = "none";
@@ -515,9 +515,9 @@ function toggleCollapse(name) {
 
 var ctx = visualeditor.getContext("2d");
 
-function draw(){
+function draw() {
   var width = 37,
-  height = 37;
+    height = 37;
   //credit to google's color picker for the hex versions of the colors
   //the feild
   ctx.fillStyle = "#f1ffb8";
@@ -526,7 +526,7 @@ function draw(){
   for (var i = 0; i < 6; ) {
     for (var j = 0; j < 6; ) {
       ctx.fillRect(i * 50, j * 50, 50, 50);
-      if(drawSquares === true) ctx.strokeRect(i * 50, j * 50, 50, 50);
+      if (drawSquares === true) ctx.strokeRect(i * 50, j * 50, 50, 50);
       grid_squares.push("" + i + "," + j);
       j++;
     }
@@ -547,12 +547,7 @@ function draw(){
   ctx.fillRect(x + width / 1.4, y + height / 1.2, width / 3, height / 8);
   //the treads
   ctx.fillStyle = "#000000";
-  ctx.fillRect(
-    x - width / 10,
-    y - height / 10,
-    width / 5,
-    height + height / 5
-  );
+  ctx.fillRect(x - width / 10, y - height / 10, width / 5, height + height / 5);
   ctx.fillRect(x + width, y - width / 10, width / 5, height + height / 5);
   //the control bub and the expantion hub
   ctx.fillStyle = "#4a4a4a";
@@ -565,7 +560,7 @@ function draw(){
   ctx.fillRect(x + width / 1.43, y + height / 2.1, width / 8, height / 3.3);
 }
 
-function toggleGrid(){
+function toggleGrid() {
   drawSquares = false;
 }
 
@@ -618,7 +613,6 @@ function visualEditor() {
     ctx.rotate(90);
   }
 }
-
 
 if (localStorage.ok) {
   //   var inputs = document.getElementsByTagName("input");
