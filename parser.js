@@ -1,4 +1,4 @@
-export default function GotoParser() {
+function GotoParser() {
   // this.lex; // Lexer
   // this.parse; // Parser
   // this.analyze; // Semantic analyzer
