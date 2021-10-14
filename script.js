@@ -1,3 +1,5 @@
+import GotoParser from "./modules/parser.js";
+
 // Credit to StackOverflow: https://stackoverflow.com/questions/4282151/is-it-possible-to-ping-a-server-from-javascript
 document.getElementById("visualeditor").style.display = "none";
 document.getElementById("visualeditor").style.visibility = "hidden";
@@ -138,7 +140,7 @@ function runGotoActions(actionObject, callback) {
   callback(res);
 }
 
-function parseProgram(programString) {
+window.parseProgram = function(programString) {
   document.getElementById("output").innerHTML = document.getElementById(
     "output"
   ).innerHTML = "Running...<br /><br />";
@@ -416,7 +418,7 @@ if (editor) {
   });
 }
 
-function codeUpdate(parse) {
+window.codeUpdate = function(parse) {
   // Run every time the textarea updates
   var textarea = document.getElementById("editor");
   var highlighter = document.getElementById("highlighter");
@@ -439,7 +441,7 @@ function codeUpdate(parse) {
   }
 }
 
-function sync_scroll(element) {
+window.sync_scroll = function(element) {
   /* Scroll result to scroll coords of event - sync with textarea */
   // let result_element = document.querySelector("#highlighting");
   let result_element = document.getElementById("highlighter");
@@ -451,7 +453,7 @@ function sync_scroll(element) {
 codeUpdate(true);
 
 // Code for the about page
-function highlightBlocks() {
+window.highlightBlocks = function() {
   var codeBlocks = [
     ...document.getElementsByTagName("code"),
     ...document.getElementsByClassName("code-block")
@@ -461,7 +463,7 @@ function highlightBlocks() {
   }
 }
 
-function loadEntry(name) {
+window.loadEntry = function(name) {
   if (!data) return;
 
   var cover = document.getElementsByClassName("cover")[0];
@@ -497,7 +499,7 @@ function loadEntry(name) {
   }, 300);
 }
 
-function toggleCollapse(name) {
+window.toggleCollapse = function(name) {
   var settingsPanel = document.getElementById(name);
   if (!settingsPanel) return "I lost the game"; // Darn you me from the past
 
@@ -513,7 +515,7 @@ function toggleCollapse(name) {
 
 var ctx = visualeditor.getContext("2d");
 
-function draw() {
+window.draw = function() {
   var width = 37,
     height = 37;
   //credit to google's color picker for the hex versions of the colors
@@ -558,7 +560,7 @@ function draw() {
   ctx.fillRect(x + width / 1.43, y + height / 2.1, width / 8, height / 3.3);
 }
 
-function toggleGrid() {
+window.toggleGrid = function() {
   drawSquares = false;
 }
 
@@ -568,7 +570,7 @@ var grid_squares = [];
 var gridX = 1;
 var gridY = 1;
 
-function visualEditor() {
+window.visualEditor = function() {
   var veElement = document.getElementById("visualeditor");
   var editor = document.getElementById("editor");
   var highlighter = document.getElementById("highlighter");
@@ -607,7 +609,7 @@ function visualEditor() {
     visualeditor.style.display = "block";
     visualeditor.style.visibility = "visible";
     grid_squares.length = 36;
-    var robot = draw();
+    var robot = window.draw();
     ctx.rotate(90);
   }
 }

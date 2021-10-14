@@ -269,3 +269,6 @@ code {
 #settings > h3 {
   margin: 15px 0px 0px 0px;
 }
+#settings > input {
+  margin: 0px 0px 0px 15px;
+}

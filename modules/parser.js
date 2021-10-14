@@ -1,4 +1,4 @@
-function GotoParser() {
+export default function GotoParser() {
   // this.lex; // Lexer
   // this.parse; // Parser
   // this.analyze; // Semantic analyzer
@@ -9,8 +9,7 @@ function GotoParser() {
     "start",
     "radius",
     "cont",
-    "stop",
-    "iltg"
+    "stop"
   ];
 
   this.lex = function(programString) {
