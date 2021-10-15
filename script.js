@@ -142,13 +142,13 @@ function runGotoActions(actionObject, callback) {
 
 window.highlightBlocks = function() {
   var codeBlocks = [
-    ...document.getElementsByTagName("code"),
+    ...document.getElementsByTagName("code")
     // ...document.getElementsByClassName("code-block")
   ];
   for (var x of codeBlocks) {
     x.innerHTML = new GotoParser().highlight(x.innerText);
   }
-}
+};
 
 window.parseProgram = function(programString) {
   document.getElementById("output").innerHTML = document.getElementById(
@@ -158,7 +158,7 @@ window.parseProgram = function(programString) {
     document.getElementById("output").innerHTML = output;
   });
   highlightBlocks();
-}
+};
 
 window.codeUpdate = function(parse) {
   // Run every time the textarea updates
@@ -181,7 +181,7 @@ window.codeUpdate = function(parse) {
   if (parse && document.getElementById("autoparse").checked) {
     parseProgram(textarea.value);
   }
-}
+};
 
 window.sync_scroll = function(element) {
   /* Scroll result to scroll coords of event - sync with textarea */
@@ -190,7 +190,7 @@ window.sync_scroll = function(element) {
   // Get and set x and y
   result_element.scrollTop = element.scrollTop;
   result_element.scrollLeft = element.scrollLeft;
-}
+};
 
 codeUpdate(true);
 
@@ -475,27 +475,23 @@ window.toggleCollapse = function(name) {
     settingsPanel.classList.toggle("expanded");
   }
   settingsPanel.classList.toggle("collapsed");
-}
+};
 
 var ctx = visualeditor.getContext("2d");
 
-
-
-window.draw = function() {
-  
-}
+window.draw = function() {};
 
 window.toggleGrid = function() {
   drawSquares = false;
-}
+};
 
-var x = 80;
-var y = 90;
+var x = 112;
+var y = -20;
 var grid_squares = [];
 var gridX = 1;
 var gridY = 1;
 var width = 37,
-height = 37;
+  height = 37;
 //credit to google's color picker for the hex versions of the colors
 //the feild
 ctx.fillStyle = "#f1ffb8";
@@ -512,7 +508,7 @@ for (var i = 0; i < 6; ) {
   i++;
 }
 ctx.translate(x + width / 2, y + height / 2);
-ctx.rotate(90 * Math.PI / 180);
+ctx.rotate((90 * Math.PI) / 180);
 //the robot
 ctx.fillStyle = "#c9c9c9";
 ctx.fillRect(x, y, width, height);
@@ -539,8 +535,6 @@ ctx.fillRect(x + width / 1.5, y + height / 2.25, width / 5, height / 2.6);
 //battery
 ctx.fillStyle = "#000000";
 ctx.fillRect(x + width / 1.43, y + height / 2.1, width / 8, height / 3.3);
-
-
 
 window.visualEditor = function() {
   var veElement = document.getElementById("visualeditor");
@@ -581,14 +575,8 @@ window.visualEditor = function() {
     visualeditor.style.display = "block";
     visualeditor.style.visibility = "visible";
     grid_squares.length = 36;
-    var robot = window.draw();
-    ctx.rotate(90);
-    
-    
-    
-    
   }
-}
+};
 
 if (localStorage.ok) {
   //   var inputs = document.getElementsByTagName("input");
