@@ -489,8 +489,8 @@ window.toggleGrid = function() {
   drawSquares = false;
 }
 
-var x = 50;
-var y = 50;
+var x = 80;
+var y = 90;
 var grid_squares = [];
 var gridX = 1;
 var gridY = 1;
@@ -511,8 +511,8 @@ for (var i = 0; i < 6; ) {
   }
   i++;
 }
-//ctx.translate(x + width / 2, y + height / 2);
-//ctx.rotate(0 * Math.PI / 180);
+ctx.translate(x + width / 2, y + height / 2);
+ctx.rotate(90 * Math.PI / 180);
 //the robot
 ctx.fillStyle = "#c9c9c9";
 ctx.fillRect(x, y, width, height);
