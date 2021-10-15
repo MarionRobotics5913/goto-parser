@@ -494,9 +494,6 @@ var y = 50;
 var grid_squares = [];
 var gridX = 1;
 var gridY = 1;
-
-;
-
 var width = 37,
 height = 37;
 //credit to google's color picker for the hex versions of the colors
@@ -504,6 +501,7 @@ height = 37;
 ctx.fillStyle = "#f1ffb8";
 ctx.strokeStyle = "#4a4a4a";
 ctx.strokeWeight = "6";
+//the feild
 for (var i = 0; i < 6; ) {
   for (var j = 0; j < 6; ) {
     ctx.fillRect(i * 50, j * 50, 50, 50);
@@ -513,6 +511,8 @@ for (var i = 0; i < 6; ) {
   }
   i++;
 }
+//ctx.translate(x + width / 2, y + height / 2);
+//ctx.rotate(0 * Math.PI / 180);
 //the robot
 ctx.fillStyle = "#c9c9c9";
 ctx.fillRect(x, y, width, height);
@@ -539,7 +539,6 @@ ctx.fillRect(x + width / 1.5, y + height / 2.25, width / 5, height / 2.6);
 //battery
 ctx.fillStyle = "#000000";
 ctx.fillRect(x + width / 1.43, y + height / 2.1, width / 8, height / 3.3);
-ctx.rotate(20 * Math.PI / 180);
 
 
 
