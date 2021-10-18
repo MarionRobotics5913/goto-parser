@@ -223,7 +223,7 @@ export default function GotoParser() {
               for(var i in idents){
                 var ident = idents[i]; // Because JS
                 if(name === ident){
-                  handleError("", "")
+                  handleError(`Duplicate argument '${ident}' in action`, "");
                 }
               }
               idents.push(token.value);
