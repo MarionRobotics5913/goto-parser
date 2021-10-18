@@ -215,9 +215,17 @@ export default function GotoParser() {
           // Eat arguments until a newline or a semicolon, then make a new Action
           while (token && token.type !== "terminator") {
             var name = "";
+            var idents = [];
             increment();
             if (token?.type === "identifier") {
               name = token.value;
+              for(var i in idents){
+                var ident = idents[i].value; // Because JS
+                if(name === ident){
+                  co
+                }
+              }
+              idents.push(token.type);
 
               if (nextToken?.value === ":") {
                 increment();
