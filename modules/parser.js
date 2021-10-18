@@ -198,7 +198,7 @@ export default function GotoParser() {
         increment();
       }
     }
-
+    
     var infiniteLoopStopper = 0;
     tokens = tokens.filter(token => token.type !== "comment");
     while (x < tokens.length - 1) {
@@ -211,18 +211,20 @@ export default function GotoParser() {
         case "start":
         case "radius":
           currAction.name = token.value;
-          var idents = [];
           // increment();
           // Eat arguments until a newline or a semicolon, then make a new Action
+          var idents = [];
           while (token && token.type !== "terminator") {
             var name = "";
             increment();
             if (token?.type === "identifier") {
               name = token.value;
+              console.log(idents);
               for(var i in idents){
+                // console.log(i);
                 console.log(idents[i].value);
                 var ident = idents[i].value; // Because JS
-                // console.log(ident);
+                console.log(ident);
                 if(name === ident){
                   console.log("two args");
                 }

@@ -495,6 +495,7 @@ window.toggleCollapse = function(name) {
 };
 
 var ctx = visualeditor.getContext("2d");
+var robotCtx = robot.getContext("2d");
 
 window.draw = function() {};
 
@@ -527,31 +528,31 @@ for (var i = 0; i < 6; ) {
 ctx.translate(x + width / 2, y + height / 2);
 ctx.rotate((90 * Math.PI) / 180);
 //the robot
-ctx.fillStyle = "#c9c9c9";
-ctx.fillRect(x, y, width, height);
+robotCtx.fillStyle = "#c9c9c9";
+robotCtx.fillRect(x, y, width, height);
 //motors
-ctx.fillStyle = "#696969";
+robotCtx.fillStyle = "#696969";
 //front left
-ctx.fillRect(x + width / 16, y + height / 21, width / 3, height / 8);
+robotCtx.fillRect(x + width / 16, y + height / 21, width / 3, height / 8);
 //front right
-ctx.fillRect(x + width / 1.4, y + height / 21, width / 3, height / 8);
+robotCtx.fillRect(x + width / 1.4, y + height / 21, width / 3, height / 8);
 //back left
-ctx.fillRect(x + width / 16, y + height / 1.2, width / 3, height / 8);
+robotCtx.fillRect(x + width / 16, y + height / 1.2, width / 3, height / 8);
 //back right
-ctx.fillRect(x + width / 1.4, y + height / 1.2, width / 3, height / 8);
+robotCtx.fillRect(x + width / 1.4, y + height / 1.2, width / 3, height / 8);
 //the treads
-ctx.fillStyle = "#000000";
-ctx.fillRect(x - width / 10, y - height / 10, width / 5, height + height / 5);
-ctx.fillRect(x + width, y - width / 10, width / 5, height + height / 5);
+robotCtx.fillStyle = "#000000";
+robotCtx.fillRect(x - width / 10, y - height / 10, width / 5, height + height / 5);
+robotCtx.fillRect(x + width, y - width / 10, width / 5, height + height / 5);
 //the control bub and the expantion hub
-ctx.fillStyle = "#4a4a4a";
-ctx.fillRect(x + width / 5, y + height / 2, width / 3, height / 4);
+robotCtx.fillStyle = "#4a4a4a";
+robotCtx.fillRect(x + width / 5, y + height / 2, width / 3, height / 4);
 //battery holder
-ctx.fillStyle = "#7ce800";
-ctx.fillRect(x + width / 1.5, y + height / 2.25, width / 5, height / 2.6);
+robotCtx.fillStyle = "#7ce800";
+robotCtx.fillRect(x + width / 1.5, y + height / 2.25, width / 5, height / 2.6);
 //battery
-ctx.fillStyle = "#000000";
-ctx.fillRect(x + width / 1.43, y + height / 2.1, width / 8, height / 3.3);
+robotCtx.fillStyle = "#000000";
+robotCtx.fillRect(x + width / 1.43, y + height / 2.1, width / 8, height / 3.3);
 
 window.visualEditor = function() {
   var veElement = document.getElementById("visualeditor");
