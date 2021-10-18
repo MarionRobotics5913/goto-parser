@@ -457,6 +457,23 @@ if (editor) {
       //backspace
       addToUndoStack();
     }
+    
+    if(event.keyCode === 37){
+      //left arrow key
+      console.log('left');
+    }
+    if(event.keyCode === 38){
+      //up arrow key
+      console.log('up');
+    }
+    if(event.keyCode === 39){
+      //right arrow key
+      console.log('right');
+    }
+    if(event.keyCode === 40){
+      //down arrow key
+      console.log('down');
+    }
 
     // console.log(undoStack);
     codeUpdate(true); //calls hightlighter and parser (if enabled)
