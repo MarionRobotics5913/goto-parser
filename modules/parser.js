@@ -211,22 +211,23 @@ export default function GotoParser() {
         case "start":
         case "radius":
           currAction.name = token.value;
+          var idents = [];
           // increment();
           // Eat arguments until a newline or a semicolon, then make a new Action
           while (token && token.type !== "terminator") {
             var name = "";
-            var idents = [];
             increment();
             if (token?.type === "identifier") {
               name = token.value;
               for(var i in idents){
+                console.log(idents[i].value);
                 var ident = idents[i].value; // Because JS
+                // console.log(ident);
                 if(name === ident){
-                  co
+                  console.log("two args");
                 }
               }
-              idents.push(token.type);
-
+              idents.push(token.value);
               if (nextToken?.value === ":") {
                 increment();
                 increment();
