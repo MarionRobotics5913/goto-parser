@@ -5,6 +5,7 @@ document.getElementById("visualeditor").style.display = "none";
 document.getElementById("visualeditor").style.visibility = "hidden";
 // document.getElementById("visualeditor").style.opacity = "0";
 var visualeditor = document.getElementById("visualeditor");
+var robot = document.getElementById("robot");
 var VEactivated = false;
 var drawSquares = true;
 
@@ -575,6 +576,8 @@ window.visualEditor = function() {
     document.getElementById("highlighter").style.display = "initial";
     visualeditor.style.display = "none";
     visualeditor.style.visibility = "hidden";
+    robot.style.visibility = "hidden";
+    robot.style.diasplay = "none";
     grid_squares.length = 0;
   } else if (visualeditor.style.display === false || VEactivated === false) {
     //activate
@@ -592,6 +595,8 @@ window.visualEditor = function() {
     document.getElementById("highlighter").style.display = "none";
     visualeditor.style.display = "block";
     visualeditor.style.visibility = "visible";
+    robot.style.display = "block"
+    robot.style.visibility = "visible";
     grid_squares.length = 36;
   }
 };

@@ -221,12 +221,9 @@ export default function GotoParser() {
               name = token.value;
               console.log(idents);
               for(var i in idents){
-                // console.log(i);
-                console.log(idents[i].value);
-                var ident = idents[i].value; // Because JS
-                console.log(ident);
+                var ident = idents[i]; // Because JS
                 if(name === ident){
-                  console.log("two args");
+                  handleError("", "")
                 }
               }
               idents.push(token.value);
