@@ -3,8 +3,7 @@ import GotoParser from "./modules/parser.js";
 // Credit to StackOverflow: https://stackoverflow.com/questions/4282151/is-it-possible-to-ping-a-server-from-javascript
 document.getElementById("visualeditor").style.display = "none";
 document.getElementById("visualeditor").style.visibility = "hidden";
-robot.style.visibility = "hidden";
-robot.style.diasplay = "none";
+
 // document.getElementById("visualeditor").style.opacity = "0";
 var visualeditor = document.getElementById("visualeditor");
 var robot = document.getElementById("robot");
@@ -206,6 +205,8 @@ function addToUndoStack() {
 }
 
 // Actual page functions
+robot.style.visibility = "hidden";
+robot.style.diasplay = "none";
 var editor = document.getElementById("editor");
 var undoStack = [editor?.value];
 var stackPos = 0;
