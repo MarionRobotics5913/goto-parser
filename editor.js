@@ -503,7 +503,7 @@ window.toggleCollapse = function(name) {
 };
 
 var ctx = visualeditor.getContext("2d");
-var robotCtx = robot.getContext("2d");
+var robotCtx = visualeditor.getContext("2d");
 
 window.draw = function() {};
 
