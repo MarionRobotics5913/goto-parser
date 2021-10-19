@@ -207,8 +207,7 @@ function addToUndoStack() {
 }
 
 // Actual page functions
-//robot.style.visibility = "hidden";
-//robot.style.diasplay = "none";
+
 var editor = document.getElementById("editor");
 var undoStack = [editor?.value];
 var stackPos = 0;
@@ -584,9 +583,8 @@ window.visualEditor = function() {
     document.getElementById("highlighter").style.display = "initial";
     visualeditor.style.display = "none";
     visualeditor.style.visibility = "hidden";
-    //robot.style.visibility = "hidden";
-    //robot.style.display = "none";
-    grid_squares.length = 0;
+    
+grid_squares.length = 0;
   } else if (visualeditor.style.display === false || VEactivated === false) {
     //activate
     // veElement.classList.remove("editorout");
@@ -603,8 +601,7 @@ window.visualEditor = function() {
     document.getElementById("highlighter").style.display = "none";
     visualeditor.style.display = "block";
     visualeditor.style.visibility = "visible";
-    //robot.style.display = "block"
-    //robot.style.visibility = "visible";
+
     grid_squares.length = 36;
   }
 };
