@@ -511,8 +511,8 @@ window.toggleGrid = function() {
   drawSquares = false;
 };
 
-var x = 4;
-var y = -10;
+var x = 23;
+var y = 36;
 var grid_squares = [];
 var gridX = 1;
 var gridY = 1;
@@ -533,8 +533,9 @@ for (var i = 0; i < 6; ) {
   }
   i++;
 }
-//ctx.translate(x + width / 2, y + height / 2);
-//ctx.rotate((90 * Math.PI) / 180);
+ctx.translate(x + width / 2, y + height / 2);
+ctx.rotate((90 * Math.PI) / 180);
+ctx.translate(-x,-y);
 //the robot
 robotCtx.fillStyle = "#c9c9c9";
 robotCtx.fillRect(x, y, width, height);
