@@ -517,6 +517,7 @@ var gridX = 1;
 var gridY = 1;
 var width = 37,
   height = 37;
+var gridLineColor = "#4a4a4a";
 //credit to google's color picker for the hex versions of the colors
 //the feild
 ctx.fillStyle = "#f1ffb8";
@@ -526,7 +527,8 @@ ctx.strokeWeight = "6";
 for (var i = 0; i < 6; ) {
   for (var j = 0; j < 6; ) {
     ctx.fillRect(i * 50, j * 50, 50, 50);
-    if (drawSquares === true) ctx.strokeRect(i * 50, j * 50, 50, 50);
+    ctx.strokeStyle = gridLineColor;
+    ctx.strokeRect(i * 50, j * 50, 50, 50);
     grid_squares.push("" + i + "," + j);
     j++;
   }
@@ -583,8 +585,7 @@ window.visualEditor = function() {
     document.getElementById("highlighter").style.display = "initial";
     visualeditor.style.display = "none";
     visualeditor.style.visibility = "hidden";
-    
-grid_squares.length = 0;
+    grid_squares.length = 0;
   } else if (visualeditor.style.display === false || VEactivated === false) {
     //activate
     // veElement.classList.remove("editorout");
@@ -601,7 +602,6 @@ grid_squares.length = 0;
     document.getElementById("highlighter").style.display = "none";
     visualeditor.style.display = "block";
     visualeditor.style.visibility = "visible";
-
     grid_squares.length = 36;
   }
 };
