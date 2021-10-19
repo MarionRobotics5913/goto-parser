@@ -3,12 +3,12 @@ import GotoParser from "./modules/parser.js";
 // Credit to StackOverflow: https://stackoverflow.com/questions/4282151/is-it-possible-to-ping-a-server-from-javascript
 document.getElementById("visualeditor").style.display = "none";
 document.getElementById("visualeditor").style.visibility = "hidden";
-document.getElementById("robot").style.visibility = "hidden";
-document.getElementById("robot").style.display = "none";
+//document.getElementById("robot").style.visibility = "hidden";
+//document.getElementById("robot").style.display = "none";
 
 // document.getElementById("visualeditor").style.opacity = "0";
 var visualeditor = document.getElementById("visualeditor");
-var robot = document.getElementById("robot");
+//var robot = document.getElementById("robot");
 var VEactivated = false;
 var drawSquares = true;
 
@@ -207,8 +207,8 @@ function addToUndoStack() {
 }
 
 // Actual page functions
-robot.style.visibility = "hidden";
-robot.style.diasplay = "none";
+//robot.style.visibility = "hidden";
+//robot.style.diasplay = "none";
 var editor = document.getElementById("editor");
 var undoStack = [editor?.value];
 var stackPos = 0;
@@ -511,8 +511,8 @@ window.toggleGrid = function() {
   drawSquares = false;
 };
 
-var x = 112;
-var y = -20;
+var x = 4;
+var y = -10;
 var grid_squares = [];
 var gridX = 1;
 var gridY = 1;
@@ -533,8 +533,8 @@ for (var i = 0; i < 6; ) {
   }
   i++;
 }
-ctx.translate(x + width / 2, y + height / 2);
-ctx.rotate((90 * Math.PI) / 180);
+//ctx.translate(x + width / 2, y + height / 2);
+//ctx.rotate((90 * Math.PI) / 180);
 //the robot
 robotCtx.fillStyle = "#c9c9c9";
 robotCtx.fillRect(x, y, width, height);
@@ -583,8 +583,8 @@ window.visualEditor = function() {
     document.getElementById("highlighter").style.display = "initial";
     visualeditor.style.display = "none";
     visualeditor.style.visibility = "hidden";
-    robot.style.visibility = "hidden";
-    robot.style.display = "none";
+    //robot.style.visibility = "hidden";
+    //robot.style.display = "none";
     grid_squares.length = 0;
   } else if (visualeditor.style.display === false || VEactivated === false) {
     //activate
@@ -602,8 +602,8 @@ window.visualEditor = function() {
     document.getElementById("highlighter").style.display = "none";
     visualeditor.style.display = "block";
     visualeditor.style.visibility = "visible";
-    robot.style.display = "block"
-    robot.style.visibility = "visible";
+    //robot.style.display = "block"
+    //robot.style.visibility = "visible";
     grid_squares.length = 36;
   }
 };
