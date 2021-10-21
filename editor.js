@@ -526,6 +526,7 @@ var width = 37,
 var gridLineColor = "#4a4a4a";
 for (var i = 0; i < 6; ) {
   for (var j = 0; j < 6; ) {
+    ctx.fillStyle = "#f1ffb8"
     ctx.fillRect(i * 50, j * 50, 50, 50);
     grid_squares.push("" + i + "," + j);
     j++;

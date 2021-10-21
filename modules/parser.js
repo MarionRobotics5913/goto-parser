@@ -257,12 +257,15 @@ export default function GotoParser() {
           break;
         case "{":
           console.log("Code block");
+          var blockTokens = [];
           while(nextToken?.value !== "}"){
             increment();
             if(token.type === "terminator"){
               handleError(`No ending bracket`, "");
             }
+            blockTokens.push(token);
           }
+          
           break;
         default:
           // actions.push(token);
