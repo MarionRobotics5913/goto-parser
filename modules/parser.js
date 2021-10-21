@@ -203,7 +203,7 @@ export default function GotoParser() {
     tokens = tokens.filter(token => token.type !== "comment");
     while (x < tokens.length - 1) {
       increment();
-      console.log(token);
+      // console.log(token);
       // console.log(token);
       switch (token.value) {
         case "goto":
@@ -219,7 +219,7 @@ export default function GotoParser() {
             increment();
             if (token?.type === "identifier") {
               name = token.value;
-              console.log(idents);
+              // console.log(idents);
               for(var i in idents){
                 var ident = idents[i]; // Because JS
                 if(name === ident){
@@ -242,7 +242,7 @@ export default function GotoParser() {
               }
             } else if (token && token.type !== "terminator") {
               // increment();
-              console.log(token);
+              // console.log(token);
               handleError();
             }
           }
@@ -254,6 +254,9 @@ export default function GotoParser() {
         case ";":
           // increment();
           console.log("terminator")
+          break;
+        case "{":
+          console.log("Code block");
           break;
         default:
           // actions.push(token);

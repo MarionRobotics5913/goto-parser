@@ -489,7 +489,7 @@ if (editor) {
 
 window.toggleCollapse = function(name) {
   var settingsPanel = document.getElementById(name);
-  if (!settingsPanel) return "I lost the game"; // Darn you me from the past
+  if (!settingsPanel) return "The thing"; // lol 
 
   settingsPanel.style.animationDuration = "0.8s";
   if (
