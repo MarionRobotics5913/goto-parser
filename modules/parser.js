@@ -253,10 +253,16 @@ export default function GotoParser() {
         case "\n":
         case ";":
           // increment();
-          console.log("terminator")
+          // console.log("terminator");
           break;
         case "{":
           console.log("Code block");
+          while(nextToken?.value !== "}"){
+            increment();
+            if(token.type === "terminator"){
+              handleError(`No ending bracket`, "");
+            }
+          }
           break;
         default:
           // actions.push(token);
