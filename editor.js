@@ -524,6 +524,14 @@ var gridY = 1;
 var width = 37,
   height = 37;
 var gridLineColor = "#4a4a4a";
+for (var i = 0; i < 6; ) {
+  for (var j = 0; j < 6; ) {
+    ctx.fillRect(i * 50, j * 50, 50, 50);
+    grid_squares.push("" + i + "," + j);
+    j++;
+  }
+  i++;
+}
 
 window.visualEditor = function() {
   var veElement = document.getElementById("visualeditor");
@@ -575,7 +583,6 @@ window.visualEditor = function() {
     // ctx.translate(-x, -y);
     for (var i = 0; i < 6; ) {
       for (var j = 0; j < 6; ) {
-        ctx.fillRect(i * 50, j * 50, 50, 50);
         ctx.strokeStyle = gridLineColor;
         ctx.strokeRect(i * 50, j * 50, 50, 50);
         grid_squares.push("" + i + "," + j);
