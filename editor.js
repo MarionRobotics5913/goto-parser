@@ -124,7 +124,11 @@ function runGotoActions(actionObject, callback) {
             ${action.name} (at&nbsp${action.args.line}:${action.args.column})
           </div>`;
     } else if (action.name === "block") {
-      var internalBlocks = [];
+      return `<div class='command-block'>
+            <strong>${action.name}</strong>
+            <br>
+            ${action.args.map(toBlock).join("")}
+          </div>`;      
     } else {
       return `<div class='command-block'>
             <strong>${action.name}</strong> -
@@ -134,7 +138,7 @@ function runGotoActions(actionObject, callback) {
           </div>`;
     }
   }
-  var res = `<br />
+/*  var res = `<br />
     ${actionObject.issues
       ?.map(
         issue => `<div class='warn command-block'>
@@ -157,7 +161,15 @@ function runGotoActions(actionObject, callback) {
           </div>`;
         }
       })
-      ?.join("")}`;
+      ?.join("")}`;*/
+  var res = `
+    ${actionObject.issues
+      ?.map(
+        issue => `<div class='warn command-block'>
+    ${issue.message}</div>`
+      )
+      .join("")}
+    ${actionObject.actions.map(toBlock)?.join("")}`;
   callback(res);
 }
 

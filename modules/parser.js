@@ -255,9 +255,18 @@ export default function GotoParser() {
           // console.log("terminator");
           break;
         case "{":
-          // console.log("Code block");
+          console.log("Code block");
           var blockTokens = [];
-          while (nextToken?.value !== "}") {
+          console.log(token);
+          console.log(nextToken);
+          var bracketLevel = 1;
+          while (nextToken && bracketLevel) {
+            if(token.value === "}"){
+              bracketLevel--;
+              continue;
+            }
+            if(token.value )
+          console.log(token);
             increment();
             if (token.value === "eof") {
               handleError(`No ending bracket`, "");
