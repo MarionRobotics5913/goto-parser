@@ -117,6 +117,23 @@ function runGotoActions(actionObject, callback) {
   //       callback(`Unrecognized command ${actionObject[x].command} run`);
   //   }
   // }
+  function toBlock(action) {
+    if (action.type === "error") {
+      return `<div class='error command-block'>
+            <strong>Error</strong>:
+            ${action.name} (at&nbsp${action.args.line}:${action.args.column})
+          </div>`;
+    } else if (action.name === "block") {
+      var internalBlocks = [];
+    } else {
+      return `<div class='command-block'>
+            <strong>${action.name}</strong> -
+            ${Object.entries(action.args)
+              .map(([x, v]) => `${x}: ${v}`)
+              .join(", ")}
+          </div>`;
+    }
+  }
   var res = `<br />
     ${actionObject.issues
       ?.map(
@@ -489,7 +506,7 @@ if (editor) {
 
 window.toggleCollapse = function(name) {
   var settingsPanel = document.getElementById(name);
-  if (!settingsPanel) return "The thing"; // lol 
+  if (!settingsPanel) return "The thing"; // lol
 
   settingsPanel.style.animationDuration = "0.8s";
   if (
@@ -526,7 +543,7 @@ var width = 37,
 var gridLineColor = "#4a4a4a";
 for (var i = 0; i < 6; ) {
   for (var j = 0; j < 6; ) {
-    ctx.fillStyle = "#f1ffb8"
+    ctx.fillStyle = "#f1ffb8";
     ctx.fillRect(i * 50, j * 50, 50, 50);
     grid_squares.push("" + i + "," + j);
     j++;

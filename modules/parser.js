@@ -136,7 +136,6 @@ export default function GotoParser() {
     }
     return tokens;
   };
-  
 
   this.parse = function(tokens) {
     var x = -1; // Gets incremented to 0 immediately and updates the character
@@ -198,7 +197,7 @@ export default function GotoParser() {
         increment();
       }
     }
-    
+
     var infiniteLoopStopper = 0;
     tokens = tokens.filter(token => token.type !== "comment");
     while (x < tokens.length - 1) {
@@ -220,9 +219,9 @@ export default function GotoParser() {
             if (token?.type === "identifier") {
               name = token.value;
               // console.log(idents);
-              for(var i in idents){
+              for (var i in idents) {
                 var ident = idents[i]; // Because JS
-                if(name === ident){
+                if (name === ident) {
                   handleError(`Duplicate argument '${ident}' in action`, "");
                 }
               }
@@ -256,20 +255,19 @@ export default function GotoParser() {
           // console.log("terminator");
           break;
         case "{":
-          console.log("Code block");
+          // console.log("Code block");
           var blockTokens = [];
-          while(nextToken?.value !== "}"){
+          while (nextToken?.value !== "}") {
             increment();
-            if(token.type === "terminator"){
+            if (token.value === "eof") {
               handleError(`No ending bracket`, "");
               newAction();
               break;
             }
-            blockTokens.push(token);
+            blockTokens.push(JSON.parse(JSON.stringify(token)));
           }
           increment(); // The current token should be }
           currAction.name = "block";
-          console.log(blockTokens);
           currAction.args = this.parse(blockTokens);
           newAction();
           break;
@@ -280,26 +278,39 @@ export default function GotoParser() {
           break;
       }
     }
-    console.log(actions);
+    // console.log(actions);
     return actions;
   };
 
   this.analyze = function(actions) {
     var issues = [];
     var commands = actions.filter(action => action.type === "action");
-    
+
     function handleError(msg, pos) {
       var token = actions[pos]?.tokens[0];
-      issues.push({ message: msg + (token?` (at ${token.line}:${token.column})`:""), action: actions[pos] });
+      issues.push({
+        message: msg + (token ? ` (at ${token.line}:${token.column})` : ""),
+        action: actions[pos]
+      });
     }
 
-    if (actions[0]?.name !== "start" || actions[0]?.args[0]?.includes("x") || actions[0]?.args[0]?.inclueds("y")) {
-      handleError("The program does not begin with a functional starting position (use <code>start</code>)", 0);
+    if (
+      actions[0]?.name !== "start" ||
+      actions[0]?.args[0]?.includes("x") ||
+      actions[0]?.args[0]?.inclueds("y")
+    ) {
+      handleError(
+        "The program does not begin with a functional starting position (use <code>start</code>)",
+        0
+      );
     }
-    
-    for(var x in commands){
-      if(Object.entries(commands[x].args).length === 0){
-        handleError(`There is a command <code>${commands[x].name}</code> without arguments`, x)
+
+    for (var x in commands) {
+      if (Object.entries(commands[x].args).length === 0) {
+        handleError(
+          `There is a command <code>${commands[x].name}</code> without arguments`,
+          x
+        );
       }
     }
 
@@ -391,4 +402,3 @@ export default function GotoParser() {
     };
   };
 }
-
