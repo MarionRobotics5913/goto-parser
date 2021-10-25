@@ -671,7 +671,9 @@ window.visualEditor = function() {
     );
   }
 };
-function update() {}
+function update() {
+  
+}
 
 if (localStorage.ok) {
   //   var inputs = document.getElementsByTagName("input");

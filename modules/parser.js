@@ -149,7 +149,7 @@ export default function GotoParser() {
     function newAction() {
       actions.push(currAction);
       currAction = {
-        type: "action",
+        type: "command",
         name: "",
         args: {},
         tokens: []
@@ -256,6 +256,8 @@ export default function GotoParser() {
           break;
         case "{":
           console.log("Code block");
+          currAction.name = "block";
+          currAction.type = "block";
           var stopInfinite = 0;
           var blockTokens = [];
           var bracketLevel = 1;
@@ -285,8 +287,7 @@ export default function GotoParser() {
             blockTokens.push(JSON.parse(JSON.stringify(token)));
           }
           increment(); // The current token should be }
-          console.log(blockTokens.map(a => a.value).join(", "));
-          currAction.name = "block";
+          // console.log(blockTokens.map(a => a.value).join(", "));
           currAction.args = this.parse(blockTokens);
           newAction();
           break;
@@ -297,7 +298,7 @@ export default function GotoParser() {
           break;
       }
     }
-    console.log(actions);
+    // console.log(actions);
     return actions;
   };
 
@@ -324,7 +325,7 @@ export default function GotoParser() {
       );
     }
 
-    for (var x in commands) {
+    for (var x in commands.filter(c => c.type === "command")) {
       if (Object.entries(commands[x].args).length === 0) {
         handleError(
           `There is a command <code>${commands[x].name}</code> without arguments`,
