@@ -16,14 +16,15 @@ function ping(host, port, pong) {
   var started = new Date().getTime();
 
   var http = new XMLHttpRequest(); // Fetch API?
+  var url = "http://" + host + ":" + port;
 
-  http.open("GET", "http://" + host + ":" + port, /*async*/ true);
+  http.open("GET", url, /*async*/ true);
   http.onreadystatechange = function() {
     if (http.readyState == 4 && http.status == 200) {
       var ended = new Date().getTime();
       var milliseconds = ended - started;
       if (pong != null) {
-        pong(milliseconds);
+        pong(url, milliseconds);
       }
     }
   };
@@ -58,7 +59,7 @@ if (!String.prototype.splice) {
 if (window.process && process.versions.hasOwnProperty("electron")) {
 } else {
   function upload() {
-    var name = "Meepably";
+    var name = "Meepably2";
     if (!name) return;
     // Robot is at either http://192.168.43.1:8080 or http://192.168.49.1:8080
     // Process:
@@ -72,19 +73,19 @@ if (window.process && process.versions.hasOwnProperty("electron")) {
 
       var xhr = new XMLHttpRequest(); // Fetch API?
       var file =
-        "package org.firstinsprites.ftc.teamcode;\n" +
+        "package org.firstinspires.ftc.teamcode;\n" +
         '@GotoProgram(name="' +
         name +
         '", code=' +
         JSON.stringify(document.getElementById("editor").value) +
-        ")\npublic class Goto" +
+        ")\npublic class " +
         name +
         " {}";
       var data = new FormData();
       data.append(
         "file",
         new Blob([file], { type: "text/x-java" }),
-        "goto." + name + ".java"
+        name + ".java"
       );
       xhr.open("POST", url + "/java/file/upload");
       xhr.send(data);
