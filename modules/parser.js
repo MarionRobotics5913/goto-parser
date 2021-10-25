@@ -259,21 +259,23 @@ export default function GotoParser() {
           var stopInfinite = 0;
           var blockTokens = [];
           var bracketLevel = 1;
-          while (nextToken && bracketLevel>0) {
-            stopInfinite ++;
-            if(stopInfinite>1000){
+          while (nextToken && bracketLevel > 0) {
+            stopInfinite++;
+            if (stopInfinite > 1000) {
               console.log("Block code looped over 1000 times");
               throw "AAAA";
             }
-          // console.log(token);
+            // console.log(token);
             increment();
-            if(token.value === "}"){
+            if (token.value === "}") {
               bracketLevel--;
-              continue;
+              if (bracketLevel === 0) {
+                continue;
+              }
             }
-            if(token.value === "{"){
+            if (token.value === "{") {
               bracketLevel++;
-              continue;
+              // continue;
             }
             if (token.value === "eof") {
               handleError(`No ending bracket`, "");
@@ -283,6 +285,7 @@ export default function GotoParser() {
             blockTokens.push(JSON.parse(JSON.stringify(token)));
           }
           increment(); // The current token should be }
+          console.log(blockTokens.map(a => a.value).join(", "));
           currAction.name = "block";
           currAction.args = this.parse(blockTokens);
           newAction();
