@@ -256,18 +256,25 @@ export default function GotoParser() {
           break;
         case "{":
           console.log("Code block");
+          var stopInfinite = 0;
           var blockTokens = [];
-          console.log(token);
-          console.log(nextToken);
           var bracketLevel = 1;
-          while (nextToken && bracketLevel) {
+          while (nextToken && bracketLevel>0) {
+            stopInfinite ++;
+            if(stopInfinite>1000){
+              console.log("Block code looped over 1000 times");
+              throw "AAAA";
+            }
+          // console.log(token);
+            increment();
             if(token.value === "}"){
               bracketLevel--;
               continue;
             }
-            if(token.value )
-          console.log(token);
-            increment();
+            if(token.value === "{"){
+              bracketLevel++;
+              continue;
+            }
             if (token.value === "eof") {
               handleError(`No ending bracket`, "");
               newAction();
@@ -287,7 +294,7 @@ export default function GotoParser() {
           break;
       }
     }
-    // console.log(actions);
+    console.log(actions);
     return actions;
   };
 

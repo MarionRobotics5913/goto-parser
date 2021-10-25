@@ -190,7 +190,7 @@ window.parseProgram = function(programString) {
   runGotoActions(new GotoParser().parseProgram(programString), output => {
     document.getElementById("output").innerHTML = output;
   });
-  highlightBlocks();
+  window.highlightBlocks();
 };
 
 window.codeUpdate = function(parse) {
@@ -212,7 +212,7 @@ window.codeUpdate = function(parse) {
 
   // alert(text);
   if (parse && document.getElementById("autoparse").checked) {
-    parseProgram(textarea.value);
+    window.parseProgram(textarea.value);
   }
 };
 
@@ -225,7 +225,7 @@ window.sync_scroll = function(element) {
   result_element.scrollLeft = element.scrollLeft;
 };
 
-codeUpdate(true);
+window.codeUpdate(true);
 
 function addToUndoStack() {
   undoStack[stackPos++] = editor.value;
