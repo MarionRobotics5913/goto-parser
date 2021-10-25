@@ -96,7 +96,16 @@ set arm: 0.9 stop // Reach down to box
       Loading scripts...
     </div>
   </div>
-  <!-- <div width="300" max-height="300"><!-- <canvas id="visualeditor"class="editorout"height="300"x="200"y="200"onclick="update()"></canvas> </div> -->
+  <div width="300" max-height="300">
+    <canvas
+      id="visualeditor"
+      class="editorout"
+      height="300"
+      x="200"
+      y="200"
+      onclick="update()"
+    ></canvas>
+  </div>
 
   <button
     id="parseButton"
@@ -104,7 +113,7 @@ set arm: 0.9 stop // Reach down to box
   >
     Parse
   </button>
-  <button id="visualeditor" onclick="visualEditor()">
+  <button id="visualeditorbtn" onclick="visualEditor()">
     Visual Editor
   </button>
   Output:<br />

@@ -332,7 +332,15 @@ export default function GotoParser() {
         );
       }
     }
-
+    for(var x in commands.filter(c => c.type === "block")) {
+      console.log(x);
+      if (Object.entries(commands[x].args).length === 0) {
+        handleError(
+          `Empty code block`,
+          x
+        );
+      }      
+    }
     return issues;
   };
 

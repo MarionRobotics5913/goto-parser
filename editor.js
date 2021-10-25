@@ -1,8 +1,8 @@
 import GotoParser from "./modules/parser.js";
 
 // Credit to StackOverflow: https://stackoverflow.com/questions/4282151/is-it-possible-to-ping-a-server-from-javascript
-document.getElementById("visualeditor").style.display = "none";
-document.getElementById("visualeditor").style.visibility = "hidden";
+//document.getElementById("visualeditor").style.display = "none";
+//document.getElementById("visualeditor").style.visibility = "hidden";
 //document.getElementById("robot").style.visibility = "hidden";
 //document.getElementById("robot").style.display = "none";
 
@@ -56,50 +56,47 @@ if (!String.prototype.splice) {
   };
 }
 
-if (window.process && process.versions.hasOwnProperty("electron")) {
-} else {
-  function upload() {
-    var name = "Meepably2";
-    if (!name) return;
-    // Robot is at either http://192.168.43.1:8080 or http://192.168.49.1:8080
-    // Process:
-    // 1. Build Java file
-    // 2. Send POST request to <server>/java/file/upload
-    //   a. Send file as "file" in a multipart form
-    var responseRecieved = false;
-    function part2(url, millis) {
-      if (responseRecieved) return;
-      responseRecieved = true;
+function upload() {
+  var name = "Meepably2"; // TODO: Don't hardcode name
+  if (!name) return;
+  // Robot is at either http://192.168.43.1:8080 or http://192.168.49.1:8080
+  // Process:
+  // 1. Build Java file
+  // 2. Send POST request to <server>/java/file/upload
+  //   a. Send file as "file" in a multipart form
+  var responseRecieved = false;
+  function part2(url, millis) {
+    if (responseRecieved) return;
+    responseRecieved = true;
 
-      var xhr = new XMLHttpRequest(); // Fetch API?
-      var file =
-        "package org.firstinspires.ftc.teamcode;\n" +
-        '@GotoProgram(name="' +
-        name +
-        '", code=' +
-        JSON.stringify(document.getElementById("editor").value) +
-        ")\npublic class " +
-        name +
-        " {}";
-      var data = new FormData();
-      data.append(
-        "file",
-        new Blob([file], { type: "text/x-java" }),
-        name + ".java"
-      );
-      xhr.open("POST", url + "/java/file/upload");
-      xhr.send(data);
-    }
-    ping("192.168.43.1", "8080", part2);
-    ping("192.168.49.1", "8080", part2);
+    var xhr = new XMLHttpRequest(); // Fetch API?
+    var file =
+      "package org.firstinspires.ftc.teamcode;\n" +
+      '@GotoProgram(programName="' +
+      name +
+      '", code=' +
+      JSON.stringify(document.getElementById("editor").value) +
+      ")\npublic class " +
+      name +
+      " {}";
+    var data = new FormData();
+    data.append(
+      "file",
+      new Blob([file], { type: "text/x-java" }),
+      name + ".java"
+    );
+    xhr.open("POST", url + "/java/file/upload");
+    xhr.send(data);
   }
-
-  var parseButton = document.getElementById("parseButton");
-  var uploadButton = document.createElement("button");
-  uploadButton.innerHTML = "Upload";
-  uploadButton.onclick = upload;
-  parseButton?.parentNode?.insertBefore(uploadButton, parseButton.nextSibling);
+  ping("192.168.43.1", "8080", part2);
+  ping("192.168.49.1", "8080", part2);
 }
+
+var parseButton = document.getElementById("parseButton");
+var uploadButton = document.createElement("button");
+uploadButton.innerHTML = "Upload";
+uploadButton.onclick = upload;
+parseButton?.parentNode?.insertBefore(uploadButton, parseButton.nextSibling);
 
 var data;
 
@@ -554,15 +551,7 @@ var gridY = 1;
 var width = 37,
   height = 37;
 var gridLineColor = "#4a4a4a";
-for (var i = 0; i < 6; ) {
-  for (var j = 0; j < 6; ) {
-    ctx.fillStyle = "#f1ffb8";
-    ctx.fillRect(i * 50, j * 50, 50, 50);
-    grid_squares.push("" + i + "," + j);
-    j++;
-  }
-  i++;
-}
+
 
 window.visualEditor = function() {
   var veElement = document.getElementById("visualeditor");
@@ -615,7 +604,7 @@ window.visualEditor = function() {
   }
 };
 function setup(){
-    rect()
+    window.createCanvas(200,200);
 
 }
 function draw(){
