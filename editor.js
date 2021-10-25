@@ -611,66 +611,15 @@ window.visualEditor = function() {
     // ctx.translate(x + width / 2, y + height / 2);
     // ctx.rotate((90 * Math.PI) / 180);
     // ctx.translate(-x, -y);
-    for (var i = 0; i < 6; ) {
-      for (var j = 0; j < 6; ) {
-        ctx.strokeStyle = gridLineColor;
-        ctx.strokeRect(i * 50, j * 50, 50, 50);
-        grid_squares.push("" + i + "," + j);
-        j++;
-      }
-      i++;
-    }
-    ctx.translate(x + width / 2, y + height / 2);
-    ctx.rotate((90 * Math.PI) / 180);
-    ctx.translate(-x, -y);
-    //the robot
-    robotCtx.fillStyle = "#c9c9c9";
-    robotCtx.fillRect(x, y, width, height);
-    //motors
-    robotCtx.fillStyle = "#696969";
-    //front left
-    robotCtx.fillRect(x + width / 16, y + height / 21, width / 3, height / 8);
-    //front right
-    robotCtx.fillRect(x + width / 1.4, y + height / 21, width / 3, height / 8);
-    //back left
-    robotCtx.fillRect(x + width / 16, y + height / 1.2, width / 3, height / 8);
-    //back right
-    robotCtx.fillRect(x + width / 1.4, y + height / 1.2, width / 3, height / 8);
-    //the treads
-    robotCtx.fillStyle = "#000000";
-    robotCtx.fillRect(
-      x - width / 10,
-      y - height / 10,
-      width / 5,
-      height + height / 5
-    );
-    robotCtx.fillRect(
-      x + width,
-      y - width / 10,
-      width / 5,
-      height + height / 5
-    );
-    //the control bub and the expantion hub
-    robotCtx.fillStyle = "#4a4a4a";
-    robotCtx.fillRect(x + width / 5, y + height / 2, width / 3, height / 4);
-    //battery holder
-    robotCtx.fillStyle = "#7ce800";
-    robotCtx.fillRect(
-      x + width / 1.5,
-      y + height / 2.25,
-      width / 5,
-      height / 2.6
-    );
-    //battery
-    robotCtx.fillStyle = "#000000";
-    robotCtx.fillRect(
-      x + width / 1.43,
-      y + height / 2.1,
-      width / 8,
-      height / 3.3
-    );
   }
 };
+function setup(){
+    createCanvas(400, 400);
+
+}
+function draw(){
+  
+}
 function update() {
   
 }
