@@ -262,10 +262,16 @@ export default function GotoParser() {
             increment();
             if(token.type === "terminator"){
               handleError(`No ending bracket`, "");
+              newAction();
+              break;
             }
             blockTokens.push(token);
           }
-          
+          increment(); // The current token should be }
+          currAction.name = "block";
+          console.log(blockTokens);
+          currAction.args = this.parse(blockTokens);
+          newAction();
           break;
         default:
           // actions.push(token);
