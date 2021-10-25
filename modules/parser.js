@@ -286,7 +286,6 @@ export default function GotoParser() {
             }
             blockTokens.push(JSON.parse(JSON.stringify(token)));
           }
-          increment(); // The current token should be }
           // console.log(blockTokens.map(a => a.value).join(", "));
           currAction.args = this.parse(blockTokens);
           newAction();

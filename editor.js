@@ -615,7 +615,7 @@ window.visualEditor = function() {
   }
 };
 function setup(){
-    createCanvas(400, 400);
+    rect()
 
 }
 function draw(){
