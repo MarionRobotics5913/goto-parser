@@ -1,8 +1,8 @@
 import GotoParser from "./modules/parser.js";
 
 // Credit to StackOverflow: https://stackoverflow.com/questions/4282151/is-it-possible-to-ping-a-server-from-javascript
-document.getElementById("visualeditor").style="position: absolute; width:0; height:0; border:none;display:none !important";
-
+document.getElementById("visualeditor").style =
+  "position: absolute; width:0; height:0; border:none;display:none !important";
 //document.getElementById("robot").style.visibility = "hidden";
 //document.getElementById("robot").style.display = "none";
 
@@ -127,7 +127,7 @@ function runGotoActions(actionObject, callback) {
             <strong>${action.name}</strong>
             <br>
             ${action.args.map(toBlock).join("")}
-          </div>`;      
+          </div>`;
     } else {
       return `<div class='command-block'>
             <strong>${action.name}</strong> -
@@ -137,7 +137,7 @@ function runGotoActions(actionObject, callback) {
           </div>`;
     }
   }
-/*  var res = `<br />
+  /*  var res = `<br />
     ${actionObject.issues
       ?.map(
         issue => `<div class='warn command-block'>
@@ -553,7 +553,6 @@ var width = 37,
   height = 37;
 var gridLineColor = "#4a4a4a";
 
-
 window.visualEditor = function() {
   var veElement = document.getElementById("visualeditor");
   var editor = document.getElementById("editor");
@@ -573,8 +572,9 @@ window.visualEditor = function() {
     document.getElementById("editor").style.display = "initial";
     document.getElementById("highlighter").style.visibility = "visible";
     document.getElementById("highlighter").style.display = "initial";
-    removeCanvas = true;
+    window.resizeCanvas(1, 1);
     grid_squares.length = 0;
+    removeCanvas = false;
   } else if (visualeditor.style.display === false || VEactivated === false) {
     //activate
     // veElement.classList.remove("editorout");
@@ -589,7 +589,7 @@ window.visualEditor = function() {
     document.getElementById("editor").style.display = "none";
     document.getElementById("highlighter").style.visibility = "hidden";
     document.getElementById("highlighter").style.display = "none";
-    window.resizeCanvas(1,1);
+    window.resizeCanvas(200, 200);
     grid_squares.length = 36;
     //credit to google's color picker for the hex versions of the colors
     //the feild
@@ -600,7 +600,7 @@ window.visualEditor = function() {
     // ctx.translate(x + width / 2, y + height / 2);
     // ctx.rotate((90 * Math.PI) / 180);
     // ctx.translate(-x, -y);
-      //the robot
+    //the robot
     // ctx.fillStyle = "#c9c9c9";
     // ctx.fillRect(x, y, width, height);
     // //motors
@@ -626,29 +626,29 @@ window.visualEditor = function() {
     // //battery
     // ctx.fillStyle = "#000000";
     // ctx.fillRect(x + width / 1.43, y + height / 2.1, width / 8, height / 3.3);
+    removeCanvas = false;
   }
 };
-window.setup = function setup(){
-    var cvs = window.createCanvas(200,200);
-    cvs.position(20,67);
-  
-}
-window.draw = function draw(){
+window.setup = function setup() {
+  var cvs = window.createCanvas(200, 200);
+  cvs.position(20, 67);
+};
+window.draw = function draw() {
   console.log("called");
-  
+
   window.fill("#f1ffb8");
-  for(var i = 0; i < 36; i++){
-    for(var j = 0; j < 36; j++){
-      window.rect(i*50,j*50,50,50);
+  for (var i = 0; i < 36; i++) {
+    for (var j = 0; j < 36; j++) {
+      window.rect(i * 50, j * 50, 50, 50);
     }
   }
-  // if(removeCanvas === true){
-  //   window.noCanvas();
-  // }else if(removeCanvas === false){
-  //   window.createCanvas(200,200);
-  // }
-}
-
+  if (removeCanvas) {
+    window.resizeCanvas(1, 1);
+    document.getElementById("visualeditor").style = "display: none";
+  } else if (!removeCanvas) {
+    window.resizeCanvas(200, 200);
+  }
+};
 
 if (localStorage.ok) {
   //   var inputs = document.getElementsByTagName("input");
