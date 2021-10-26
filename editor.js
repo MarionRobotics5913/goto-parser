@@ -1,12 +1,13 @@
 import GotoParser from "./modules/parser.js";
 
 // Credit to StackOverflow: https://stackoverflow.com/questions/4282151/is-it-possible-to-ping-a-server-from-javascript
-document.getElementById("visualeditor").style="position: absolute; width:0; height:0; border:0;display:none !important";
-window.noCanvas();
+document.getElementById("visualeditor").style="position: absolute; width:0; height:0; border:none;display:none !important";
+
 //document.getElementById("robot").style.visibility = "hidden";
 //document.getElementById("robot").style.display = "none";
 
 // document.getElementById("visualeditor").style.opacity = "0";
+var removeCanvas = true;
 var visualeditor = document.getElementById("visualeditor");
 //var robot = document.getElementById("robot");
 var VEactivated = false;
@@ -572,8 +573,7 @@ window.visualEditor = function() {
     document.getElementById("editor").style.display = "initial";
     document.getElementById("highlighter").style.visibility = "visible";
     document.getElementById("highlighter").style.display = "initial";
-    visualeditor.style.display = "none";
-    visualeditor.style.visibility = "hidden";
+    removeCanvas = true;
     grid_squares.length = 0;
   } else if (visualeditor.style.display === false || VEactivated === false) {
     //activate
@@ -589,8 +589,7 @@ window.visualEditor = function() {
     document.getElementById("editor").style.display = "none";
     document.getElementById("highlighter").style.visibility = "hidden";
     document.getElementById("highlighter").style.display = "none";
-    visualeditor.style.display = "block";
-    visualeditor.style.visibility = "visible";
+    window.resizeCanvas(1,1);
     grid_squares.length = 36;
     //credit to google's color picker for the hex versions of the colors
     //the feild
@@ -632,14 +631,22 @@ window.visualEditor = function() {
 window.setup = function setup(){
     var cvs = window.createCanvas(200,200);
     cvs.position(20,67);
+  
 }
 window.draw = function draw(){
+  console.log("called");
+  
   window.fill("#f1ffb8");
   for(var i = 0; i < 36; i++){
     for(var j = 0; j < 36; j++){
       window.rect(i*50,j*50,50,50);
     }
   }
+  // if(removeCanvas === true){
+  //   window.noCanvas();
+  // }else if(removeCanvas === false){
+  //   window.createCanvas(200,200);
+  // }
 }
 
 
