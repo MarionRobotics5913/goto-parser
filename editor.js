@@ -601,39 +601,40 @@ window.visualEditor = function() {
     // ctx.translate(x + width / 2, y + height / 2);
     // ctx.rotate((90 * Math.PI) / 180);
     // ctx.translate(-x, -y);
-    //the robot
-    ctx.fillStyle = "#c9c9c9";
-    ctx.fillRect(x, y, width, height);
-    //motors
-    ctx.fillStyle = "#696969";
-    //front left
-    ctx.fillRect(x + width / 16, y + height / 21, width / 3, height / 8);
-    //front right
-    ctx.fillRect(x + width / 1.4, y + height / 21, width / 3, height / 8);
-    //back left
-    ctx.fillRect(x + width / 16, y + height / 1.2, width / 3, height / 8);
-    //back right
-    ctx.fillRect(x + width / 1.4, y + height / 1.2, width / 3, height / 8);
-    //the treads
-    ctx.fillStyle = "#000000";
-    ctx.fillRect(x - width / 10, y - height / 10, width / 5, height + height / 5);
-    ctx.fillRect(x + width, y - width / 10, width / 5, height + height / 5);
-    //the control bub and the expantion hub
-    ctx.fillStyle = "#4a4a4a";
-    ctx.fillRect(x + width / 5, y + height / 2, width / 3, height / 4);
-    //battery holder
-    ctx.fillStyle = "#7ce800";
-    ctx.fillRect(x + width / 1.5, y + height / 2.25, width / 5, height / 2.6);
-    //battery
-    ctx.fillStyle = "#000000";
-    ctx.fillRect(x + width / 1.43, y + height / 2.1, width / 8, height / 3.3);
+      //the robot
+    // ctx.fillStyle = "#c9c9c9";
+    // ctx.fillRect(x, y, width, height);
+    // //motors
+    // ctx.fillStyle = "#696969";
+    // //front left
+    // ctx.fillRect(x + width / 16, y + height / 21, width / 3, height / 8);
+    // //front right
+    // ctx.fillRect(x + width / 1.4, y + height / 21, width / 3, height / 8);
+    // //back left
+    // ctx.fillRect(x + width / 16, y + height / 1.2, width / 3, height / 8);
+    // //back right
+    // ctx.fillRect(x + width / 1.4, y + height / 1.2, width / 3, height / 8);
+    // //the treads
+    // ctx.fillStyle = "#000000";
+    // ctx.fillRect(x - width / 10, y - height / 10, width / 5, height + height / 5);
+    // ctx.fillRect(x + width, y - width / 10, width / 5, height + height / 5);
+    // //the control bub and the expantion hub
+    // ctx.fillStyle = "#4a4a4a";
+    // ctx.fillRect(x + width / 5, y + height / 2, width / 3, height / 4);
+    // //battery holder
+    // ctx.fillStyle = "#7ce800";
+    // ctx.fillRect(x + width / 1.5, y + height / 2.25, width / 5, height / 2.6);
+    // //battery
+    // ctx.fillStyle = "#000000";
+    // ctx.fillRect(x + width / 1.43, y + height / 2.1, width / 8, height / 3.3);
   }
 };
-function setup(){
+window.setup = function setup(){
     window.createCanvas(200,200);
 
 }
-function draw(){
+window.draw = function draw(){
+  debugger;
   window.fill("#f1ffb8");
   for(var i = 0; i < 36; i++){
     for(var j = 0; j < 36; j++){
