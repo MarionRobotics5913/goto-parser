@@ -1,8 +1,7 @@
 import GotoParser from "./modules/parser.js";
 
 // Credit to StackOverflow: https://stackoverflow.com/questions/4282151/is-it-possible-to-ping-a-server-from-javascript
-document.getElementById("visualeditor").style.display = "none";
-document.getElementById("visualeditor").style.visibility = "hidden";
+document.getElementById("visualeditor").style="position: absolute; width:0; height:0; border:0;";
 //document.getElementById("robot").style.visibility = "hidden";
 //document.getElementById("robot").style.display = "none";
 
@@ -630,13 +629,14 @@ window.visualEditor = function() {
   }
 };
 window.setup = function setup(){
-    createCanvas(200,200);
+    var cvs = window.createCanvas(200,200);
+    cvs.position(20,67);
 }
 window.draw = function draw(){
-  fill("#f1ffb8");
+  window.fill("#f1ffb8");
   for(var i = 0; i < 36; i++){
     for(var j = 0; j < 36; j++){
-      rect(i*50,j*50,50,50);
+      window.rect(i*50,j*50,50,50);
     }
   }
 }
