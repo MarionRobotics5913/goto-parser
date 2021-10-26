@@ -1,8 +1,8 @@
 import GotoParser from "./modules/parser.js";
 
 // Credit to StackOverflow: https://stackoverflow.com/questions/4282151/is-it-possible-to-ping-a-server-from-javascript
-//document.getElementById("visualeditor").style.display = "none";
-//document.getElementById("visualeditor").style.visibility = "hidden";
+document.getElementById("visualeditor").style.display = "none";
+document.getElementById("visualeditor").style.visibility = "hidden";
 //document.getElementById("robot").style.visibility = "hidden";
 //document.getElementById("robot").style.display = "none";
 
