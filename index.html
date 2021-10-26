@@ -92,21 +92,13 @@ set arm: 0.9 stop // Reach down to box
 }
       </textarea
     >
+    <iframe src="http://p5js.org/test/embed.html" width="300" height="300" id="visualeditor"></iframe>
     <div id="highlighter" class="code-block editorin">
       Loading scripts...
     </div>
   </div>
-  <div width="300" max-height="300">
-    <canvas
-      id="visualeditor"
-      class="editorout"
-      height="300"
-      x="200"
-      y="200"
-      onclick="update()"
-    ></canvas>
-  </div>
-
+  <iframe src="http://p5js.org/test/embed.html" width="300" height="300" id="visualeditor"></iframe>
+  <!--<div width="300" max-height="300"><canvas id="visualeditor"class="editorout"height="300"x="200"y="200"onclick="update()"></canvas></div>-->
   <button
     id="parseButton"
     onclick="parseProgram(document.getElementById('editor').value)"
@@ -118,5 +110,4 @@ set arm: 0.9 stop // Reach down to box
   </button>
   Output:<br />
   <div id="output"></div>
-  <iframe src="http://p5js.org/test/embed.html" width="600px" height="400px"></iframe>
 </html>

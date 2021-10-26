@@ -528,8 +528,8 @@ window.toggleCollapse = function(name) {
   settingsPanel.classList.toggle("collapsed");
 };
 
-var ctx = visualeditor.getContext("2d");
-var robotCtx = visualeditor.getContext("2d");
+//var ctx = visualeditor.getContext("2d");
+//var robotCtx = visualeditor.getContext("2d");
 
 window.draw = function() {};
 
@@ -594,9 +594,9 @@ window.visualEditor = function() {
     grid_squares.length = 36;
     //credit to google's color picker for the hex versions of the colors
     //the feild
-    ctx.fillStyle = "#f1ffb8";
-    ctx.strokeStyle = "#4a4a4a";
-    ctx.strokeWeight = "6";
+    //ctx.fillStyle = "#f1ffb8";
+    //ctx.strokeStyle = "#4a4a4a";
+    //ctx.strokeWeight = "6";
     //the feild
     // ctx.translate(x + width / 2, y + height / 2);
     // ctx.rotate((90 * Math.PI) / 180);
@@ -630,21 +630,17 @@ window.visualEditor = function() {
   }
 };
 window.setup = function setup(){
-    window.createCanvas(200,200);
-
+    createCanvas(200,200);
 }
 window.draw = function draw(){
-  debugger;
-  window.fill("#f1ffb8");
+  fill("#f1ffb8");
   for(var i = 0; i < 36; i++){
     for(var j = 0; j < 36; j++){
-      window.rect(i*50,j*50,50,50);
+      rect(i*50,j*50,50,50);
     }
   }
 }
-function update() {
-  
-}
+
 
 if (localStorage.ok) {
   //   var inputs = document.getElementsByTagName("input");
