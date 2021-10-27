@@ -1,11 +1,11 @@
 import GotoParser from "./modules/parser.js";
+import VisualEditor from "/visualeditor.js";
 
 // Credit to StackOverflow: https://stackoverflow.com/questions/4282151/is-it-possible-to-ping-a-server-from-javascript
 
 //document.getElementById("robot").style.display = "none";
 
 // document.getElementById("visualeditor").style.opacity = "0";
-
 
 function ping(host, port, pong) {
   var started = new Date().getTime();
@@ -512,8 +512,6 @@ window.toggleCollapse = function(name) {
 //var ctx = visualeditor.getContext("2d");
 //var robotCtx = visualeditor.getContext("2d");
 
-
-
 if (localStorage.ok) {
   //   var inputs = document.getElementsByTagName("input");
   //   for(var i in inputs){
@@ -531,7 +529,7 @@ var texteditor = document.getElementById("texteditor");
 var visualeditor = document.getElementById("visualeditor");
 visualeditor.style.display = "none";
 document.getElementById("visualeditorbtn").onclick = function() {
-  if(visualeditor.style.display == "none"){
+  if (visualeditor.style.display == "none") {
     //activating
     visualeditor.style.display = "";
     texteditor.style.display = "none";
@@ -539,11 +537,15 @@ document.getElementById("visualeditorbtn").onclick = function() {
     //deactivating
     visualeditor.style.display = "none";
     texteditor.style.display = "";
-  
   }
-}
-if(gridLinesActivated){
-  
-}else{
-  
+};
+var VE = VisualEditor;
+var gridLinesActivated = VE.gridLinesActivated;
+function toggleGridLines() {
+  if (gridLinesActivated) {
+    VE.gridLineColor = "#f1ffb8";
+  } else {
+    VE.gridLineColor = "#4a4a4a";
+  }
+  console.log('hi');
 }
