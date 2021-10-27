@@ -526,3 +526,19 @@ if (localStorage.ok) {
   )
     localStorage.ok = true;
 }
+
+var texteditor = document.getElementById("texteditor");
+var visualeditor = document.getElementById("visualeditor");
+visualeditor.style.display = "none";
+document.getElementById("visualeditorbtn").onclick = function() {
+  if(visualeditor.style.display == "none"){
+    //activating
+    visualeditor.style.display = "";
+    texteditor.style.display = "none";
+  } else {
+    //deactivating
+    visualeditor.style.display = "none";
+    texteditor.style.display = "";
+  
+  }
+}

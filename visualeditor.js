@@ -1,9 +1,9 @@
 var gridActivated = true;
 var removeCanvas = true;
 var visualeditor = document.getElementById("visualeditor");
-//var robot = document.getElementById("robot");
 var VEactivated = false;
 var drawSquares = true;
+
 
 window.toggleGrid = function() {
   if (gridActivated === false) {
@@ -22,19 +22,14 @@ var width = 37,
   height = 37;
 var gridLineColor = "#4a4a4a";
 function setup() {
-  var cvs = window.createCanvas(200, 200);
-  cvs.position(20, 67);
-};
+  
+}
 function draw() {
   window.fill("#f1ffb8");
-  for (var i = 0; i < 36; i++) {
-    for (var j = 0; j < 36; j++) {
+  window.resizeCanvas(300,300);
+  for (var i = 0; i < 6; i++) {
+    for (var j = 0; j < 6; j++) {
       window.rect(i * 50, j * 50, 50, 50);
     }
   }
-  if (removeCanvas) {
-    window.resizeCanvas(200, 200);
-  } else if (!removeCanvas) {
-    window.resizeCanvas(200, 200);
-  }
-};
+}
