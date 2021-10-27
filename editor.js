@@ -542,3 +542,8 @@ document.getElementById("visualeditorbtn").onclick = function() {
   
   }
 }
+if(gridLinesActivated){
+  
+}else{
+  
+}
