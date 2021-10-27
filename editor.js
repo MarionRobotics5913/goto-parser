@@ -1,9 +1,7 @@
 import GotoParser from "./modules/parser.js";
 
 // Credit to StackOverflow: https://stackoverflow.com/questions/4282151/is-it-possible-to-ping-a-server-from-javascript
-document.getElementById("visualeditor").style =
-  "position: absolute; width:0; height:0; border:none;display:none !important";
-//document.getElementById("robot").style.visibility = "hidden";
+
 //document.getElementById("robot").style.display = "none";
 
 // document.getElementById("visualeditor").style.opacity = "0";
@@ -532,8 +530,6 @@ window.toggleCollapse = function(name) {
 //var ctx = visualeditor.getContext("2d");
 //var robotCtx = visualeditor.getContext("2d");
 
-window.draw = function() {};
-
 var gridActivated = true;
 
 window.toggleGrid = function() {
@@ -552,6 +548,8 @@ var gridY = 1;
 var width = 37,
   height = 37;
 var gridLineColor = "#4a4a4a";
+document.getElementById('visualeditor').style.display = "none";
+document.getElementById('visualeditor').style.visibility = "hidden";
 
 window.visualEditor = function() {
   var veElement = document.getElementById("visualeditor");
@@ -572,6 +570,8 @@ window.visualEditor = function() {
     document.getElementById("editor").style.display = "initial";
     document.getElementById("highlighter").style.visibility = "visible";
     document.getElementById("highlighter").style.display = "initial";
+    veElement.style.display = "none";
+    veElement.style.visibility = "hidden";
     window.resizeCanvas(1, 1);
     grid_squares.length = 0;
     removeCanvas = false;
@@ -589,6 +589,8 @@ window.visualEditor = function() {
     document.getElementById("editor").style.display = "none";
     document.getElementById("highlighter").style.visibility = "hidden";
     document.getElementById("highlighter").style.display = "none";
+    veElement.style.display = "initial";
+    veElement.style.visibility = "visible";
     window.resizeCanvas(200, 200);
     grid_squares.length = 36;
     //credit to google's color picker for the hex versions of the colors
@@ -634,8 +636,6 @@ window.setup = function setup() {
   cvs.position(20, 67);
 };
 window.draw = function draw() {
-  console.log("called");
-
   window.fill("#f1ffb8");
   for (var i = 0; i < 36; i++) {
     for (var j = 0; j < 36; j++) {
