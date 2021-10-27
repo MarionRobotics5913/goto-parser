@@ -644,7 +644,6 @@ window.draw = function draw() {
   }
   if (removeCanvas) {
     window.resizeCanvas(1, 1);
-    document.getElementById("visualeditor").style = "display: none";
   } else if (!removeCanvas) {
     window.resizeCanvas(200, 200);
   }
