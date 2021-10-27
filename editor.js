@@ -643,7 +643,7 @@ window.draw = function draw() {
     }
   }
   if (removeCanvas) {
-    window.resizeCanvas(1, 1);
+    window.resizeCanvas(200, 200);
   } else if (!removeCanvas) {
     window.resizeCanvas(200, 200);
   }
