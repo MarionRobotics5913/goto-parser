@@ -539,13 +539,12 @@ document.getElementById("visualeditorbtn").onclick = function() {
     texteditor.style.display = "";
   }
 };
-var VE = VisualEditor;
-var gridLinesActivated = VE.gridLinesActivated;
+var gridLinesActivated = gridLinesActivated;
 function toggleGridLines() {
   if (gridLinesActivated) {
-    VE.gridLineColor = "#f1ffb8";
+    gridLineColor = "#f1ffb8";
   } else {
-    VE.gridLineColor = "#4a4a4a";
+    gridLineColor = "#4a4a4a";
   }
   console.log('hi');
 }
