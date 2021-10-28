@@ -1,5 +1,4 @@
 import GotoParser from "./modules/parser.js";
-import VisualEditor from "/visualeditor.js";
 
 // Credit to StackOverflow: https://stackoverflow.com/questions/4282151/is-it-possible-to-ping-a-server-from-javascript
 
