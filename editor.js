@@ -539,11 +539,6 @@ document.getElementById("visualeditorbtn").onclick = function() {
   }
 };
 var gridLinesActivated = gridLinesActivated;
-function toggleGridLines() {
-  if (gridLinesActivated) {
-    gridLineColor = "#f1ffb8";
-  } else {
-    gridLineColor = "#4a4a4a";
-  }
-  console.log('hi');
+function toggleGridLines(){
+  debugger;
 }

@@ -25,12 +25,4 @@ function draw() {
     }
   }
 }
-function toggleGridLines(){
-  if(gridActivated === true){
-    gridLineColor = "#4a4a4a";
-    debugger;
-  }else if(gridActivated === false){
-    gridLineColor = "#f1ffb8";
-    debugger;
-  }
-}
+
