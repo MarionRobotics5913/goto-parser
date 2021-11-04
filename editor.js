@@ -51,8 +51,6 @@ if (!String.prototype.splice) {
 }
 
 function upload() {
-  var name = "Meepably2"; // TODO: Don't hardcode name
-  if (!name) return;
   // Robot is at either http://192.168.43.1:8080 or http://192.168.49.1:8080
   // Process:
   // 1. Build Java file
@@ -63,21 +61,12 @@ function upload() {
     if (responseRecieved) return;
     responseRecieved = true;
 
-    var xhr = new XMLHttpRequest(); // Fetch API?
-    var file =
-      "package org.firstinspires.ftc.teamcode;\n" +
-      '@GotoProgram(programName="' +
-      name +
-      '", code=' +
-      JSON.stringify(document.getElementById("editor").value) +
-      ")\npublic class " +
-      name +
-      " {}";
+    var xhr = new XMLHttpRequest();
     var data = new FormData();
     data.append(
       "file",
-      new Blob([file], { type: "text/x-java" }),
-      name + ".java"
+      new Blob([document.getElementById("editor").value], { type: "text/x-java" }),
+      name + ".goto"
     );
     xhr.open("POST", url + "/java/file/upload");
     xhr.send(data);

@@ -102,7 +102,12 @@ export default function GotoParser() {
           // break;
           case "/":
             if (/*nextChar !== undefined &&*/ nextChar === "/") {
-              currToken.type = "comment";
+              increment();
+              if(nextChar === "!"){
+                currToken.type = "meta";                
+              }else{
+                currToken.type = "comment";                
+              }
               while (char && char !== "\n") {
                 currToken.value += char;
                 x++;
