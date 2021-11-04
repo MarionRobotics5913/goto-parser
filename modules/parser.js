@@ -152,7 +152,7 @@ export default function GotoParser() {
     var x = -1; // Gets incremented to 0 immediately and updates the character
     var actions = [];
     var currAction = {
-      type: "action",
+      type: "command",
       name: "",
       args: {},
       tokens: []
@@ -211,7 +211,12 @@ export default function GotoParser() {
 
     var infiniteLoopStopper = 0;
     tokens = tokens.filter(token => token.type !== "comment");
-    
+    // tokens
+    //   .filter(token => token.type === "meta")
+    //   .forEach(e => {
+    //   currAction.name = token.value;      
+    // });
+    tokens = tokens.filter(token => token.type !== "meta");
     while (x < tokens.length - 1) {
       increment();
       // console.log(token);
@@ -376,7 +381,7 @@ export default function GotoParser() {
         number: ["orange", "orange"],
         symbol: ["grey", "violet"],
         comment: ["rgb(100, 200, 100)", "lime"],
-        meta: ["indigo", "purple"]
+        meta: ["plum", "purple"]
       };
       var value = token.value
         .replace(/&/g, "&amp;")
