@@ -216,9 +216,11 @@ export default function GotoParser() {
     //   .forEach(e => {
     //   currAction.name = token.value;      
     // });
-    tokens = tokens.filter(token => token.type !== "meta");
+    // tokens = tokens.filter(token => token.type !== "meta");
     while (x < tokens.length - 1) {
-      increment();
+      do{
+        increment();
+      }while(token.type === "meta");
       // console.log(token);
       // console.log(token);
       switch (token.value) {
@@ -381,7 +383,7 @@ export default function GotoParser() {
         number: ["orange", "orange"],
         symbol: ["grey", "violet"],
         comment: ["rgb(100, 200, 100)", "lime"],
-        meta: ["plum", "purple"]
+        meta: ["plum", "plum"]
       };
       var value = token.value
         .replace(/&/g, "&amp;")
