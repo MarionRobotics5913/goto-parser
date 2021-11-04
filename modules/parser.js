@@ -102,18 +102,23 @@ export default function GotoParser() {
           // break;
           case "/":
             if (/*nextChar !== undefined &&*/ nextChar === "/") {
-                currToken.value += char;
+              currToken.value += char;
               increment();
-                currToken.type = nextChar === "!"?"meta":"comment";                
+              currToken.type = nextChar === "!" ? "meta" : "comment";
               while (char && char !== "\n") {
                 currToken.value += char;
                 x++;
                 char = programString[x];
                 column++;
               }
-              if(currToken.type === "meta"){
-                // var temp = currToken.value.slice(3);
-                (currToken.args)[]
+              if (currToken.type === "meta") {
+                var [metaName, ...metaContent] = currToken.value
+                  .slice(3)
+                  .split(" ");
+                currToken.args = {
+                  name: metaName,
+                  content: metaContent.join("")
+                };
               }
               newToken();
               // if (char) {
@@ -206,6 +211,7 @@ export default function GotoParser() {
 
     var infiniteLoopStopper = 0;
     tokens = tokens.filter(token => token.type !== "comment");
+    
     while (x < tokens.length - 1) {
       increment();
       // console.log(token);
@@ -338,14 +344,11 @@ export default function GotoParser() {
         );
       }
     }
-    for(var x in commands.filter(c => c.type === "block")) {
+    for (var x in commands.filter(c => c.type === "block")) {
       console.log(x);
       if (Object.entries(commands[x].args).length === 0) {
-        handleError(
-          `Empty code block`,
-          x
-        );
-      }      
+        handleError(`Empty code block`, x);
+      }
     }
     return issues;
   };
