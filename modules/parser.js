@@ -102,13 +102,9 @@ export default function GotoParser() {
           // break;
           case "/":
             if (/*nextChar !== undefined &&*/ nextChar === "/") {
-              currToken.value += char;
+                currToken.value += char;
               increment();
-              if (nextChar === "!") {
-                currToken.type = "meta";
-              } else {
-                currToken.type = "comment";
-              }
+                currToken.type = nextChar === "!"?"meta":"comment";                
               while (char && char !== "\n") {
                 currToken.value += char;
                 x++;
@@ -338,11 +334,14 @@ export default function GotoParser() {
         );
       }
     }
-    for (var x in commands.filter(c => c.type === "block")) {
+    for(var x in commands.filter(c => c.type === "block")) {
       console.log(x);
       if (Object.entries(commands[x].args).length === 0) {
-        handleError(`Empty code block`, x);
-      }
+        handleError(
+          `Empty code block`,
+          x
+        );
+      }      
     }
     return issues;
   };
