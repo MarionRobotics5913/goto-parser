@@ -102,11 +102,12 @@ export default function GotoParser() {
           // break;
           case "/":
             if (/*nextChar !== undefined &&*/ nextChar === "/") {
+              currToken.value += char;
               increment();
-              if(nextChar === "!"){
-                currToken.type = "meta";                
-              }else{
-                currToken.type = "comment";                
+              if (nextChar === "!") {
+                currToken.type = "meta";
+              } else {
+                currToken.type = "comment";
               }
               while (char && char !== "\n") {
                 currToken.value += char;
@@ -337,14 +338,11 @@ export default function GotoParser() {
         );
       }
     }
-    for(var x in commands.filter(c => c.type === "block")) {
+    for (var x in commands.filter(c => c.type === "block")) {
       console.log(x);
       if (Object.entries(commands[x].args).length === 0) {
-        handleError(
-          `Empty code block`,
-          x
-        );
-      }      
+        handleError(`Empty code block`, x);
+      }
     }
     return issues;
   };
@@ -371,7 +369,8 @@ export default function GotoParser() {
       var coloredTypes = {
         number: ["orange", "orange"],
         symbol: ["grey", "violet"],
-        comment: ["rgb(100, 200, 100)", "lime"]
+        comment: ["rgb(100, 200, 100)", "lime"],
+        meta: ["indigo", "purple"]
       };
       var value = token.value
         .replace(/&/g, "&amp;")
