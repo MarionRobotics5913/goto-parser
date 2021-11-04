@@ -111,6 +111,10 @@ export default function GotoParser() {
                 char = programString[x];
                 column++;
               }
+              if(currToken.type === "meta"){
+                // var temp = currToken.value.slice(3);
+                (currToken.args)[]
+              }
               newToken();
               // if (char) {
               //   currToken.type = "newline";

@@ -66,7 +66,7 @@ function upload() {
     data.append(
       "file",
       new Blob([document.getElementById("editor").value], { type: "text/x-java" }),
-      name + ".goto"
+      window.programName + ".goto"
     );
     xhr.open("POST", url + "/java/file/upload");
     xhr.send(data);
