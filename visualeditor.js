@@ -25,7 +25,7 @@ function draw() {
     }
   }
   
-  
+  window.rotate()
   // the testing
   //the robot
   window.fill("#c9c9c9");
