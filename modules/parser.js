@@ -274,7 +274,7 @@ export default function GotoParser() {
           // console.log("terminator");
           break;
         case "{":
-          console.log("Code block");
+//          console.log("Code block");
           currAction.name = "block";
           currAction.type = "block";
           var stopInfinite = 0;
