@@ -26,7 +26,7 @@ function draw() {
     }
   }
   window.push();
-  window.translate(xpos,ypos);
+  window.translate((xpos*2)+(widthpos/2),(ypos*2)+(heightpos/2));
   window.rotate(Math.PI / 180 * turndegree);
   // the testing
   //the robot
@@ -123,5 +123,7 @@ document.onkeydown = function(event) {
       xpos+=5;
       break;
   }
+  console.log("turndegree: " + turndegree + " x: " + xpos + " y: " + ypos + " widthpos: " + widthpos + " heightpos: " + heightpos);
+  console.log(" translate x: " + (xpos*2)+(widthpos/2) + " translate y: " + (ypos*2)+(heightpos/2))
   //console.log("x: " + xpos  + "y: " + ypos);
 };
