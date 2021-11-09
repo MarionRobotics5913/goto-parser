@@ -6,7 +6,7 @@ var drawSquares = true;
 
 var xpos = 5;
 var ypos = 5;
-var turndegree = 0;
+var turndegree = 55;
 var grid_squares = [];
 var gridX = 1;
 var gridY = 1;
@@ -25,8 +25,8 @@ function draw() {
       window.rect(i * 50, j * 50, 50, 50);
     }
   }
-
-  window.rotate();
+  window.translate(300 / 2, height / 2);
+  window.rotate(turndegree);
   // the testing
   //the robot
   window.fill("#c9c9c9");
