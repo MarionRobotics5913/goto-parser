@@ -28,8 +28,6 @@ function draw() {
     }
   }
   window.push();
-  window.rotate(Math.PI / 180 * turndegree);
-  window.translate(xpos + widthpos / 2, ypos + heightpos / 2);
   // the testing
   //the robot
   window.fill("#c9c9c9");
@@ -102,6 +100,8 @@ function draw() {
     widthpos / 8,
     heightpos / 3.3
   );
+  window.rotate(Math.PI / 180 * turndegree);
+  window.translate(xpos + widthpos / 2, ypos + heightpos / 2);
   window.pop();
 }
 document.onkeydown = function(event) {
@@ -125,10 +125,7 @@ document.onkeydown = function(event) {
       xpos+=5;
       break;
   }
-  console.log("ypos + heightpos / 2 = " + ypos + heightpos / 2);
-  console.log("ypos + heightpos / 2 = ")
-  // hi1 = (ypos*2)+(heightpos/2);
-  // hi = (xpos*2)+(widthpos/2);
-  // console.log(hi);
-  // console.log("(ypos*2)+(heightpos/2) = "+hi1);
+  console.log("x: " + xpos + " ypos: "+ ypos + " heightpos: " + heightpos + " widthpos: " + widthpos);
+  console.log("ypos + heightpos / 2 = " + (ypos + heightpos / 2));
+  console.log("xpos + widthpos / 2 = " + (xpos + widthpos / 2));
 };
