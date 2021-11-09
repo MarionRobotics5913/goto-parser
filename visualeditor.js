@@ -6,6 +6,7 @@ var drawSquares = true;
 
 var xpos = 5;
 var ypos = 5;
+var turndegree = 0;
 var grid_squares = [];
 var gridX = 1;
 var gridY = 1;
@@ -98,21 +99,20 @@ function draw() {
     widthpos / 8,
     heightpos / 3.3
   );
-  
 }
 document.onkeydown = function(event) {
   switch (event.keyCode) {
     case 37:
-      xpos-=5;
+      turndegree-=5;
       break;
     case 38:
-      ypos+=5;
+      ypos-=5;
       break;
     case 39:
-      xpos+=5;
+      turndegree+=5;
       break;
     case 40:
-      ypos-=5;
+      ypos+=5;
       break;
   }
 };
