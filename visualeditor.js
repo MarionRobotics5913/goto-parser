@@ -30,6 +30,8 @@ function draw() {
   window.push();
   // the testing
   //the robot
+    window.rotate(Math.PI / 180 * turndegree);
+  window.translate(xpos + widthpos / 2, ypos + heightpos / 2;)
   window.fill("#c9c9c9");
   window.rect(xpos, ypos, widthpos, heightpos);
   //motors
@@ -100,8 +102,6 @@ function draw() {
     widthpos / 8,
     heightpos / 3.3
   );
-  window.rotate(Math.PI / 180 * turndegree);
-  window.translate(xpos + widthpos / 2, ypos + heightpos / 2);
   window.pop();
 }
 document.onkeydown = function(event) {
