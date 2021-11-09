@@ -25,7 +25,8 @@ function draw() {
       window.rect(i * 50, j * 50, 50, 50);
     }
   }
-  window.translate(300 / 2, height / 2);
+  window.push();
+  window.translate(300 / 2, 300 / 2);
   window.rotate(turndegree);
   // the testing
   //the robot
@@ -99,6 +100,7 @@ function draw() {
     widthpos / 8,
     heightpos / 3.3
   );
+  window.pop();
 }
 document.onkeydown = function(event) {
   switch (event.keyCode) {
