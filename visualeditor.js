@@ -108,13 +108,13 @@ document.onkeydown = function(event) {
       turndegree-=5;
       break;
     case 38:
-      ypos+=5;
+      ypos-=5;
       break;
     case 39:
       turndegree+=5;
       break;
     case 40:
-      ypos-=5;
+      ypos+=5;
       break;
     case 65:
       xpos-=5;
