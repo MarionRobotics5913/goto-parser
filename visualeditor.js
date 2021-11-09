@@ -128,5 +128,5 @@ document.onkeydown = function(event) {
   hi1 = (ypos*2)+(heightpos/2);
   hi = (xpos*2)+(widthpos/2);
   console.log(hi);
-  console.log(hi1);
+  console.log("(ypos*2)+(heightpos/2) = "+hi1);
 };
