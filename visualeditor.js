@@ -28,8 +28,8 @@ function draw() {
     }
   }
   window.push();
-  window.translate((xpos*2)+(widthpos/2),(ypos*2)+(heightpos/2));
   window.rotate(Math.PI / 180 * turndegree);
+  window.translate(xpos + widthpos / 2, ypos + heightpos / 2);
   // the testing
   //the robot
   window.fill("#c9c9c9");
@@ -125,8 +125,10 @@ document.onkeydown = function(event) {
       xpos+=5;
       break;
   }
-  hi1 = (ypos*2)+(heightpos/2);
-  hi = (xpos*2)+(widthpos/2);
-  console.log(hi);
-  console.log("(ypos*2)+(heightpos/2) = "+hi1);
+  console.log("ypos + heightpos / 2 = " + ypos + heightpos / 2);
+  console.log("ypos + heightpos / 2 = ")
+  // hi1 = (ypos*2)+(heightpos/2);
+  // hi = (xpos*2)+(widthpos/2);
+  // console.log(hi);
+  // console.log("(ypos*2)+(heightpos/2) = "+hi1);
 };
