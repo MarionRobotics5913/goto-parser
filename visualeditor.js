@@ -15,6 +15,7 @@ var widthpos = 37,
 var gridLineColor = "#4a4a4a";
 var tan = "#f1ffb8";
 var grey = "#4a4a4a";
+var hi = (xpos*2)+(widthpos/2);
 function setup() {}
 function draw() {
   window.stroke(gridLineColor);
@@ -124,6 +125,8 @@ document.onkeydown = function(event) {
       break;
   }
   console.log("turndegree: " + turndegree + " x: " + xpos + " y: " + ypos + " widthpos: " + widthpos + " heightpos: " + heightpos);
-  console.log(" translate x: " + (xpos*2)+(widthpos/2) + " translate y: " + (ypos*2)+(heightpos/2))
+  console.log(" translate x: " + xpos*2+widthpos/2 + " translate y: " + (ypos*2)+(heightpos/2));
+  console.log("(xpos*2)+(widthpos/2) = " + (xpos*2)+(widthpos/2) + " (37 * 2) + (37 / 2) = " + (37)+(37/2));
+  console.log(hi);
   //console.log("x: " + xpos  + "y: " + ypos);
 };
