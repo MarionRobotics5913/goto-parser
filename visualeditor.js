@@ -27,7 +27,7 @@ function draw() {
   }
   window.push();
   window.translate(300 / 2, 300 / 2);
-  window.rotate(turndegree);
+  window.rotate(Math.PI / 180 * turndegree);
   // the testing
   //the robot
   window.fill("#c9c9c9");
@@ -108,13 +108,13 @@ document.onkeydown = function(event) {
       turndegree-=5;
       break;
     case 38:
-      ypos-=5;
+      ypos+=5;
       break;
     case 39:
       turndegree+=5;
       break;
     case 40:
-      ypos+=5;
+      ypos-=5;
       break;
   }
 };
