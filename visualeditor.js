@@ -98,6 +98,7 @@ function draw() {
     widthpos / 8,
     heightpos / 3.3
   );
+  
 }
 document.onkeydown = function(event) {
   switch (event.keyCode) {
