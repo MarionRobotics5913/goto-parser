@@ -31,7 +31,7 @@ function draw() {
   // the testing
   //the robot
     window.rotate(Math.PI / 180 * turndegree);
-  window.translate(xpos + widthpos / 2, ypos + heightpos / 2;)
+  window.translate(xpos + widthpos / 2, ypos + heightpos / 2);
   window.fill("#c9c9c9");
   window.rect(xpos, ypos, widthpos, heightpos);
   //motors
@@ -107,21 +107,29 @@ function draw() {
 document.onkeydown = function(event) {
   switch (event.keyCode) {
     case 37:
-      turndegree-=5;
+      console.log('left');
+      turndegree+=5;
+      xpos+=7;
       break;
     case 38:
+      console.log('up');
       ypos-=5;
       break;
     case 39:
-      turndegree+=5;
+      console.log('right');
+      turndegree-=5;
+      xpos-=7;
       break;
     case 40:
+      console.log('down');
       ypos+=5;
       break;
     case 65:
+      console.log('a');
       xpos-=5;
       break;
     case 68:
+      console.log('d');
       xpos+=5;
       break;
   }
