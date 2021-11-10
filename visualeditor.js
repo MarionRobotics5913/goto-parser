@@ -103,7 +103,7 @@ function draw() {
     heightpos / 3.3
   );
   
-  window.fill("#4a4a4a");
+  window.fill("#f51000");
   window.rect((ypos + heightpos / 2),(xpos + widthpos / 2),10,10)
   window.pop();
 }
@@ -112,7 +112,6 @@ document.onkeydown = function(event) {
     case 37:
       console.log('left');
       turndegree+=5;
-      xpos+=7;
       break;
     case 38:
       console.log('up');
@@ -121,7 +120,6 @@ document.onkeydown = function(event) {
     case 39:
       console.log('right');
       turndegree-=5;
-      xpos-=7;
       break;
     case 40:
       console.log('down');
