@@ -30,8 +30,8 @@ function draw() {
   window.push();
   // the testing
   //the robot
-  window.rotate(Math.PI / 180 * turndegree);
   window.translate(xpos + widthpos / 2, ypos + heightpos / 2);
+  window.rotate(Math.PI / 180 * turndegree);
   window.fill("#c9c9c9");
   window.rect(xpos, ypos, widthpos, heightpos);
   //motors
@@ -104,33 +104,34 @@ function draw() {
   );
   
   window.fill("#f51000");
-  window.rect((ypos + heightpos / 2),(xpos + widthpos / 2),10,10)
+  window.rect((ypos + heightpos / 2),(xpos + widthpos / 2),10,10);
+  window.rect(150,150,10,10);
   window.pop();
 }
 document.onkeydown = function(event) {
   switch (event.keyCode) {
     case 37:
-      console.log('left');
+      //console.log('left');
       turndegree+=5;
       break;
     case 38:
-      console.log('up');
+      //console.log('up');
       ypos-=5;
       break;
     case 39:
-      console.log('right');
+      //console.log('right');
       turndegree-=5;
       break;
     case 40:
-      console.log('down');
+      //console.log('down');
       ypos+=5;
       break;
     case 65:
-      console.log('a');
+      //console.log('a');
       xpos-=5;
       break;
     case 68:
-      console.log('d');
+      //console.log('d');
       xpos+=5;
       break;
   }
