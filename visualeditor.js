@@ -105,7 +105,9 @@ function draw() {
   );
   
   window.fill("#f51000");
+  //rectangle is supposed to be drawn in the center of the robot
   window.rect((ypos + heightpos / 2),(xpos + widthpos / 2),10,10);
+  //rectangle is supposed to be drawn at 150,150
   window.rect(150,150,10,10);
   window.reset();
 }
