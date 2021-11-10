@@ -32,9 +32,9 @@ function draw() {
   //the robot
   // var [xpos, ypos, turndegree]
   // window.translate(xpos + widthpos / 2, ypos + heightpos / 2);
-  window.translate(xpos, ypos );
+  window.translate(xpos, ypos);
   window.rotate(Math.PI / 180 * turndegree);
-  window.translate(- widthpos / 2, - heightpos / 2)
+  window.translate(-widthpos / 2, -heightpos / 2);
   window.fill("#c9c9c9");
   window.rect(0, 0, widthpos, heightpos);
   //motors
@@ -129,19 +129,16 @@ document.onkeydown = function(event) {
       //console.log('up');
       ypos-=5;
       xpos+=turndegree;
-      
       break;
     case 39:
       //console.log('right');
       xpos+=5;
       ypos+=turndegree;
-      
       break;
     case 40:
       //console.log('down');
       ypos+=5;
       xpos+=turndegree;
-
       break;
     case 65:
       //console.log('a');
