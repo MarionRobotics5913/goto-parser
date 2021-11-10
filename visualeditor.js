@@ -123,18 +123,25 @@ document.onkeydown = function(event) {
     case 37:
       //console.log('left');
       xpos-=5;
+      ypos+=turndegree;
       break;
     case 38:
       //console.log('up');
       ypos-=5;
+      xpos+=turndegree;
+      
       break;
     case 39:
       //console.log('right');
       xpos+=5;
+      ypos+=turndegree;
+      
       break;
     case 40:
       //console.log('down');
       ypos+=5;
+      xpos+=turndegree;
+
       break;
     case 65:
       //console.log('a');
