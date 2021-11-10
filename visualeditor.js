@@ -31,85 +31,85 @@ function draw() {
   // the testing
   //the robot
   // var [xpos, ypos, turndegree]
-  window.translate(xpos + widthpos / 2, ypos + heightpos / 2);
   window.rotate(Math.PI / 180 * turndegree);
+  window.translate(xpos + widthpos / 2, ypos + heightpos / 2);
   window.fill("#c9c9c9");
   window.rect(xpos, ypos, widthpos, heightpos);
   //motors
   window.fill("#696969");
   //front left
   window.rect(
-    xpos + widthpos / 16,
-    ypos + heightpos / 21,
+    /*xpos + widthpos / 16,
+    /*ypos + heightpos / 21,
     widthpos / 3,
     heightpos / 8
   );
   //front right
   window.rect(
-    xpos + widthpos / 1.4,
-    ypos + heightpos / 21,
+    /*xpos + widthpos / 1.4,
+    /*ypos + heightpos / 21,
     widthpos / 3,
     heightpos / 8
   );
   //back left
   window.rect(
-    xpos + widthpos / 16,
-    ypos + heightpos / 1.2,
+    /*xpos + widthpos / 16,
+    /*ypos + heightpos / 1.2,
     widthpos / 3,
     heightpos / 8
   );
   //back right
   window.rect(
-    xpos + widthpos / 1.4,
-    ypos + heightpos / 1.2,
+    /*xpos + widthpos / 1.4,
+    /*ypos + heightpos / 1.2,
     widthpos / 3,
     heightpos / 8
   );
   //the treads
   window.fill("#000000");
   window.rect(
-    xpos - widthpos / 10,
-    ypos - heightpos / 10,
+    /*xpos - widthpos / 10,
+    /*ypos - heightpos / 10,
     widthpos / 5,
     heightpos + heightpos / 5
   );
   window.rect(
-    xpos + widthpos,
-    ypos - widthpos / 10,
+    /*xpos + widthpos,
+    /*ypos - widthpos / 10,
     widthpos / 5,
     heightpos + heightpos / 5
   );
   //the control bub and the expantion hub
   window.fill("#4a4a4a");
   window.rect(
-    xpos + widthpos / 5,
-    ypos + heightpos / 2,
+    /*xpos + widthpos / 5,
+    /*ypos + heightpos / 2,
     widthpos / 3,
     heightpos / 4
   );
   //battery holder
   window.fill("#7ce800");
   window.rect(
-    xpos + widthpos / 1.5,
-    ypos + heightpos / 2.25,
+    /*xpos + widthpos / 1.5,
+    /*ypos + heightpos / 2.25,
     widthpos / 5,
     heightpos / 2.6
   );
   //batterypos
   window.fill("#000000");
   window.rect(
-    xpos + widthpos / 1.43,
-    ypos + heightpos / 2.1,
+    /*xpos + widthpos / 1.43,
+    /*ypos + heightpos / 2.1,
     widthpos / 8,
     heightpos / 3.3
   );
+  window.pop();
   
   window.fill("#f51000");
   //rectangle is supposed to be drawn in the center of the robot
-  window.rect((ypos + heightpos / 2),(xpos + widthpos / 2),10,10);
+  window.rect(xpos + (widthpos / 2), ypos + (heightpos / 2),10,10);
   //rectangle is supposed to be drawn at 150,150
   window.rect(150,150,10,10);
-  window.reset();
 }
 document.onkeydown = function(event) {
   switch (event.keyCode) {
