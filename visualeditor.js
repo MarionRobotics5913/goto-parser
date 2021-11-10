@@ -30,6 +30,7 @@ function draw() {
   window.push();
   // the testing
   //the robot
+  // var [xpos, ypos, turndegree]
   window.translate(xpos + widthpos / 2, ypos + heightpos / 2);
   window.rotate(Math.PI / 180 * turndegree);
   window.fill("#c9c9c9");
@@ -106,7 +107,7 @@ function draw() {
   window.fill("#f51000");
   window.rect((ypos + heightpos / 2),(xpos + widthpos / 2),10,10);
   window.rect(150,150,10,10);
-  window.pop();
+  window.reset();
 }
 document.onkeydown = function(event) {
   switch (event.keyCode) {
