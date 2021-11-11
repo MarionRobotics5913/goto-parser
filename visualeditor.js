@@ -3,9 +3,8 @@ var removeCanvas = true;
 var visualeditor = document.getElementById("visualeditor");
 var VEactivated = false;
 var drawSquares = true;
-
-var xpos = 150;
-var ypos = 150;
+var xpos = 20;
+var ypos = 20;
 var turndegree = 0;
 var grid_squares = [];
 var gridX = 1;
