@@ -4,8 +4,8 @@ var visualeditor = document.getElementById("visualeditor");
 var VEactivated = false;
 var drawSquares = true;
 
-var xpos = 5;
-var ypos = 5;
+var xpos = 90;
+var ypos = 90;
 var turndegree = 0;
 var grid_squares = [];
 var gridX = 1;
@@ -41,28 +41,28 @@ function draw() {
   window.fill("#696969");
   //front left
   window.rect(
-    /* xpos + */ widthpos / 16,
+    widthpos / 16,
     /* ypos + */ heightpos / 21,
     widthpos / 3,
     heightpos / 8
   );
   //front right
   window.rect(
-    /* xpos + */ widthpos / 1.4,
+    widthpos / 1.4,
     /* ypos + */ heightpos / 21,
     widthpos / 3,
     heightpos / 8
   );
   //back left
   window.rect(
-    /* xpos + */ widthpos / 16,
+    widthpos / 16,
     /* ypos + */ heightpos / 1.2,
     widthpos / 3,
     heightpos / 8
   );
   //back right
   window.rect(
-    /* xpos + */ widthpos / 1.4,
+    widthpos / 1.4,
     /* ypos + */ heightpos / 1.2,
     widthpos / 3,
     heightpos / 8
@@ -76,7 +76,7 @@ function draw() {
     heightpos + heightpos / 5
   );
   window.rect(
-    /* xpos + */ widthpos,
+    widthpos,
     /* ypos - */ -widthpos / 10,
     widthpos / 5,
     heightpos + heightpos / 5
@@ -84,7 +84,7 @@ function draw() {
   //the control bub and the expantion hub
   window.fill("#4a4a4a");
   window.rect(
-    /* xpos + */ widthpos / 5,
+    widthpos / 5,
     /* ypos + */ heightpos / 2,
     widthpos / 3,
     heightpos / 4
@@ -92,7 +92,7 @@ function draw() {
   //battery holder
   window.fill("#7ce800");
   window.rect(
-    /* xpos + */ widthpos / 1.5,
+    widthpos / 1.5,
     /* ypos + */ heightpos / 2.25,
     widthpos / 5,
     heightpos / 2.6
@@ -100,8 +100,8 @@ function draw() {
   //batterypos
   window.fill("#000000");
   window.rect(
-    /* xpos + */ widthpos / 1.43,
-    /* ypos + */ heightpos / 2.1,
+    widthpos / 1.43,
+    heightpos / 2.1,
     widthpos / 8,
     heightpos / 3.3
   );
@@ -121,31 +121,32 @@ function draw() {
 document.onkeydown = function(event) {
   switch (event.keyCode) {
     case 37:
-      //console.log('left');
-      xpos-=5;
+      //left
+      console.log("reworking the keys! please hold..... :)");
       
       break;
     case 38:
-      //console.log('up');
-      ypos-=5;
-      xpos+=turndegree;
+      //up
+      console.log("reworking the keys! please hold..... :)");
+      
       break;
     case 39:
-      //console.log('right');
-      xpos+=5;
-      ypos+=turndegree;
+      //right
+      console.log("reworking the keys! please hold..... :)");
+      
       break;
     case 40:
-      //console.log('down');
-      ypos+=5;
-      xpos+=turndegree;
+      //down
+      console.log("reworking the keys! please hold..... :)");
+      
       break;
     case 65:
-      //console.log('a');
+      //a
       turndegree-=5;
+      
       break;
     case 68:
-      //console.log('d');
+      //d
       turndegree+=5;
       break;
   }
