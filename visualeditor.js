@@ -4,8 +4,8 @@ var visualeditor = document.getElementById("visualeditor");
 var VEactivated = false;
 var drawSquares = true;
 
-var xpos = 90;
-var ypos = 90;
+var xpos = 150;
+var ypos = 150;
 var turndegree = 0;
 var grid_squares = [];
 var gridX = 1;
@@ -15,8 +15,8 @@ var widthpos = 37,
 var gridLineColor = "#4a4a4a";
 var tan = "#f1ffb8";
 var grey = "#4a4a4a";
-var hi = xpos * 2 + widthpos / 2;
-var hi1 = ypos * 2 + heightpos / 2;
+// var hi = xpos * 2 + widthpos / 2;
+// var hi1 = ypos * 2 + heightpos / 2;
 function setup() {}
 function draw() {
   window.stroke(gridLineColor);
